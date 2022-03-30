@@ -6,6 +6,8 @@
     "node": "16.13.1"
   },
   "scripts": {
+    "eslint": "eslint --ext .js src/ --fix",
+    "stylelint": "stylelint **/*.css",
     "serve": "node server/express.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
