@@ -1,0 +1,9 @@
+@import url("./fonts.css");
+@import url("./normalize.css");
+
+html {
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 400;
+}
