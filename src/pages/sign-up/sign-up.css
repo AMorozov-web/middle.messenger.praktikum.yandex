@@ -1,0 +1,34 @@
+.sign-up__content {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  width: 340px;
+  min-height: 450px;
+  padding: 50px 30px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
+}
+
+.sign-up__title {
+  text-align: center;
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.sign-up__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.sign-up__submit {
+  margin-top: auto;
+}
+
+.sign-up__sign-in {
+  display: block;
+  text-align: center;
+}

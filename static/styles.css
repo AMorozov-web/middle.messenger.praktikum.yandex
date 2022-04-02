@@ -1,5 +1,6 @@
 @import url("/src/styles/global.css");
 @import url("/src/pages/login/login.css");
+@import url("/src/pages/sign-up/sign-up.css");
 
 main {
   width: 100%;
