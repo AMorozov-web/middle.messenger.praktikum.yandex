@@ -5,14 +5,14 @@ export const template = `
         <form class="login-page__form">
           <label for="login" class="login-page__login">
             <p class="input__label">Логин</p>
-            <input type="text" name="login" id="login" class="input__control" />
+            <input type="text" name="login" id="login" class="input" />
           </label>
           <label for="password" class="login-page__password">
             <p class="input__label">Пароль</p>
             <input
               type="password"
               id="password"
-              class="input__control"
+              class="input"
             />
           </label>
           <a
