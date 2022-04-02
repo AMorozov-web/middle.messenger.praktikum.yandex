@@ -15,13 +15,6 @@
   "rules": {
     "class-methods-use-this": "off",
     "import/prefer-default-export": "off",
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js": "never"
-      }
-    ],
     "no-param-reassign": ["error", {"props": false}],
     "no-restricted-syntax": [2, "WithStatement"],
     "no-underscore-dangle": "off",

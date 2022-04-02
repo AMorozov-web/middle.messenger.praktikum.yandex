@@ -1,5 +1,5 @@
-@import url("src/styles/fonts.css");
-@import url("src/styles/normalize.css");
+@import url("./fonts.css");
+@import url("./normalize.css");
 
 html {
   font-family: "Inter", sans-serif;

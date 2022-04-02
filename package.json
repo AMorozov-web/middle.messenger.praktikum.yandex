@@ -6,7 +6,11 @@
     "node": "16.13.1"
   },
   "scripts": {
+    "build": "parcel build static/*.html --no-cache",
+    "clean": "rm -rf dist/ && rm -rf .parcel-cache",
+    "dev": "parcel serve static/index.html",
     "eslint": "eslint --ext .js src/ --fix",
+    "start": "npm run clean && npm run build && npm run serve",
     "stylelint": "stylelint **/*.css",
     "serve": "node server/express.js",
     "test": "echo \"Error: no test specified\" && exit 1"
