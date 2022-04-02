@@ -1,0 +1,14 @@
+@import url("/src/styles/global.css");
+@import url("/src/pages/login/login.css");
+
+main {
+  width: 100%;
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+p {
+  margin: 0;
+}
