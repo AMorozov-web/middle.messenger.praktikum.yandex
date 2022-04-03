@@ -3,6 +3,7 @@
 @import url("/src/pages/sign-up/sign-up.css");
 @import url("/src/pages/main/main.css");
 @import url("/src/pages/profile/profile.css");
+@import url("/src/pages/change-user-data/change-user-data.css");
 
 main {
   width: 100%;
