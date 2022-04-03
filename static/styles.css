@@ -5,6 +5,7 @@
 @import url("/src/pages/profile/profile.css");
 @import url("/src/pages/change-user-data/change-user-data.css");
 @import url("/src/pages/change-user-password/change-user-password.css");
+@import url("/src/pages/error/error.css");
 
 main {
   width: 100%;
