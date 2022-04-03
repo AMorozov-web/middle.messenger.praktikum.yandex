@@ -2,6 +2,7 @@
 @import url("/src/pages/login/login.css");
 @import url("/src/pages/sign-up/sign-up.css");
 @import url("/src/pages/main/main.css");
+@import url("/src/pages/profile/profile.css");
 
 main {
   width: 100%;
