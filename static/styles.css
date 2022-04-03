@@ -4,6 +4,7 @@
 @import url("/src/pages/main/main.css");
 @import url("/src/pages/profile/profile.css");
 @import url("/src/pages/change-user-data/change-user-data.css");
+@import url("/src/pages/change-user-password/change-user-password.css");
 
 main {
   width: 100%;
