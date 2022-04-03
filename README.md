@@ -1,4 +1,4 @@
-
+[Pull Request](<https://github.com/AMorozov-web/middle.messenger.praktikum.yandex/pull/1>)
 
 ## Описание
 
@@ -11,3 +11,5 @@
 - `npm install` — установка зависимостей,
 - `npm start` — запуск проекта на локальном сервере,
 - `npm run build` — сборка проекта.
+
+[Демо](<https://beautiful-heliotrope-95058b.netlify.app>)
