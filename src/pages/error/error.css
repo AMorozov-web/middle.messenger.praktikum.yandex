@@ -1,0 +1,33 @@
+.error-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 1070px;
+  max-width: 1280px;
+  min-height: 720px;
+  border-radius: 12px;
+  box-shadow: var(--main-shadow);
+}
+
+.error-page__code {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.error-page__description {
+  margin-bottom: 70px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.error-page__back {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--royal-blue);
+  text-decoration: none;
+  text-align: center;
+}

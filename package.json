@@ -1,0 +1,43 @@
+{
+  "name": "middle.messenger.practikum.yandex",
+  "version": "1.0.0",
+  "description": "---",
+  "engines": {
+    "node": "16.13.1"
+  },
+  "scripts": {
+    "build": "parcel build static/*.html --no-cache",
+    "clean": "rimraf dist/ && rimraf .parcel-cache",
+    "dev": "npm run clean && parcel static/*.html",
+    "eslint": "eslint --ext .js src/ --fix",
+    "start": "npm run clean && npm run build && npm run serve",
+    "stylelint": "stylelint **/*.css",
+    "serve": "node server/express.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AMorozov-web/middle.messenger.praktikum.yandex.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AMorozov-web/middle.messenger.praktikum.yandex/issues"
+  },
+  "homepage": "https://github.com/AMorozov-web/middle.messenger.praktikum.yandex#readme",
+  "devDependencies": {
+    "autoprefixer": "10.4.4",
+    "eslint": "8.12.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-prettier": "4.0.0",
+    "express": "4.17.3",
+    "parcel": "2.4.0",
+    "postcss": "8.4.12",
+    "prettier": "2.6.1",
+    "rimraf": "3.0.2",
+    "stylelint": "14.6.1",
+    "stylelint-config-recommended": "7.0.0"
+  }
+}
