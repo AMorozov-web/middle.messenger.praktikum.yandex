@@ -4,7 +4,7 @@
   max-width: 1280px;
   min-height: 720px;
   border-radius: 12px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
+  box-shadow: var(--main-shadow);
 }
 
 .profile-page__inner-wrapper {
@@ -12,15 +12,15 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-color: #fbfbfb;
-  border-right: 1px solid #eaeaea;
+  background-color: var(--alabaster);
+  border-right: 1px solid var(--gallery);
 }
 
 .profile-page__back {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background-color: #3369F3;
+  background-color: var(--royal-blue);
 }
 
 .profile-page__content {
@@ -36,7 +36,7 @@
   width: 130px;
   height: 130px;
   margin-bottom: 20px;
-  background-color: #efefef;
+  background-color: var(--gallery);
   border-radius: 50%;
 }
 
@@ -46,7 +46,7 @@
   right: 18px;
   width: 27px;
   height: 27px;
-  background-color: #999999;
+  background-color: var(--dusty-gray);
   border: none;
   border-radius: 50%;
 }
@@ -76,7 +76,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid var(--gallery);
   font-size: 13px;
   font-weight: 500;
 }
@@ -87,15 +87,15 @@
 }
 
 .profile-page__user-data-value {
-  color: #999999;
+  color: var(--dusty-gray);
 }
 
 .profile-page__user-controls-item > a {
-  color: #3369F3;
+  color: var(--royal-blue);
   text-decoration: none;
 }
 
 .profile-page__user-controls-item--exit > a {
-  color: #FF0000;
+  color: var(--red);
   text-decoration: none;
 }

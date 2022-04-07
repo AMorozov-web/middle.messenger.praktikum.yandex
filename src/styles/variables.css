@@ -1,0 +1,13 @@
+:root {
+  /*Colors*/
+  --white: #ffffff;
+  --gallery: #eaeaea;
+  --alabaster: #fbfbfb;
+  --royal-blue: #3369F3;
+  --dusty-gray: #999999;
+  --hawkeys-blue: #e4edfd;
+  --red: #ff0000;
+
+  /*Shadows*/
+  --main-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
+}

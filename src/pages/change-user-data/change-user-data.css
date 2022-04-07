@@ -4,7 +4,7 @@
   max-width: 1280px;
   min-height: 720px;
   border-radius: 12px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
+  box-shadow: var(--main-shadow);
 }
 
 .change-user-data-page__inner-wrapper {
@@ -12,15 +12,15 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-color: #fbfbfb;
-  border-right: 1px solid #eaeaea;
+  background-color: var(--alabaster);
+  border-right: 1px solid var(--gallery);
 }
 
 .change-user-data-page__back {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background-color: #3369F3;
+  background-color: var(--royal-blue);
 }
 
 .change-user-data-page__form {
@@ -37,7 +37,7 @@
   align-items: center;
   min-width: 510px;
   padding: 10px 0;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid var(--gallery);
   font-size: 13px;
   font-weight: 500;
 }
@@ -52,8 +52,8 @@
   width: 280px;
   padding: 12px;
   text-align: center;
-  color: #ffffff;
-  background-color: #3369f3;
+  color: var(--white);
+  background-color: var(--royal-blue);
   border-radius: 8px;
   text-decoration: none;
 }

@@ -4,7 +4,7 @@
   max-width: 1280px;
   min-height: 720px;
   border-radius: 12px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
+  box-shadow: var(--main-shadow);
 }
 
 .main-page__inner-wrapper {
@@ -12,7 +12,7 @@
   align-content: flex-start;
   row-gap: 10px;
   padding: 10px 10px 0;
-  border-right: 1px solid #EAEAEA;
+  border-right: 1px solid var(--gallery);
 }
 
 .main-page__buttons {
@@ -40,7 +40,7 @@
   width: 47px;
   height: 47px;
   border-radius: 50%;
-  background-color: #efefef;
+  background-color: var(--gallery);
 }
 
 .main-page__chat-name {
@@ -53,13 +53,13 @@
 .main-page__chat-time {
   grid-column: 3 / -1;
   grid-row: 1 / 2;
-  color: #999999;
+  color: var(--dusty-gray);
 }
 
 .main-page__chat-last-message {
   grid-column: 2 / 3;
   grid-row: 2 / -1;
-  color: #999999;
+  color: var(--dusty-gray);
 }
 
 .main-page__chat-new-message-count {
@@ -73,8 +73,8 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  color: #fff;
-  background-color: #3369F3;
+  color: var(--white);
+  background-color: var(--royal-blue);
 }
 
 .main-page__content {
@@ -90,14 +90,14 @@
   width: max-content;
   min-width: 720px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #EAEAEA;
+  border-bottom: 1px solid var(--gallery);
 }
 
 .main-page__user-avatar {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background-color: #efefef;
+  background-color: var(--gallery);
 }
 
 .main-page__user-name {
@@ -129,7 +129,7 @@
   margin-bottom: 30px;
   text-align: center;
   font-weight: 500;
-  color: #999999;
+  color: var(--dusty-gray);
 }
 
 .main-page__messages {
@@ -150,13 +150,13 @@
   max-width: 50%;
   padding: 10px;
   border-radius: 0 15px 15px 15px;
-  background-color: #f8f8f8;
+  background-color: var(--alabaster);
 }
 
 .main-page__message--self {
   align-self: flex-end;
   border-radius: 15px 15px 0 15px;
-  background-color: #e4edfd;
+  background-color: var(--hawkeys-blue);
 }
 
 .main-page__message-content,
@@ -168,7 +168,7 @@
   align-self: flex-end;
   font-size: 9px;
   line-height: 7px;
-  color: #999999;
+  color: var(--dusty-gray);
 }
 
 .main-page__send-message {
@@ -179,7 +179,7 @@
   width: max-content;
   min-width: 720px;
   padding-top: 10px;
-  border-top: 1px solid #EAEAEA;
+  border-top: 1px solid var(--gallery);
 }
 
 .main-page__new-message {
