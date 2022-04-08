@@ -39,3 +39,27 @@ export const queryStringify = (data: object) =>
       return `&${k}=${v.toString()}`;
     })
     .join('');
+
+/**
+ * Предикат на тип объекта Record<string, unknown>
+ *
+ * @param value - определяемый объект
+ */
+
+export const isObject = (value: unknown): value is object =>
+  Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+
+export const cloneObject = <T>(object: T): T => {
+  if (!object) {
+    throw new Error('Object not found');
+  }
+
+  return Object.entries(object).reduce((copy, [key, value]) => {
+    if (isObject(value)) {
+      copy[key] = cloneObject(value);
+    } else {
+      copy[key] = value;
+    }
+    return copy;
+  }, {} as T);
+};
