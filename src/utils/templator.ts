@@ -1,12 +1,18 @@
 import { get } from "./utils";
 
-export default class Templator {
+export class Templator {
   PROPS_REGEXP = /{{(.*?)}}/gi;
+
+  EMPTY_PROPS_REGEXP = /\S+undefined[\S]?\s?/gi;
 
   _template: string;
 
   constructor(template: string) {
     this._template = template;
+  }
+
+  compile<T extends Record<string, unknown>>(props?: T) {
+    return this._compileTemplate(props);
   }
 
   _compileTemplate<T extends Record<string, unknown>>(props?: T) {
@@ -27,14 +33,27 @@ export default class Templator {
           tmpl = tmpl.replace(new RegExp(key[0], "gi"), data as string);
         }
       }
-
+      this.PROPS_REGEXP.lastIndex = key.index;
       key = this.PROPS_REGEXP.exec(tmpl);
     }
 
-    return tmpl;
+    return this._removeEmpty(tmpl);
   }
 
-  compile<T extends Record<string, unknown>>(props?: T) {
-    return this._compileTemplate(props);
+  // В дальнейшем перенести логику метода _removeEmpty внутрь _compileTemplate
+  _removeEmpty(template: string) {
+    let tmpl = template;
+    let key: RegExpExecArray | null = this.EMPTY_PROPS_REGEXP.exec(template);
+
+    while (key) {
+      if (key) {
+        tmpl = tmpl.replace(new RegExp(key[0], "gi"), "");
+
+        this.EMPTY_PROPS_REGEXP.lastIndex = key.index;
+        key = this.EMPTY_PROPS_REGEXP.exec(tmpl);
+      }
+    }
+
+    return tmpl;
   }
 }
