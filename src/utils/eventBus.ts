@@ -1,4 +1,4 @@
-type Handler<T extends unknown[] = unknown[]> = (...args: T) => void;
+type Handler<T extends any[] = any[]> = (...args: T) => void;
 
 type EventBusListeners = {
   [key: string]: Handler[];
@@ -27,7 +27,7 @@ export class EventBus {
     this.listeners[eventName] = this.listeners[eventName].filter((event) => event !== eventHandler);
   }
 
-  emit(eventName: string, ...args: unknown[]) {
+  emit(eventName: string, ...args: any[]) {
     if (!this.listeners[eventName]) {
       throw new Error(`${eventName} not exist`);
     }
