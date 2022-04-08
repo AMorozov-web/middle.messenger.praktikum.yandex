@@ -12,7 +12,8 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
   "plugins": [
     "@typescript-eslint"
@@ -30,6 +31,14 @@
       "error"
     ],
     "class-methods-use-this": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "": "never"
+      }
+    ],
+    "import/no-unresolved": "off",
     "import/prefer-default-export": "off",
     "no-param-reassign": [
       "error",
@@ -53,7 +62,7 @@
     "import/resolver": {
       "node": {
         "extensions": [
-          ".js",
+          "*.js",
           "*.ts"
         ]
       }

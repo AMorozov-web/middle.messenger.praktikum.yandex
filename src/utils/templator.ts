@@ -1,4 +1,4 @@
-import { get } from "./utils";
+import {get} from './utils';
 
 export class Templator {
   PROPS_REGEXP = /{{(.*?)}}/gi;
@@ -27,10 +27,10 @@ export class Templator {
           const data = get(props, value);
 
           if (Array.isArray(data)) {
-            tmpl = tmpl.replace(new RegExp(key[0], "gi"), data.join(" "));
+            tmpl = tmpl.replace(new RegExp(key[0], 'gi'), data.join(' '));
           }
 
-          tmpl = tmpl.replace(new RegExp(key[0], "gi"), data as string);
+          tmpl = tmpl.replace(new RegExp(key[0], 'gi'), data as string);
         }
       }
       this.PROPS_REGEXP.lastIndex = key.index;
@@ -47,7 +47,7 @@ export class Templator {
 
     while (key) {
       if (key) {
-        tmpl = tmpl.replace(new RegExp(key[0], "gi"), "");
+        tmpl = tmpl.replace(new RegExp(key[0], 'gi'), '');
 
         this.EMPTY_PROPS_REGEXP.lastIndex = key.index;
         key = this.EMPTY_PROPS_REGEXP.exec(tmpl);

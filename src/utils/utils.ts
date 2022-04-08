@@ -7,21 +7,20 @@
  * @param defaultValue - значение по умолчанию
  */
 
-export const get = <T extends Record<string, unknown>, D extends unknown>(
+export const get = <T extends Record<string, unknown>, D>(
   obj: T,
   path: string,
-  defaultValue?: D
+  defaultValue?: D,
 ): unknown | D => {
-  const pathArr = path.split(".");
+  const pathArr = path.split('.');
 
   const value = obj[pathArr[0]];
 
-  if (value && typeof value === "object") {
-    const nextPath = pathArr.slice(1).join(".");
+  if (value && typeof value === 'object') {
+    const nextPath = pathArr.slice(1).join('.');
     return get(value as Record<string, unknown>, nextPath, defaultValue);
-  } else {
-    return value ?? defaultValue;
   }
+  return value ?? defaultValue;
 };
 
 /**
@@ -39,4 +38,4 @@ export const queryStringify = (data: object) =>
 
       return `&${k}=${v.toString()}`;
     })
-    .join("");
+    .join('');

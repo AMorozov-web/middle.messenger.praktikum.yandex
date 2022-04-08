@@ -1,10 +1,10 @@
-import { queryStringify } from "./utils";
+import {queryStringify} from './utils';
 
 const METHODS = {
-  GET: "GET",
-  POST: "POST",
-  PUT: "PUT",
-  DELETE: "DELETE"
+  GET: 'GET',
+  POST: 'POST',
+  PUT: 'PUT',
+  DELETE: 'DELETE',
 } as const;
 
 type Options = {
@@ -16,24 +16,24 @@ type Options = {
 
 export class HTTPTransport {
   get = (url: string, options: Options) => {
-    return this.request(url, { ...options, method: METHODS.GET }, options?.timeout);
+    return this.request(url, {...options, method: METHODS.GET}, options?.timeout);
   };
 
   post = (url: string, options: Options) => {
-    return this.request(url, { ...options, method: METHODS.POST }, options?.timeout);
+    return this.request(url, {...options, method: METHODS.POST}, options?.timeout);
   };
 
   put = (url: string, options: Options) => {
-    return this.request(url, { ...options, method: METHODS.PUT }, options?.timeout);
+    return this.request(url, {...options, method: METHODS.PUT}, options?.timeout);
   };
 
   delete = (url: string, options: Options) => {
-    return this.request(url, { ...options, method: METHODS.PUT }, options?.timeout);
+    return this.request(url, {...options, method: METHODS.PUT}, options?.timeout);
   };
 
   request = (url: string, options: Options, timeout = 5000) => {
-    const { method, headers, data } = options;
-    let params = "";
+    const {method, headers, data} = options;
+    let params = '';
 
     if (method === METHODS.GET && data) {
       params = queryStringify(data);
