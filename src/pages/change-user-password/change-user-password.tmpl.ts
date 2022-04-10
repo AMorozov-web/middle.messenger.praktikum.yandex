@@ -1,5 +1,5 @@
 export const template = `
-<main>
+<main class="main">
   <section class="change-user-password-page">
     <h1 class="visually-hidden">Изменить пароль</h1>
     <div class="change-user-password-page__inner-wrapper">

@@ -1,5 +1,5 @@
 export const template = `
-<main>
+<main class="main">
   <section class="main-page">
     <h1 class="visually-hidden">Чаты</h1>
     <aside class="main-page__inner-wrapper">

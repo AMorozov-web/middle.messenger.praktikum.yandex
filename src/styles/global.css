@@ -2,11 +2,26 @@
 @import url("./normalize.css");
 @import url("./variables.css");
 
-html {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.main {
+  width: 100%;
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-items: center;
   font-family: "Inter", sans-serif;
   font-size: 12px;
   line-height: 15px;
   font-weight: 400;
+}
+
+p {
+  margin: 0;
 }
 
 .visually-hidden {
@@ -20,10 +35,4 @@ html {
   clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
 }

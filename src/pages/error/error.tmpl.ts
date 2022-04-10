@@ -1,5 +1,5 @@
 export const template = `
-<main>
+<main class="main">
   <section class="error-page">
     <h1 class="visually-hidden">Произошла ошибка</h1>
     <div class="error-page__content">

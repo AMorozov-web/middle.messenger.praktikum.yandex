@@ -1,5 +1,5 @@
 export const template = `
-<main>
+<main class="main">
   <section class="profile-page">
     <h1 class="visually-hidden">Профиль</h1>
     <div class="profile-page__inner-wrapper">

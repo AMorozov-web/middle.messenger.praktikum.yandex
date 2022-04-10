@@ -1,5 +1,5 @@
 export const template = `
-<main>
+<main class="main">
   <section class="change-user-data-page">
     <h1 class="visually-hidden">Редактировать данные</h1>
     <div class="change-user-data-page__inner-wrapper">
