@@ -30,15 +30,12 @@ export const get = <T extends Record<string, unknown>, D>(
  * @returns строка. Пример: ?a=1&b=2&c=[object Object]&k=1,2,3
  */
 export const queryStringify = (data: object) =>
-  Object.entries(data)
-    .map(([k, v], i) => {
-      if (i === 0) {
-        return `?${k}=${v.toString()}`;
-      }
-
-      return `&${k}=${v.toString()}`;
-    })
-    .join('');
+  Object.entries(data).reduce((result, [k, v], i) => {
+    if (i === 0) {
+      return result.concat(`?${k}=${v.toString()}`);
+    }
+    return result.concat(`&${k}=${v.toString()}`);
+  }, '');
 
 /**
  * Предикат на тип объекта Record<string, unknown>
