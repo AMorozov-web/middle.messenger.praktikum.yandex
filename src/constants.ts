@@ -17,6 +17,7 @@ export const TAG_NAME = {
   FORM: 'form',
   LABEL: 'label',
   UL: 'ul',
+  LI: 'li',
 } as const;
 
 export const METHODS = {
