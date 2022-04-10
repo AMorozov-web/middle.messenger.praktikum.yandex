@@ -16,6 +16,7 @@ export const TAG_NAME = {
   DIV: 'div',
   FORM: 'form',
   LABEL: 'label',
+  UL: 'ul',
 } as const;
 
 export const METHODS = {
