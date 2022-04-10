@@ -15,11 +15,7 @@ export const template = `
       {{chatsList}}
     </aside>
     <div class="main-page__content">
-      <div class="main-page__user-info">
-        <div class="main-page__user-avatar"></div>
-        <p class="main-page__user-name">Пользователь</p>
-        <button class="main-page__user-button" type="button"></button>
-      </div>
+      {{userInfo}}
       <ul class="main-page__selected-chat">
         <li class="main-page__day">
           <p class="main-page__day-title">19 мая</p>

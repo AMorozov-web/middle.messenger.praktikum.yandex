@@ -1,5 +1,16 @@
 import {template} from './main.tmpl';
-import {Avatar, Block, Button, ChatItem, Form, Input, Link, List, Message} from '../../components';
+import {
+  Avatar,
+  Block,
+  Button,
+  ChatItem,
+  Form,
+  Input,
+  Link,
+  List,
+  Message,
+  UserInfo,
+} from '../../components';
 import {onFormSubmit, renderDOM} from '../../utils';
 import {BUTTON_TYPE, TAG_NAME} from '../../constants';
 
@@ -9,6 +20,7 @@ type Props = {
   chatsList: List;
   messagesList: List;
   form: Form;
+  userInfo: UserInfo;
 };
 
 const addChatLink = new Link({
@@ -92,6 +104,18 @@ const newMessageForm = new Form({
   },
 });
 
+const userInfo = new UserInfo({
+  avatar: new Avatar({
+    wrapperClassName: 'main-page__user-avatar',
+  }),
+  button: new Button({
+    className: 'main-page__user-button',
+    text: '',
+    type: BUTTON_TYPE.BUTTON,
+  }),
+  userName: 'Пользователь',
+});
+
 class MainPage extends Block {
   constructor(props: Props) {
     super(TAG_NAME.DIV, props);
@@ -108,6 +132,7 @@ const allProps = {
   chatsList,
   messagesList,
   form: newMessageForm,
+  userInfo,
 };
 
 const page = new MainPage(allProps);

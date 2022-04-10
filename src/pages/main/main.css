@@ -102,10 +102,18 @@
 }
 
 .main-page__user-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 34px;
   height: 34px;
   border-radius: 50%;
   background-color: var(--gallery);
+}
+
+.main-page__user-avatar > img {
+  width: 14px;
+  height: 14px;
 }
 
 .main-page__user-name {

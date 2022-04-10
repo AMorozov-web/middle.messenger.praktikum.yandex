@@ -1,5 +1,6 @@
 import {template} from './message.tmpl';
 import {Block} from '../block';
+import {TAG_NAME} from '../../constants';
 
 type Props = {
   className?: string;
@@ -9,7 +10,7 @@ type Props = {
 
 export class Message extends Block {
   constructor(props: Props) {
-    super('div', props);
+    super(TAG_NAME.DIV, props);
   }
 
   render() {
