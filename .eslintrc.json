@@ -46,6 +46,7 @@
         "props": false
       }
     ],
+    "no-restricted-globals": "off",
     "no-restricted-syntax": [
       2,
       "WithStatement"
