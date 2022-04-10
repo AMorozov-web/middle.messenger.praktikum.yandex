@@ -1,18 +1,8 @@
 import {v4 as getId} from 'uuid';
-import {cloneObject, EventBus, Templator} from '../utils';
+import {cloneObject, EventBus, Templator} from '../../utils';
 
 export type Children = {
   [key: string]: Block | Block[];
-};
-
-export type EventProps = {
-  callback: (evt: Event) => void;
-  capture?: boolean;
-};
-
-export type CommonProps = {
-  events?: Record<string, EventProps>;
-  [key: string]: unknown;
 };
 
 type BlockMeta = {

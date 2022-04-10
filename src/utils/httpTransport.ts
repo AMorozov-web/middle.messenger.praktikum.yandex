@@ -1,11 +1,5 @@
 import {queryStringify} from './utils';
-
-const METHODS = {
-  GET: 'GET',
-  POST: 'POST',
-  PUT: 'PUT',
-  DELETE: 'DELETE',
-} as const;
+import {METHODS} from '../constants';
 
 type Options = {
   data: object;
