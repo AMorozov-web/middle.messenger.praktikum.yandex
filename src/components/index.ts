@@ -7,3 +7,4 @@ export * from './form';
 export * from './link';
 export * from './list';
 export * from './message';
+export * from './user-info';
