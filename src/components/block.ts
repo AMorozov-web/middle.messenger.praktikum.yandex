@@ -5,19 +5,19 @@ export type Children = {
   [key: string]: Block | Block[];
 };
 
-export type EventProp = {
-  event: (evt: Event) => void;
+export type EventProps = {
+  callback: (evt: Event) => void;
   capture?: boolean;
 };
 
-export type Props = {
-  events?: Record<string, EventProp>;
+export type CommonProps = {
+  events?: Record<string, EventProps>;
   [key: string]: unknown;
 };
 
-type Meta = {
+type BlockMeta = {
   tagName: string;
-  props: Props;
+  props: CommonProps;
 };
 
 export class Block {
@@ -32,15 +32,15 @@ export class Block {
 
   eventBus: () => EventBus;
 
-  props: Props;
+  props: CommonProps;
 
   _element: HTMLElement | null;
 
   _id: string | null;
 
-  _meta: Meta;
+  _meta: BlockMeta;
 
-  constructor(tagName = 'div', allProps: Props = {}) {
+  constructor(tagName = 'div', allProps: CommonProps = {}) {
     const eventBus = new EventBus();
 
     const {props, children} = this._getChildren(allProps);
@@ -104,7 +104,7 @@ export class Block {
     }
   }
 
-  componentDidUpdate(oldProps: Props, newProps: Props) {
+  componentDidUpdate(oldProps: CommonProps, newProps: CommonProps) {
     // В дальнейшем необходимо сравнивать пропсы для оптимизации ререндеров
     // If написан для купирования ошибки value is never read
     if (oldProps && newProps) {
@@ -113,7 +113,7 @@ export class Block {
     return true;
   }
 
-  compile(template: string, props: Props) {
+  compile(template: string, props: CommonProps) {
     const propsWithBlanks = Object.entries(this.children).reduce(
       (result, [key, value]) => {
         if (Array.isArray(value)) {
@@ -123,7 +123,7 @@ export class Block {
         }
         return result;
       },
-      {...props} as Props,
+      {...props} as CommonProps,
     );
     // Рассмотреть вариант компиляции в один проход
     const fragment = this._createDocumentElement('template') as HTMLTemplateElement;
@@ -146,7 +146,7 @@ export class Block {
     return content;
   }
 
-  _getChildren(allProps: Props) {
+  _getChildren(allProps: CommonProps) {
     return Object.entries(allProps).reduce(
       (result, [key, value]) => {
         if (value instanceof Block) {
@@ -158,7 +158,7 @@ export class Block {
         }
         return result;
       },
-      {children: {} as Children, props: {} as Props},
+      {children: {} as Children, props: {} as CommonProps},
     );
   }
 
@@ -188,7 +188,7 @@ export class Block {
     }
   }
 
-  _componentDidUpdate(oldProps: Props, newProps: Props) {
+  _componentDidUpdate(oldProps: CommonProps, newProps: CommonProps) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (response) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
@@ -212,7 +212,7 @@ export class Block {
     this._addEvents();
   }
 
-  _makePropsProxy(props: Props) {
+  _makePropsProxy(props: CommonProps) {
     const eventBus = this.eventBus.bind(this);
 
     return new Proxy(props, {
@@ -241,7 +241,7 @@ export class Block {
       Object.keys(events).forEach((eventName) => {
         this._element?.addEventListener(
           eventName,
-          events[eventName].event,
+          events[eventName].callback,
           events[eventName].capture ?? false,
         );
       });
@@ -253,7 +253,7 @@ export class Block {
 
     if (events) {
       Object.keys(events).forEach((eventName) => {
-        this._element?.removeEventListener(eventName, events[eventName].event);
+        this._element?.removeEventListener(eventName, events[eventName].callback);
       });
     }
   }
