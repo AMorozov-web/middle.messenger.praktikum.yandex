@@ -11,8 +11,10 @@ type Props = {
 const redirectToMain = () => {
   const link = document.createElement(TAG_NAME.A);
   link.href = '/main.html';
-  link.click();
-  link.remove();
+  setTimeout(() => {
+    link.click();
+    link.remove();
+  }, 500);
 };
 
 const loginInput = new Input({
