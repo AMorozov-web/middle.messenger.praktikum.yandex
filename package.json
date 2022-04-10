@@ -2,9 +2,6 @@
   "name": "middle.messenger.practikum.yandex",
   "version": "1.0.0",
   "description": "---",
-  "engines": {
-    "node": "16.13.1"
-  },
   "scripts": {
     "build": "parcel build static/*.html --no-cache",
     "clean": "rimraf dist/ && rimraf .parcel-cache",
