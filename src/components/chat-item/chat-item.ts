@@ -6,7 +6,7 @@ import {TAG_NAME} from '../../constants';
 type Props = {
   avatar: Avatar;
   lastMessage: string;
-  name: string;
+  userName: string;
   time: string;
   newMessagesCount: string;
 };
