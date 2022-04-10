@@ -37,10 +37,18 @@
 .main-page__chat-avatar {
   grid-column: 1 / 2;
   grid-row: 1 / 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 47px;
   height: 47px;
   border-radius: 50%;
   background-color: var(--gallery);
+}
+
+.main-page__chat-avatar > img {
+  width: 19px;
+  height: 19px;
 }
 
 .main-page__chat-name {
