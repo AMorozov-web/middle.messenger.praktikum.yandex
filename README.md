@@ -1,4 +1,4 @@
-[Pull Request](<https://github.com/AMorozov-web/middle.messenger.praktikum.yandex/pull/1>)
+[Pull Request](<https://github.com/AMorozov-web/middle.messenger.praktikum.yandex/pull/2>)
 
 ## Описание
 
