@@ -3,8 +3,8 @@ export const template = `
     <p class="main-page__message-content">
       {{text}}
     </p>
-    <p class="main-page__message-time">
+    <time class="main-page__message-time">
       {{time}}
-    </p>
+    </time>
   </li>
 `;

@@ -1,12 +1,7 @@
 import {template} from './change-user-data.tmpl';
 import {Block, Button, Form, Input, Link} from '../../components';
 import {onFormSubmit, renderDOM} from '../../utils';
-import {BUTTON_TYPE, INPUT_TYPE, TAG_NAME} from '../../constants';
-
-type Props = {
-  link: Link;
-  form: Form;
-};
+import {BUTTON_TYPE, INPUT_TYPE, PATTERN, TAG_NAME} from '../../constants';
 
 const redirectToProfile = () => {
   const link = document.createElement(TAG_NAME.A);
@@ -17,17 +12,12 @@ const redirectToProfile = () => {
   }, 500);
 };
 
-const toBackLink = new Link({
-  className: 'change-user-data-page__back',
-  href: './profile.html',
-  text: ' ',
-});
-
 const emailInput = new Input({
   className: 'change-user-data__field',
   id: 'email',
   name: 'email',
   type: INPUT_TYPE.EMAIL,
+  pattern: PATTERN.EMAIL,
   label: {
     text: 'Почта',
   },
@@ -40,6 +30,7 @@ const loginInput = new Input({
   className: 'change-user-data__field',
   id: 'login',
   name: 'login',
+  pattern: PATTERN.LOGIN,
   label: {
     text: 'Логин',
   },
@@ -54,6 +45,7 @@ const firstNameInput = new Input({
   className: 'change-user-data__field',
   id: 'first-name',
   name: 'first-name',
+  pattern: PATTERN.NAME,
   label: {
     text: 'Имя',
   },
@@ -66,6 +58,7 @@ const lastNameInput = new Input({
   className: 'change-user-data__field',
   id: 'last-name',
   name: 'last-name',
+  pattern: PATTERN.NAME,
   label: {
     text: 'Фамилия',
   },
@@ -78,6 +71,7 @@ const nickNameInput = new Input({
   className: 'change-user-data__field',
   id: 'nickname',
   name: 'nickname',
+  pattern: PATTERN.NAME,
   label: {
     text: 'Имя в чате',
   },
@@ -90,7 +84,8 @@ const phoneInput = new Input({
   className: 'change-user-data__field',
   id: 'phone',
   name: 'phone',
-  type: INPUT_TYPE.PHONE,
+  pattern: PATTERN.PHONE,
+  type: INPUT_TYPE.TEL,
   label: {
     text: 'Телефон',
   },
@@ -105,37 +100,42 @@ const saveButton = new Button({
   type: BUTTON_TYPE.SUBMIT,
 });
 
-const changeDataForm = new Form({
-  className: 'change-user-data-page__form',
-  children: [
-    emailInput,
-    loginInput,
-    firstNameInput,
-    lastNameInput,
-    nickNameInput,
-    phoneInput,
-    saveButton,
-  ],
-  events: {
-    submit: {
-      callback: (evt) => onFormSubmit(evt, redirectToProfile),
-    },
-    focus: {
-      callback: (evt) => {
-        const target = evt.target as HTMLInputElement;
-
-        if (!target.checkValidity()) {
-          target.reportValidity();
-        }
-      },
-      capture: true,
-    },
-  },
-});
-
 class ChangeUserDataPage extends Block {
-  constructor(props: Props) {
-    super(TAG_NAME.DIV, props);
+  constructor() {
+    super(TAG_NAME.DIV, {
+      link: new Link({
+        className: 'change-user-data-page__back',
+        href: './profile.html',
+        text: ' ',
+      }),
+      form: new Form({
+        className: 'change-user-data-page__form',
+        children: [
+          emailInput,
+          loginInput,
+          firstNameInput,
+          lastNameInput,
+          nickNameInput,
+          phoneInput,
+          saveButton,
+        ],
+        events: {
+          submit: {
+            callback: (evt) => onFormSubmit(evt, redirectToProfile),
+          },
+          focus: {
+            callback: (evt) => {
+              const target = evt.target as HTMLInputElement;
+
+              if (!target.checkValidity()) {
+                target.reportValidity();
+              }
+            },
+            capture: true,
+          },
+        },
+      }),
+    });
   }
 
   render() {
@@ -143,12 +143,7 @@ class ChangeUserDataPage extends Block {
   }
 }
 
-const allProps = {
-  link: toBackLink,
-  form: changeDataForm,
-};
-
-const page = new ChangeUserDataPage(allProps);
+const page = new ChangeUserDataPage();
 
 const root = document.getElementById('root');
 

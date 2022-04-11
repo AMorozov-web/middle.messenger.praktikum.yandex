@@ -5,6 +5,7 @@ import {INPUT_TYPE, TAG_NAME} from '../../constants';
 type Props = {
   className?: string;
   events?: Record<string, EventProps>;
+  pattern?: string;
   id?: string;
   inputClassName?: string;
   label?: {
@@ -23,7 +24,7 @@ type Props = {
 const DEFAULT_INPUT_CLASSNAME = 'input';
 const DEFAULT_LABEL_CLASSNAME = 'input__label';
 
-export class Input extends Block {
+export class Input extends Block<Props> {
   constructor(props: Props) {
     const defaultProps: Props = {
       inputClassName: DEFAULT_INPUT_CLASSNAME,

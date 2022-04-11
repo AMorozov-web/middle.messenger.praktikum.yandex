@@ -14,25 +14,6 @@ import {
 import {onFormSubmit, renderDOM} from '../../utils';
 import {BUTTON_TYPE, TAG_NAME} from '../../constants';
 
-type Props = {
-  addChatLink: Link;
-  profileLink: Link;
-  chatsList: List;
-  messagesList: List;
-  form: Form;
-  userInfo: UserInfo;
-};
-
-const addChatLink = new Link({
-  href: '',
-  text: 'Добавить чат',
-});
-
-const profileLink = new Link({
-  href: './profile.html',
-  text: 'Профиль',
-});
-
 const chatsListData = new Array(3).fill('').map(
   () =>
     new ChatItem({
@@ -46,11 +27,6 @@ const chatsListData = new Array(3).fill('').map(
     }),
 );
 
-const chatsList = new List({
-  className: 'main-page__chats-list',
-  items: chatsListData,
-});
-
 const messageData = new Array(4).fill('').map((_, i) => {
   const className = i % 2 !== 0 ? 'main-page__message--self' : '';
 
@@ -59,11 +35,6 @@ const messageData = new Array(4).fill('').map((_, i) => {
     text: 'Круто!',
     time: '12:00',
   });
-});
-
-const messagesList = new List({
-  className: 'main-page__messages',
-  items: messageData,
 });
 
 const newMessageInput = new Input({
@@ -84,41 +55,56 @@ const submitButton = new Button({
   type: BUTTON_TYPE.SUBMIT,
 });
 
-const newMessageForm = new Form({
-  className: 'main-page__send-message',
-  children: [newMessageInput, submitButton],
-  events: {
-    submit: {
-      callback: (evt) => onFormSubmit(evt),
-    },
-    focus: {
-      callback: (evt) => {
-        const target = evt.target as HTMLInputElement;
-
-        if (!target.checkValidity()) {
-          target.reportValidity();
-        }
-      },
-      capture: true,
-    },
-  },
-});
-
-const userInfo = new UserInfo({
-  avatar: new Avatar({
-    wrapperClassName: 'main-page__user-avatar',
-  }),
-  button: new Button({
-    className: 'main-page__user-button',
-    text: '',
-    type: BUTTON_TYPE.BUTTON,
-  }),
-  userName: 'Пользователь',
-});
-
 class MainPage extends Block {
-  constructor(props: Props) {
-    super(TAG_NAME.DIV, props);
+  constructor() {
+    super(TAG_NAME.DIV, {
+      addChatLink: new Link({
+        href: '',
+        text: 'Добавить чат',
+      }),
+      profileLink: new Link({
+        href: './profile.html',
+        text: 'Профиль',
+      }),
+      chatsList: new List({
+        className: 'main-page__chats-list',
+        items: chatsListData,
+      }),
+      messagesList: new List({
+        className: 'main-page__messages',
+        items: messageData,
+      }),
+      form: new Form({
+        className: 'main-page__send-message',
+        children: [newMessageInput, submitButton],
+        events: {
+          submit: {
+            callback: (evt) => onFormSubmit(evt),
+          },
+          focus: {
+            callback: (evt) => {
+              const target = evt.target as HTMLInputElement;
+
+              if (!target.checkValidity()) {
+                target.reportValidity();
+              }
+            },
+            capture: true,
+          },
+        },
+      }),
+      userInfo: new UserInfo({
+        avatar: new Avatar({
+          wrapperClassName: 'main-page__user-avatar',
+        }),
+        button: new Button({
+          className: 'main-page__user-button',
+          text: '',
+          type: BUTTON_TYPE.BUTTON,
+        }),
+        userName: 'Пользователь',
+      }),
+    });
   }
 
   render() {
@@ -126,16 +112,7 @@ class MainPage extends Block {
   }
 }
 
-const allProps = {
-  addChatLink,
-  profileLink,
-  chatsList,
-  messagesList,
-  form: newMessageForm,
-  userInfo,
-};
-
-const page = new MainPage(allProps);
+const page = new MainPage();
 
 const root = document.getElementById('root');
 

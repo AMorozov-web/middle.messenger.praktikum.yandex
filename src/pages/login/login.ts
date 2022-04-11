@@ -3,11 +3,6 @@ import {onFormSubmit, renderDOM} from '../../utils';
 import {Block, Button, Form, Input, Link} from '../../components';
 import {BUTTON_TYPE, TAG_NAME} from '../../constants';
 
-type Props = {
-  form: Form;
-  link: Link;
-};
-
 const redirectToMain = () => {
   const link = document.createElement(TAG_NAME.A);
   link.href = '/main.html';
@@ -51,35 +46,34 @@ const submitButton = new Button({
   type: BUTTON_TYPE.SUBMIT,
 });
 
-const loginForm = new Form({
-  className: 'login-page__form',
-  children: [loginInput, passwordInput, submitButton],
-  events: {
-    submit: {
-      callback: (evt) => onFormSubmit(evt, redirectToMain),
-    },
-    focus: {
-      callback: (evt) => {
-        const target = evt.target as HTMLInputElement;
-
-        if (!target.checkValidity()) {
-          target.reportValidity();
-        }
-      },
-      capture: true,
-    },
-  },
-});
-
-const signUpLink = new Link({
-  className: 'login-page__signup',
-  href: './sign-up.html',
-  text: 'Нет аккаунта?',
-});
-
 class LoginPage extends Block {
-  constructor(props: Props) {
-    super(TAG_NAME.DIV, props);
+  constructor() {
+    super(TAG_NAME.DIV, {
+      link: new Link({
+        className: 'login-page__signup',
+        href: './sign-up.html',
+        text: 'Нет аккаунта?',
+      }),
+      form: new Form({
+        className: 'login-page__form',
+        children: [loginInput, passwordInput, submitButton],
+        events: {
+          submit: {
+            callback: (evt) => onFormSubmit(evt, redirectToMain),
+          },
+          focus: {
+            callback: (evt) => {
+              const target = evt.target as HTMLInputElement;
+
+              if (!target.checkValidity()) {
+                target.reportValidity();
+              }
+            },
+            capture: true,
+          },
+        },
+      }),
+    });
   }
 
   render() {
@@ -87,12 +81,7 @@ class LoginPage extends Block {
   }
 }
 
-const allProps = {
-  form: loginForm,
-  link: signUpLink,
-};
-
-const page = new LoginPage(allProps);
+const page = new LoginPage();
 
 const root = document.getElementById('root');
 

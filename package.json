@@ -6,7 +6,7 @@
     "build": "parcel build static/*.html --no-cache",
     "clean": "rimraf dist/ && rimraf .parcel-cache",
     "dev": "npm run clean && parcel static/*.html",
-    "eslint": "eslint --ext .js src/ --fix",
+    "eslint": "eslint --ext .js --ext .ts src/ --fix",
     "start": "npm run clean && npm run build && npm run serve",
     "stylelint": "stylelint **/*.css",
     "serve": "node server/express.js",

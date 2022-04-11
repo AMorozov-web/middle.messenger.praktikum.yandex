@@ -8,7 +8,7 @@ type Props = {
   text: string;
 };
 
-export class Link extends Block {
+export class Link extends Block<Props> {
   constructor(props: Props) {
     super(TAG_NAME.A, props);
   }

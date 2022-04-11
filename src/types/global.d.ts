@@ -1,4 +1,4 @@
-import {BUTTON_TYPE, INPUT_TYPE} from '../constants';
+import {BUTTON_TYPE, INPUT_TYPE, TAG_NAME} from '../constants';
 
 export {};
 
@@ -7,6 +7,7 @@ declare global {
 
   type InputType = typeof INPUT_TYPE[keyof typeof INPUT_TYPE];
   type ButtonType = typeof BUTTON_TYPE[keyof typeof BUTTON_TYPE];
+  type TagName = typeof TAG_NAME[keyof typeof TAG_NAME];
 
   type EventProps = {
     callback: (evt: Event) => void;

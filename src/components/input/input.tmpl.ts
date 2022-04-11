@@ -6,6 +6,7 @@ export const template = `
       id={{id}}
       name={{name}}
       type={{type}}
+      pattern={{pattern}}
       minLength={{validation.minLength}}
       maxLength={{validation.maxLength}}
       required={{validation.required}} />

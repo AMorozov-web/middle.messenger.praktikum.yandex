@@ -8,7 +8,7 @@ type Props = {
   events?: Record<string, EventProps>;
 };
 
-export class Form extends Block {
+export class Form extends Block<Props> {
   constructor(props: Props) {
     super(TAG_NAME.FORM, props);
   }

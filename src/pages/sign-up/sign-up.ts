@@ -1,12 +1,7 @@
 import {template} from './sign-up.tmpl';
 import {onFormSubmit, renderDOM} from '../../utils';
 import {Block, Button, Form, Input, Link} from '../../components';
-import {BUTTON_TYPE, INPUT_TYPE, TAG_NAME} from '../../constants';
-
-type Props = {
-  form: Form;
-  link: Link;
-};
+import {BUTTON_TYPE, INPUT_TYPE, PATTERN, TAG_NAME} from '../../constants';
 
 const redirectToSignIn = () => {
   const link = document.createElement(TAG_NAME.A);
@@ -22,6 +17,7 @@ const emailInput = new Input({
   id: 'email',
   name: 'email',
   type: INPUT_TYPE.EMAIL,
+  pattern: PATTERN.EMAIL,
   label: {
     text: 'Почта',
   },
@@ -34,6 +30,7 @@ const loginInput = new Input({
   className: 'sign-up__login',
   id: 'login',
   name: 'login',
+  pattern: PATTERN.LOGIN,
   label: {
     text: 'Логин',
   },
@@ -48,6 +45,7 @@ const firstNameInput = new Input({
   className: 'sign-up__firstname',
   id: 'first-name',
   name: 'first-name',
+  pattern: PATTERN.NAME,
   label: {
     text: 'Имя',
   },
@@ -60,6 +58,7 @@ const lastNameInput = new Input({
   className: 'sign-up__lastname',
   id: 'last-name',
   name: 'last-name',
+  pattern: PATTERN.NAME,
   label: {
     text: 'Фамилия',
   },
@@ -72,7 +71,8 @@ const phoneInput = new Input({
   className: 'sign-up__phone',
   id: 'phone',
   name: 'phone',
-  type: INPUT_TYPE.PHONE,
+  pattern: PATTERN.PHONE,
+  type: INPUT_TYPE.TEL,
   label: {
     text: 'Телефон',
   },
@@ -85,6 +85,8 @@ const passwordInput = new Input({
   className: 'sign-up__password',
   id: 'password',
   name: 'password',
+  type: INPUT_TYPE.PASSWORD,
+  pattern: PATTERN.PASSWORD,
   label: {
     text: 'Пароль',
   },
@@ -99,6 +101,8 @@ const repeatPasswordInput = new Input({
   className: 'sign-up__repeat-password',
   id: 'repeat-password',
   name: 'repeat-password',
+  type: INPUT_TYPE.PASSWORD,
+  pattern: PATTERN.PASSWORD,
   label: {
     text: 'Пароль (ещё раз)',
   },
@@ -115,44 +119,43 @@ const submitButton = new Button({
   type: BUTTON_TYPE.SUBMIT,
 });
 
-const signUpForm = new Form({
-  className: 'sign-up__form',
-  children: [
-    emailInput,
-    loginInput,
-    firstNameInput,
-    lastNameInput,
-    phoneInput,
-    passwordInput,
-    repeatPasswordInput,
-    submitButton,
-  ],
-  events: {
-    submit: {
-      callback: (evt) => onFormSubmit(evt, redirectToSignIn),
-    },
-    focus: {
-      callback: (evt) => {
-        const target = evt.target as HTMLInputElement;
-
-        if (!target.checkValidity()) {
-          target.reportValidity();
-        }
-      },
-      capture: true,
-    },
-  },
-});
-
-const signInLink = new Link({
-  className: 'sign-up__sign-in',
-  href: './index.html',
-  text: 'Войти',
-});
-
 class SignUpPage extends Block {
-  constructor(props: Props) {
-    super(TAG_NAME.DIV, props);
+  constructor() {
+    super(TAG_NAME.DIV, {
+      link: new Link({
+        className: 'sign-up__sign-in',
+        href: './index.html',
+        text: 'Войти',
+      }),
+      form: new Form({
+        className: 'sign-up__form',
+        children: [
+          emailInput,
+          loginInput,
+          firstNameInput,
+          lastNameInput,
+          phoneInput,
+          passwordInput,
+          repeatPasswordInput,
+          submitButton,
+        ],
+        events: {
+          submit: {
+            callback: (evt) => onFormSubmit(evt, redirectToSignIn),
+          },
+          focus: {
+            callback: (evt) => {
+              const target = evt.target as HTMLInputElement;
+
+              if (!target.checkValidity()) {
+                target.reportValidity();
+              }
+            },
+            capture: true,
+          },
+        },
+      }),
+    });
   }
 
   render() {
@@ -160,12 +163,7 @@ class SignUpPage extends Block {
   }
 }
 
-const allProps = {
-  form: signUpForm,
-  link: signInLink,
-};
-
-const page = new SignUpPage(allProps);
+const page = new SignUpPage();
 
 const root = document.getElementById('root');
 

@@ -1,12 +1,7 @@
 import {template} from './change-user-password.tmpl';
 import {Block, Button, Form, Input, Link} from '../../components';
 import {onFormSubmit, renderDOM} from '../../utils';
-import {BUTTON_TYPE, TAG_NAME} from '../../constants';
-
-type Props = {
-  form: Form;
-  link: Link;
-};
+import {BUTTON_TYPE, INPUT_TYPE, PATTERN, TAG_NAME} from '../../constants';
 
 const redirectToProfile = () => {
   const link = document.createElement(TAG_NAME.A);
@@ -17,16 +12,12 @@ const redirectToProfile = () => {
   }, 500);
 };
 
-const toBackLink = new Link({
-  className: 'change-user-password-page__back',
-  href: './profile.html',
-  text: ' ',
-});
-
 const oldPasswordInput = new Input({
   className: 'change-user-password__field',
   id: 'password',
   name: 'password',
+  type: INPUT_TYPE.PASSWORD,
+  pattern: PATTERN.PASSWORD,
   label: {
     text: 'Пароль',
   },
@@ -41,6 +32,8 @@ const newPasswordInput = new Input({
   className: 'change-user-password__field',
   id: 'password',
   name: 'password',
+  type: INPUT_TYPE.PASSWORD,
+  pattern: PATTERN.PASSWORD,
   label: {
     text: 'Пароль',
   },
@@ -55,6 +48,8 @@ const repeatNewPasswordInput = new Input({
   className: 'change-user-password__field',
   id: 'repeat-password',
   name: 'repeat-password',
+  type: INPUT_TYPE.PASSWORD,
+  pattern: PATTERN.PASSWORD,
   label: {
     text: 'Пароль (ещё раз)',
   },
@@ -71,29 +66,34 @@ const saveButton = new Button({
   type: BUTTON_TYPE.SUBMIT,
 });
 
-const changePasswordForm = new Form({
-  className: 'change-user-password-page__form',
-  children: [oldPasswordInput, newPasswordInput, repeatNewPasswordInput, saveButton],
-  events: {
-    submit: {
-      callback: (evt) => onFormSubmit(evt, redirectToProfile),
-    },
-    focus: {
-      callback: (evt) => {
-        const target = evt.target as HTMLInputElement;
-
-        if (!target.checkValidity()) {
-          target.reportValidity();
-        }
-      },
-      capture: true,
-    },
-  },
-});
-
 class ChangeUserPasswordPage extends Block {
-  constructor(props: Props) {
-    super(TAG_NAME.DIV, props);
+  constructor() {
+    super(TAG_NAME.DIV, {
+      link: new Link({
+        className: 'change-user-password-page__back',
+        href: './profile.html',
+        text: ' ',
+      }),
+      form: new Form({
+        className: 'change-user-password-page__form',
+        children: [oldPasswordInput, newPasswordInput, repeatNewPasswordInput, saveButton],
+        events: {
+          submit: {
+            callback: (evt) => onFormSubmit(evt, redirectToProfile),
+          },
+          focus: {
+            callback: (evt) => {
+              const target = evt.target as HTMLInputElement;
+
+              if (!target.checkValidity()) {
+                target.reportValidity();
+              }
+            },
+            capture: true,
+          },
+        },
+      }),
+    });
   }
 
   render() {
@@ -101,12 +101,7 @@ class ChangeUserPasswordPage extends Block {
   }
 }
 
-const allProps = {
-  link: toBackLink,
-  form: changePasswordForm,
-};
-
-const page = new ChangeUserPasswordPage(allProps);
+const page = new ChangeUserPasswordPage();
 
 const root = document.getElementById('root');
 

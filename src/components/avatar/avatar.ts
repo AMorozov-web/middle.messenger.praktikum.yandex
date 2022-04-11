@@ -8,7 +8,7 @@ type Props = {
   wrapperClassName?: string;
 };
 
-export class Avatar extends Block {
+export class Avatar extends Block<Props> {
   constructor(props: Props) {
     const defaultProps: Props = {
       src: defaultImage,

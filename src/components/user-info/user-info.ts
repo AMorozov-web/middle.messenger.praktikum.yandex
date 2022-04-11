@@ -10,7 +10,7 @@ type Props = {
   userName: string;
 };
 
-export class UserInfo extends Block {
+export class UserInfo extends Block<Props> {
   constructor(props: Props) {
     super(TAG_NAME.DIV, props);
   }

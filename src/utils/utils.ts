@@ -1,5 +1,3 @@
-import {Block} from '../components';
-
 /**
  * Функция достает значение из объекта по указанному пути вида 'a.b.c'
  * В случае, если значение не найдено, возвращает значение по умолчанию, если оно передано третьим аргументом
@@ -26,20 +24,6 @@ export const get = <T extends Record<string, unknown>, D>(
 };
 
 /**
- * Функцию генерирует query строку у GET-метода
- *
- * @param {object} data объект. Пример: {a: 1, b: 2, c: {d: 123}, k: [1, 2, 3]}
- * @returns строка. Пример: ?a=1&b=2&c=[object Object]&k=1,2,3
- */
-export const queryStringify = (data: object) =>
-  Object.entries(data).reduce((result, [k, v], i) => {
-    if (i === 0) {
-      return result.concat(`?${k}=${v.toString()}`);
-    }
-    return result.concat(`&${k}=${v.toString()}`);
-  }, '');
-
-/**
  * Предикат на тип объекта Record<string, unknown>
  *
  * @param value - определяемый объект
@@ -61,47 +45,4 @@ export const cloneObject = <T>(object: T): T => {
     }
     return copy;
   }, {} as T);
-};
-
-/**
- * Помещает собранный компонент в выбранный элемент
- *
- * @param root - элемент
- * @param block - компонент
- */
-
-export const renderDOM = (root: Nullable<HTMLElement>, block: Block) => {
-  const element = block.getContent();
-
-  if (element && root) {
-    root.appendChild(element);
-  }
-
-  return root;
-};
-
-/**
- * Обработчик отправки формы, на событие onSubmit собирает данные, и выполняет функцию, если она был передана
- *
- * @param evt - событие отправки формы
- * @param callback - функцию, которая выполнится после сбора данных
- */
-
-export const onFormSubmit = (evt: Event, callback?: () => void) => {
-  evt.preventDefault();
-  const {elements} = evt.target as HTMLFormElement;
-
-  const data = [...elements].reduce((result, item) => {
-    if (item instanceof HTMLInputElement || item instanceof HTMLTextAreaElement) {
-      item.checkValidity();
-      result[item.name] = item.value;
-    }
-    return result;
-  }, {} as Record<string, string>);
-
-  console.log(data);
-
-  if (callback) {
-    callback();
-  }
 };

@@ -8,7 +8,7 @@ type Props = {
   time: string;
 };
 
-export class Message extends Block {
+export class Message extends Block<Props> {
   constructor(props: Props) {
     super(TAG_NAME.DIV, props);
   }

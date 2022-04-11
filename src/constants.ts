@@ -1,7 +1,7 @@
 export const INPUT_TYPE = {
   EMAIL: 'email',
   PASSWORD: 'password',
-  PHONE: 'phone',
+  TEL: 'tel',
   TEXT: 'text',
 } as const;
 
@@ -25,4 +25,12 @@ export const METHODS = {
   POST: 'POST',
   PUT: 'PUT',
   DELETE: 'DELETE',
+} as const;
+
+export const PATTERN = {
+  NAME: '[A-ZА-ЯЁ][a-za-яё-]+$',
+  LOGIN: '[a-zA-Z][a-zA-Z0-9_-]{3,19}$',
+  EMAIL: '[A-Za-z0-9_-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}$',
+  PASSWORD: '(?=^.{8,40}$)((?=.*\\d)|(?=.*\\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*',
+  PHONE: '(\\+)?([\\d]{10,15})$',
 } as const;

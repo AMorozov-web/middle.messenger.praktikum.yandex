@@ -1,16 +1,14 @@
 import {v4 as getId} from 'uuid';
 import {cloneObject, EventBus, Templator} from '../../utils';
 
-export type Children = {
-  [key: string]: Block | Block[];
-};
+export type Children = Record<string, Block | Block[]>;
 
 type BlockMeta = {
   tagName: string;
   props: CommonProps;
 };
 
-export class Block {
+export abstract class Block<T extends CommonProps = CommonProps> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -24,13 +22,13 @@ export class Block {
 
   props: CommonProps;
 
-  _element: HTMLElement | null;
+  private _element: HTMLElement | null;
 
-  _id: string | null;
+  private readonly _id: string | null;
 
-  _meta: BlockMeta;
+  private readonly _meta: BlockMeta;
 
-  constructor(tagName = 'div', allProps: CommonProps = {}) {
+  protected constructor(tagName: TagName, allProps: T) {
     const eventBus = new EventBus();
 
     const {props, children} = this._getChildren(allProps);
@@ -52,16 +50,16 @@ export class Block {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  componentDidMount() {}
+  public componentDidMount() {}
 
-  dispatchComponentDidMount() {}
+  public dispatchComponentDidMount() {}
 
-  init() {
+  public init() {
     this._createResources();
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  setProps = (nextProps: object) => {
+  public setProps = (nextProps: object) => {
     if (!nextProps) {
       return;
     }
@@ -72,29 +70,29 @@ export class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_CDU);
   };
 
-  render(): DocumentFragment {
+  public render(): DocumentFragment {
     return new DocumentFragment();
   }
 
-  getContent() {
+  public getContent() {
     return this._element;
   }
 
-  show() {
+  public show() {
     const element = this.getContent();
     if (element) {
       element.style.display = 'block';
     }
   }
 
-  hide() {
+  public hide() {
     const element = this.getContent();
     if (element) {
       element.style.display = 'none';
     }
   }
 
-  componentDidUpdate(oldProps: CommonProps, newProps: CommonProps) {
+  public componentDidUpdate(oldProps: CommonProps, newProps: CommonProps) {
     // В дальнейшем необходимо сравнивать пропсы для оптимизации ререндеров
     // If написан для купирования ошибки value is never read
     if (oldProps && newProps) {
@@ -103,7 +101,7 @@ export class Block {
     return true;
   }
 
-  compile(template: string, props: CommonProps) {
+  public compile(template: string, props: CommonProps) {
     const propsWithBlanks = Object.entries(this.children).reduce(
       (result, [key, value]) => {
         if (Array.isArray(value)) {
@@ -136,7 +134,7 @@ export class Block {
     return content;
   }
 
-  _getChildren(allProps: CommonProps) {
+  private _getChildren(allProps: CommonProps) {
     return Object.entries(allProps).reduce(
       (result, [key, value]) => {
         if (value instanceof Block) {
@@ -152,19 +150,19 @@ export class Block {
     );
   }
 
-  _registerEvents(eventBus: EventBus) {
+  private _registerEvents(eventBus: EventBus) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
   }
 
-  _createResources() {
+  private _createResources() {
     const {tagName} = this._meta;
     this._element = this._createDocumentElement(tagName);
   }
 
-  _componentDidMount() {
+  private _componentDidMount() {
     this.componentDidMount();
 
     if (this.children) {
@@ -178,14 +176,14 @@ export class Block {
     }
   }
 
-  _componentDidUpdate(oldProps: CommonProps, newProps: CommonProps) {
+  private _componentDidUpdate(oldProps: CommonProps, newProps: CommonProps) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (response) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
   }
 
-  _render() {
+  private _render() {
     // В дальнейшем переписать метод на безопасный
     const block = this.render();
 
@@ -202,7 +200,7 @@ export class Block {
     this._addEvents();
   }
 
-  _makePropsProxy(props: CommonProps) {
+  private _makePropsProxy(props: CommonProps) {
     const eventBus = this.eventBus.bind(this);
 
     return new Proxy(props, {
@@ -218,13 +216,13 @@ export class Block {
     });
   }
 
-  _createDocumentElement(tagName: string) {
+  private _createDocumentElement(tagName: string) {
     const element = document.createElement(tagName);
     element.setAttribute('data-id', this._id ?? '');
     return element;
   }
 
-  _addEvents() {
+  private _addEvents() {
     const {events} = this.props;
 
     if (events) {
@@ -238,7 +236,7 @@ export class Block {
     }
   }
 
-  _removeEvents() {
+  private _removeEvents() {
     const {events} = this.props;
 
     if (events) {

@@ -11,7 +11,7 @@ type Props = {
   newMessagesCount: string;
 };
 
-export class ChatItem extends Block {
+export class ChatItem extends Block<Props> {
   constructor(props: Props) {
     super(TAG_NAME.LI, props);
   }

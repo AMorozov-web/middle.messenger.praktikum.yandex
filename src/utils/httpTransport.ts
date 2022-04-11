@@ -1,4 +1,3 @@
-import {queryStringify} from './utils';
 import {METHODS} from '../constants';
 
 type Options = {
@@ -7,6 +6,21 @@ type Options = {
   method: keyof typeof METHODS;
   timeout: number;
 };
+
+/**
+ * Функцию генерирует query строку у GET-метода
+ *
+ * @param {object} data объект. Пример: {a: 1, b: 2, c: {d: 123}, k: [1, 2, 3]}
+ * @returns строка. Пример: ?a=1&b=2&c=[object Object]&k=1,2,3
+ */
+
+const queryStringify = (data: object) =>
+  Object.entries(data).reduce((result, [k, v], i) => {
+    if (i === 0) {
+      return result.concat(`?${k}=${v.toString()}`);
+    }
+    return result.concat(`&${k}=${v.toString()}`);
+  }, '');
 
 export class HTTPTransport {
   get = (url: string, options: Options) => {
