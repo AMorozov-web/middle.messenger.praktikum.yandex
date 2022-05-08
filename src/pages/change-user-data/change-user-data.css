@@ -54,6 +54,7 @@
   text-align: center;
   color: var(--white);
   background-color: var(--royal-blue);
+  border: none;
   border-radius: 8px;
   text-decoration: none;
 }

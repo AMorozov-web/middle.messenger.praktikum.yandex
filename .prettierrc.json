@@ -2,7 +2,13 @@
   "bracketSpacing": false,
   "overrides": [
     {
-      "files": ["*.js"]
+      "files": [
+        "*.js",
+        "*.ts"
+      ],
+      "options": {
+        "parser": "typescript"
+      }
     }
   ],
   "printWidth": 100,
