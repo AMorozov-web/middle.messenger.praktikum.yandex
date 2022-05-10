@@ -14,8 +14,7 @@ declare global {
     capture?: boolean;
   };
 
-  type CommonProps = {
+  type CommonProps = Record<string, unknown> & {
     events?: Record<string, EventProps>;
-    [key: string]: unknown;
   };
 }
