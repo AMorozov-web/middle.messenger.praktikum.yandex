@@ -70,3 +70,54 @@ export const cloneObject = <T>(object: T): T => {
     return copy;
   }, {} as T);
 };
+
+/**
+ * Функция для глубокого сравнения двух объектов
+ *
+ * @param left - первый объект
+ * @param right - второй объект
+ */
+
+export const isEqual = (left: Record<string, unknown>, right: Record<string, unknown>): boolean => {
+  const leftKeys = Object.keys(left);
+  const rightKeys = Object.keys(right);
+
+  if (leftKeys.length !== rightKeys.length) {
+    return false;
+  }
+
+  for (const key of leftKeys) {
+    const leftValue = left[key];
+    const rightValue = right[key];
+
+    const isObjects = isObject(leftValue) && isObject(rightValue);
+    const isFunctions = isFunction(leftValue) && isFunction(rightValue);
+    const isArrays = Array.isArray(leftValue) && Array.isArray(rightValue);
+
+    if (isObjects && !isEqual(leftValue, rightValue)) {
+      return false;
+    }
+
+    if (isFunctions && leftValue.toString() !== rightValue.toString()) {
+      return false;
+    }
+
+    if (isArrays) {
+      if (leftValue.length !== rightValue.length) {
+        return false;
+      }
+
+      for (let i = 0; i < leftValue.length; i++) {
+        if (!isEqual(leftValue[i], rightValue[i])) {
+          return false;
+        }
+      }
+    }
+
+    if (!isObjects && !isFunctions && !isArrays && leftValue !== rightValue) {
+      return false;
+    }
+  }
+
+  return true;
+};
