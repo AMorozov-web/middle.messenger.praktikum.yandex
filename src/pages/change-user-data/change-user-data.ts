@@ -1,7 +1,7 @@
 import {template} from './change-user-data.tmpl';
 import {Block} from '../../core';
 import {Button, Form, Input, Link} from '../../components';
-import {onFormSubmit, renderDOM} from '../../utils';
+import {onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, INPUT_TYPE, PATTERN, TAG_NAME} from '../../constants';
 
 const redirectToProfile = () => {
@@ -101,7 +101,7 @@ const saveButton = new Button({
   type: BUTTON_TYPE.SUBMIT,
 });
 
-class ChangeUserDataPage extends Block {
+export class ChangeUserDataPage extends Block {
   constructor() {
     super(TAG_NAME.DIV, {
       link: new Link({
@@ -143,9 +143,3 @@ class ChangeUserDataPage extends Block {
     return this.compile(template, this.props);
   }
 }
-
-const page = new ChangeUserDataPage();
-
-const root = document.getElementById('root');
-
-renderDOM(root, page);

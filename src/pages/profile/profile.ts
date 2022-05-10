@@ -1,7 +1,6 @@
 import {template} from './profile.tmpl';
 import {Block} from '../../core';
 import {Avatar, Link} from '../../components';
-import {renderDOM} from '../../utils';
 import {TAG_NAME} from '../../constants';
 
 const avatar = new Avatar({
@@ -30,7 +29,7 @@ const exitLink = new Link({
   text: 'Выйти',
 });
 
-class ProfilePage extends Block {
+export class ProfilePage extends Block {
   constructor() {
     super(TAG_NAME.DIV, {
       avatar,
@@ -51,9 +50,3 @@ class ProfilePage extends Block {
     return this.compile(template, this.props);
   }
 }
-
-const page = new ProfilePage();
-
-const root = document.getElementById('root');
-
-renderDOM(root, page);

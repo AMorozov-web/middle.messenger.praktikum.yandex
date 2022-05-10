@@ -1,5 +1,5 @@
 import {template} from './sign-up.tmpl';
-import {onFormSubmit, renderDOM} from '../../utils';
+import {onFormSubmit} from '../../utils';
 import {Block} from '../../core';
 import {Button, Form, Input, Link} from '../../components';
 import {BUTTON_TYPE, INPUT_TYPE, PATTERN, TAG_NAME} from '../../constants';
@@ -120,7 +120,7 @@ const submitButton = new Button({
   type: BUTTON_TYPE.SUBMIT,
 });
 
-class SignUpPage extends Block {
+export class SignUpPage extends Block {
   constructor() {
     super(TAG_NAME.DIV, {
       link: new Link({
@@ -163,9 +163,3 @@ class SignUpPage extends Block {
     return this.compile(template, this.props);
   }
 }
-
-const page = new SignUpPage();
-
-const root = document.getElementById('root');
-
-renderDOM(root, page);

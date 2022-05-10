@@ -11,7 +11,7 @@ import {
   Message,
   UserInfo,
 } from '../../components';
-import {onFormSubmit, renderDOM} from '../../utils';
+import {onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, TAG_NAME} from '../../constants';
 
 const chatsListData = new Array(3).fill('').map(
@@ -55,7 +55,7 @@ const submitButton = new Button({
   type: BUTTON_TYPE.SUBMIT,
 });
 
-class MainPage extends Block {
+export class MainPage extends Block {
   constructor() {
     super(TAG_NAME.DIV, {
       addChatLink: new Link({
@@ -111,9 +111,3 @@ class MainPage extends Block {
     return this.compile(template, this.props);
   }
 }
-
-const page = new MainPage();
-
-const root = document.getElementById('root');
-
-renderDOM(root, page);

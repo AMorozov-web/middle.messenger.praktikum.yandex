@@ -1,7 +1,7 @@
 import {template} from './login.tmpl';
 import {Block} from '../../core';
 import {Button, Form, Input, Link} from '../../components';
-import {onFormSubmit, renderDOM} from '../../utils';
+import {onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, TAG_NAME} from '../../constants';
 
 const redirectToMain = () => {
@@ -47,7 +47,7 @@ const submitButton = new Button({
   type: BUTTON_TYPE.SUBMIT,
 });
 
-class LoginPage extends Block {
+export class LoginPage extends Block {
   constructor() {
     super(TAG_NAME.DIV, {
       link: new Link({
@@ -81,9 +81,3 @@ class LoginPage extends Block {
     return this.compile(template, this.props);
   }
 }
-
-const page = new LoginPage();
-
-const root = document.getElementById('root');
-
-renderDOM(root, page);

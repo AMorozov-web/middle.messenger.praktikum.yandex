@@ -1,10 +1,9 @@
 import {template} from './error.tmpl';
 import {Block} from '../../core';
 import {Link} from '../../components';
-import {renderDOM} from '../../utils';
 import {TAG_NAME} from '../../constants';
 
-class ErrorPage extends Block {
+export class ErrorPage extends Block {
   constructor() {
     super(TAG_NAME.DIV, {
       error: {
@@ -23,9 +22,3 @@ class ErrorPage extends Block {
     return this.compile(template, this.props);
   }
 }
-
-const page = new ErrorPage();
-
-const root = document.getElementById('root');
-
-renderDOM(root, page);

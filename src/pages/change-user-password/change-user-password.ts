@@ -1,7 +1,7 @@
 import {template} from './change-user-password.tmpl';
 import {Block} from '../../core';
 import {Button, Form, Input, Link} from '../../components';
-import {onFormSubmit, renderDOM} from '../../utils';
+import {onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, INPUT_TYPE, PATTERN, TAG_NAME} from '../../constants';
 
 const redirectToProfile = () => {
@@ -67,7 +67,7 @@ const saveButton = new Button({
   type: BUTTON_TYPE.SUBMIT,
 });
 
-class ChangeUserPasswordPage extends Block {
+export class ChangeUserPasswordPage extends Block {
   constructor() {
     super(TAG_NAME.DIV, {
       link: new Link({
@@ -101,9 +101,3 @@ class ChangeUserPasswordPage extends Block {
     return this.compile(template, this.props);
   }
 }
-
-const page = new ChangeUserPasswordPage();
-
-const root = document.getElementById('root');
-
-renderDOM(root, page);
