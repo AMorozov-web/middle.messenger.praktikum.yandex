@@ -26,10 +26,10 @@ export const get = <T extends Record<string, unknown>, D>(
 /**
  * Предикат на тип объекта Record<string, unknown>
  *
- * @param value - определяемый объект
+ * @param value - определяемое значение
  */
 
-export const isObject = (value: unknown): value is object =>
+export const isObject = (value: unknown): value is Record<string, unknown> =>
   Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 
 export const cloneObject = <T>(object: T): T => {
