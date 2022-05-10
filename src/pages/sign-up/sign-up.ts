@@ -1,6 +1,7 @@
 import {template} from './sign-up.tmpl';
 import {onFormSubmit, renderDOM} from '../../utils';
-import {Block, Button, Form, Input, Link} from '../../components';
+import {Block} from '../../core';
+import {Button, Form, Input, Link} from '../../components';
 import {BUTTON_TYPE, INPUT_TYPE, PATTERN, TAG_NAME} from '../../constants';
 
 const redirectToSignIn = () => {

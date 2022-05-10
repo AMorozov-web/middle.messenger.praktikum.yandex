@@ -1,5 +1,6 @@
 import {template} from './change-user-password.tmpl';
-import {Block, Button, Form, Input, Link} from '../../components';
+import {Block} from '../../core';
+import {Button, Form, Input, Link} from '../../components';
 import {onFormSubmit, renderDOM} from '../../utils';
 import {BUTTON_TYPE, INPUT_TYPE, PATTERN, TAG_NAME} from '../../constants';
 

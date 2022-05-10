@@ -1,5 +1,6 @@
 import {template} from './error.tmpl';
-import {Block, Link} from '../../components';
+import {Block} from '../../core';
+import {Link} from '../../components';
 import {renderDOM} from '../../utils';
 import {TAG_NAME} from '../../constants';
 

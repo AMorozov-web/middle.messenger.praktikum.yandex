@@ -1,7 +1,7 @@
 import {template} from './main.tmpl';
+import {Block} from '../../core';
 import {
   Avatar,
-  Block,
   Button,
   ChatItem,
   Form,

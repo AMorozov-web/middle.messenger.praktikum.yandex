@@ -1,5 +1,5 @@
 import {template} from './input.tmpl';
-import {Block} from '../block';
+import {Block} from '../../core';
 import {INPUT_TYPE, TAG_NAME} from '../../constants';
 
 type Props = {

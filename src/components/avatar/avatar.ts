@@ -1,5 +1,5 @@
 import {template} from './avatar.tmpl';
-import {Block} from '../block';
+import {Block} from '../../core';
 import defaultImage from '../../../static/icons/image.svg';
 
 type Props = {

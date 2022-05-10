@@ -1,5 +1,6 @@
 import {template} from './profile.tmpl';
-import {Avatar, Block, Link} from '../../components';
+import {Block} from '../../core';
+import {Avatar, Link} from '../../components';
 import {renderDOM} from '../../utils';
 import {TAG_NAME} from '../../constants';
 

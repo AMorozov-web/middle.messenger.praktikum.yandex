@@ -1,6 +1,6 @@
 import {template} from './chat-item.tmpl';
 import {Avatar} from '../avatar';
-import {Block} from '../block';
+import {Block} from '../../core';
 import {TAG_NAME} from '../../constants';
 
 type Props = {

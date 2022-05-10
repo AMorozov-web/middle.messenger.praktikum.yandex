@@ -1,6 +1,7 @@
 import {template} from './login.tmpl';
+import {Block} from '../../core';
+import {Button, Form, Input, Link} from '../../components';
 import {onFormSubmit, renderDOM} from '../../utils';
-import {Block, Button, Form, Input, Link} from '../../components';
 import {BUTTON_TYPE, TAG_NAME} from '../../constants';
 
 const redirectToMain = () => {
