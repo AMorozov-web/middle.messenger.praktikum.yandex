@@ -1,5 +1,5 @@
-import {Block} from '..';
-import {renderDOM} from '../../utils';
+import {Block} from '../../index';
+import {renderDOM} from '../../../utils';
 
 export class Route<T extends Block = Block> {
   private readonly _class: new (props?: any) => T;

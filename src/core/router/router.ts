@@ -1,5 +1,5 @@
 import {Block} from '..';
-import {Route} from '../route';
+import {Route} from './route';
 
 export class Router {
   private static instance: Router;

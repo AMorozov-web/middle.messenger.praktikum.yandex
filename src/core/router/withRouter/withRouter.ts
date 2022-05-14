@@ -1,5 +1,5 @@
-import {Block} from '..';
-import {Router} from '../router';
+import {Block} from '../../index';
+import {Router} from '../index';
 
 export type PropsWithRouter = {
   router: Router;
