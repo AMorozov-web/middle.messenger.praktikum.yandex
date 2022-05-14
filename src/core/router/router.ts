@@ -6,11 +6,11 @@ export class Router {
 
   private readonly _root: string;
 
-  private _currentRoute: Route | null;
+  private _currentRoute: Nullable<Route>;
 
-  history: History;
+  private history: History;
 
-  routes: Route[];
+  private routes: Route[];
 
   private constructor(root: string) {
     this.routes = [];
