@@ -92,6 +92,13 @@ export abstract class Block<T extends CommonProps = CommonProps> {
     }
   }
 
+  public remove() {
+    const element = this.getContent();
+    if (element) {
+      element.remove();
+    }
+  }
+
   public componentDidUpdate(oldProps: CommonProps, newProps: CommonProps) {
     // В дальнейшем необходимо сравнивать пропсы для оптимизации ререндеров
     // If написан для купирования ошибки value is never read
