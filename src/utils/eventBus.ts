@@ -1,8 +1,6 @@
 type Handler<T extends any[] = any[]> = (...args: T) => void;
 
-type EventBusListeners = {
-  [key: string]: Handler[];
-};
+type EventBusListeners = Record<string, Handler[]>;
 
 export class EventBus {
   listeners: EventBusListeners;
