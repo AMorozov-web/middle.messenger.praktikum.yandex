@@ -1,6 +1,6 @@
 import {template} from './error.tmpl';
 import {Block} from '../../core';
-import {Link} from '../../components';
+import {LinkWithRouter} from '../../components';
 import {TAG_NAME} from '../../constants';
 
 export class ErrorPage extends Block {
@@ -10,10 +10,10 @@ export class ErrorPage extends Block {
         code: '404',
         description: 'Не туда попали',
       },
-      children: new Link({
+      children: new LinkWithRouter({
         className: 'error-page__back',
-        href: './main.html',
-        text: 'Назад',
+        href: -1,
+        children: 'Назад',
       }),
     });
   }

@@ -3,6 +3,6 @@ export const template = `
     href={{href}}
     class={{className}}
   >
-    {{text}}
+    {{children}}
   </a>
 `;

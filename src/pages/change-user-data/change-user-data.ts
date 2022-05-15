@@ -1,6 +1,6 @@
 import {template} from './change-user-data.tmpl';
 import {Block} from '../../core';
-import {Button, Form, Input, Link} from '../../components';
+import {Button, Form, Input, LinkWithRouter} from '../../components';
 import {onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, INPUT_TYPE, PATTERN, TAG_NAME} from '../../constants';
 
@@ -104,10 +104,10 @@ const saveButton = new Button({
 export class ChangeUserDataPage extends Block {
   constructor() {
     super(TAG_NAME.DIV, {
-      link: new Link({
+      link: new LinkWithRouter({
         className: 'change-user-data-page__back',
-        href: './profile.html',
-        text: ' ',
+        href: '/profile',
+        children: ' ',
       }),
       form: new Form({
         className: 'change-user-data-page__form',

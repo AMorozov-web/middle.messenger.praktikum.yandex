@@ -1,6 +1,6 @@
 import {template} from './profile.tmpl';
 import {Block} from '../../core';
-import {Avatar, Link} from '../../components';
+import {Avatar, LinkWithRouter} from '../../components';
 import {TAG_NAME} from '../../constants';
 
 const avatar = new Avatar({
@@ -8,25 +8,25 @@ const avatar = new Avatar({
   wrapperClassName: 'profile-page__avatar-wrapper',
 });
 
-const toBackLink = new Link({
+const toBackLink = new LinkWithRouter({
   className: 'profile-page__back',
-  href: './main.html',
-  text: ' ',
+  href: -1,
+  children: ' ',
 });
 
-const changeDataLink = new Link({
-  href: './change-user-data.html',
-  text: 'Изменить данные',
+const changeDataLink = new LinkWithRouter({
+  href: '/change-profile',
+  children: 'Изменить данные',
 });
 
-const changePasswordLink = new Link({
-  href: './change-user-password.html',
-  text: 'Изменить пароль',
+const changePasswordLink = new LinkWithRouter({
+  href: '/change-password',
+  children: 'Изменить пароль',
 });
 
-const exitLink = new Link({
-  href: './index.html',
-  text: 'Выйти',
+const exitLink = new LinkWithRouter({
+  href: '/login',
+  children: 'Выйти',
 });
 
 export class ProfilePage extends Block {

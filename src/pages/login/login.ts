@@ -1,6 +1,6 @@
 import {template} from './login.tmpl';
 import {Block} from '../../core';
-import {Button, Form, Input, Link} from '../../components';
+import {Button, Form, Input, LinkWithRouter} from '../../components';
 import {onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, TAG_NAME} from '../../constants';
 
@@ -50,10 +50,10 @@ const submitButton = new Button({
 export class LoginPage extends Block {
   constructor() {
     super(TAG_NAME.DIV, {
-      link: new Link({
+      link: new LinkWithRouter({
         className: 'login-page__signup',
-        href: './sign-up.html',
-        text: 'Нет аккаунта?',
+        href: '/sign-up',
+        children: 'Нет аккаунта?',
       }),
       form: new Form({
         className: 'login-page__form',

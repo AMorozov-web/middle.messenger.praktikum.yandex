@@ -1,19 +1,32 @@
 import {template} from './link.tmpl';
-import {Block} from '../../core';
+import {Block, PropsWithRouter, withRouter} from '../../core';
 import {TAG_NAME} from '../../constants';
 
-type Props = {
+type Props = PropsWithRouter & {
   className?: string;
-  href?: string;
-  text: string;
+  href: string | number;
+  children: string;
+  events?: Record<string, EventProps>;
 };
 
-export class Link extends Block<Props> {
+class Link extends Block<Props> {
   constructor(props: Props) {
-    super(TAG_NAME.A, props);
+    super(TAG_NAME.A, {
+      ...props,
+      events: {
+        click: {
+          callback: (evt) => {
+            evt.preventDefault();
+            props.router.go(props.href);
+          },
+        },
+      },
+    });
   }
 
   render() {
     return this.compile(template, this.props);
   }
 }
+
+export const LinkWithRouter = withRouter<Props>(Link);

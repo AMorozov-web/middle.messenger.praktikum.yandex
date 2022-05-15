@@ -1,7 +1,7 @@
 import {template} from './sign-up.tmpl';
 import {onFormSubmit} from '../../utils';
 import {Block} from '../../core';
-import {Button, Form, Input, Link} from '../../components';
+import {Button, Form, Input, LinkWithRouter} from '../../components';
 import {BUTTON_TYPE, INPUT_TYPE, PATTERN, TAG_NAME} from '../../constants';
 
 const redirectToSignIn = () => {
@@ -123,10 +123,10 @@ const submitButton = new Button({
 export class SignUpPage extends Block {
   constructor() {
     super(TAG_NAME.DIV, {
-      link: new Link({
+      link: new LinkWithRouter({
         className: 'sign-up__sign-in',
-        href: './index.html',
-        text: 'Войти',
+        href: '/login',
+        children: 'Войти',
       }),
       form: new Form({
         className: 'sign-up__form',

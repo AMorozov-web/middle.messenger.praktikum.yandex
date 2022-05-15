@@ -6,7 +6,7 @@ import {
   ChatItem,
   Form,
   Input,
-  Link,
+  LinkWithRouter,
   List,
   Message,
   UserInfo,
@@ -28,7 +28,7 @@ const chatsListData = new Array(3).fill('').map(
 );
 
 const messageData = new Array(4).fill('').map((_, i) => {
-  const className = i % 2 !== 0 ? 'main-page__message--self' : '';
+  const className = i % 2 !== 0 ? 'main-page__message--self' : undefined;
 
   return new Message({
     className,
@@ -58,13 +58,13 @@ const submitButton = new Button({
 export class MainPage extends Block {
   constructor() {
     super(TAG_NAME.DIV, {
-      addChatLink: new Link({
+      addChatLink: new LinkWithRouter({
         href: '',
-        text: 'Добавить чат',
+        children: 'Добавить чат',
       }),
-      profileLink: new Link({
-        href: './profile.html',
-        text: 'Профиль',
+      profileLink: new LinkWithRouter({
+        href: '/profile',
+        children: 'Профиль',
       }),
       chatsList: new List({
         className: 'main-page__chats-list',
