@@ -3,7 +3,7 @@ type Handler<T extends any[] = any[]> = (...args: T) => void;
 type EventBusListeners = Record<string, Handler[]>;
 
 export class EventBus {
-  listeners: EventBusListeners;
+  private readonly listeners: EventBusListeners;
 
   constructor() {
     this.listeners = {};

@@ -22,21 +22,35 @@ const queryStringify = (data: object) =>
     return result.concat(`&${k}=${v.toString()}`);
   }, '');
 
+/**
+ * Класс для создания запросов
+ */
+
 export class HTTPTransport {
+  private readonly baseUrl: string;
+
+  constructor(baseUrl: string) {
+    this.baseUrl = baseUrl;
+  }
+
+  private getUrl(url: string): string {
+    return `${this.baseUrl}${url}`;
+  }
+
   get = (url: string, options: Options) => {
-    return this.request(url, {...options, method: METHODS.GET}, options?.timeout);
+    return this.request(this.getUrl(url), {...options, method: METHODS.GET}, options?.timeout);
   };
 
   post = (url: string, options: Options) => {
-    return this.request(url, {...options, method: METHODS.POST}, options?.timeout);
+    return this.request(this.getUrl(url), {...options, method: METHODS.POST}, options?.timeout);
   };
 
   put = (url: string, options: Options) => {
-    return this.request(url, {...options, method: METHODS.PUT}, options?.timeout);
+    return this.request(this.getUrl(url), {...options, method: METHODS.PUT}, options?.timeout);
   };
 
   delete = (url: string, options: Options) => {
-    return this.request(url, {...options, method: METHODS.PUT}, options?.timeout);
+    return this.request(this.getUrl(url), {...options, method: METHODS.PUT}, options?.timeout);
   };
 
   request = (url: string, options: Options, timeout = 5000) => {
@@ -53,7 +67,11 @@ export class HTTPTransport {
 
       xhr.timeout = timeout;
       xhr.onload = () => {
-        resolve(xhr);
+        if (xhr.status === 200) {
+          resolve(xhr.response);
+        } else {
+          reject(xhr.response);
+        }
       };
 
       xhr.onabort = reject;
@@ -69,7 +87,7 @@ export class HTTPTransport {
       if (method === METHODS.GET || !data) {
         xhr.send();
       } else {
-        xhr.send(data as Document);
+        xhr.send(JSON.stringify(data));
       }
     });
   };
