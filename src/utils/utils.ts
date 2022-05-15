@@ -7,18 +7,14 @@
  * @param defaultValue - значение по умолчанию
  */
 
-export const get = <T extends Record<string, unknown>, D>(
-  obj: T,
-  path: string,
-  defaultValue?: D,
-): unknown | D => {
+export const get = <T extends Indexed, D>(obj: T, path: string, defaultValue?: D): unknown | D => {
   const pathArr = path.split('.');
 
   const value = obj[pathArr[0]];
 
   if (value && typeof value === 'object') {
     const nextPath = pathArr.slice(1).join('.');
-    return get(value as Record<string, unknown>, nextPath, defaultValue);
+    return get(value as Indexed, nextPath, defaultValue);
   }
   return value ?? defaultValue;
 };
@@ -78,7 +74,7 @@ export const cloneObject = <T>(object: T): T => {
  * @param right - второй объект
  */
 
-export const isEqual = (left: Record<string, unknown>, right: Record<string, unknown>): boolean => {
+export const isEqual = (left: Indexed, right: Indexed): boolean => {
   const leftKeys = Object.keys(left);
   const rightKeys = Object.keys(right);
 
@@ -120,4 +116,61 @@ export const isEqual = (left: Record<string, unknown>, right: Record<string, unk
   }
 
   return true;
+};
+
+/**
+ * Функция объединяет два объекта с сохранением их уникальных ключей
+ *
+ * @param left - объект
+ * @param right - объект
+ */
+
+export const mergeObjects = (left: Indexed, right: Indexed): Indexed => {
+  if (!right) {
+    return left;
+  }
+
+  if (isObject(left) && isObject(right)) {
+    for (const key in right) {
+      if (isObject(right[key])) {
+        if (!left[key]) {
+          Object.assign(left, {[key]: {}});
+        }
+
+        mergeObjects(left[key] as Indexed, right[key] as Indexed);
+      } else {
+        Object.assign(left, {[key]: right[key]});
+      }
+    }
+  }
+
+  return left;
+};
+
+/**
+ * Функция получает путь к вложенному свойству объекта и устанавливает значение в это свойство.
+ *
+ * @param object - объект
+ * @param path - путь
+ * @param value - значение свойства
+ */
+
+export const setValue = (
+  object: Indexed | unknown,
+  path: string,
+  value: unknown,
+): Indexed | unknown => {
+  if (!isObject(object)) {
+    return object;
+  }
+
+  const splited = path.split('.');
+
+  const objectToSet = splited.reduceRight<Indexed>((prev, curr) => {
+    return {
+      [curr]: prev,
+    };
+  }, value as Indexed);
+
+  return mergeObjects(object, objectToSet);
 };
