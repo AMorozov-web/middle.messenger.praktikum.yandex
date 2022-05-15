@@ -17,4 +17,8 @@ declare global {
   type CommonProps = Record<string, unknown> & {
     events?: Record<string, EventProps>;
   };
+
+  type Indexed<T = unknown> = {
+    [key in string]: T;
+  };
 }
