@@ -34,3 +34,7 @@ export const PATTERN = {
   PASSWORD: '(?=^.{8,40}$)((?=.*\\d)|(?=.*\\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*',
   PHONE: '(\\+)?([\\d]{10,15})$',
 } as const;
+
+export const STORE_EVENTS = {
+  UPDATED: 'updated',
+};
