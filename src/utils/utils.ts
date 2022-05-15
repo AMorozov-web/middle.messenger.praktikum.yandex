@@ -155,11 +155,7 @@ export const mergeObjects = (left: Indexed, right: Indexed): Indexed => {
  * @param value - значение свойства
  */
 
-export const setValue = (
-  object: Indexed | unknown,
-  path: string,
-  value: unknown,
-): Indexed | unknown => {
+export const setValue = (object: Indexed, path: string, value: unknown): Indexed => {
   if (!isObject(object)) {
     return object;
   }
