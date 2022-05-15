@@ -25,7 +25,7 @@ export const get = <T extends Indexed, D>(obj: T, path: string, defaultValue?: D
  * @param value - определяемое значение
  */
 
-export const isObject = (value: unknown): value is Record<string, unknown> =>
+export const isObject = (value: unknown): value is Indexed =>
   Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 
 /**
