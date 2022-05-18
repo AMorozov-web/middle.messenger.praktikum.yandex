@@ -1,26 +1,12 @@
-import {METHODS} from '../constants';
+import {METHODS} from '../../constants';
+import {queryStringify} from '../../utils';
 
-type Options = {
+type HTTPTransportOptions = {
   data: object;
   headers: object;
   method: keyof typeof METHODS;
   timeout: number;
 };
-
-/**
- * Функцию генерирует query строку у GET-метода
- *
- * @param {object} data объект. Пример: {a: 1, b: 2, c: {d: 123}, k: [1, 2, 3]}
- * @returns строка. Пример: ?a=1&b=2&c=[object Object]&k=1,2,3
- */
-
-const queryStringify = (data: object) =>
-  Object.entries(data).reduce((result, [k, v], i) => {
-    if (i === 0) {
-      return result.concat(`?${k}=${v.toString()}`);
-    }
-    return result.concat(`&${k}=${v.toString()}`);
-  }, '');
 
 /**
  * Класс для создания запросов
@@ -37,23 +23,23 @@ export class HTTPTransport {
     return `${this.baseUrl}${url}`;
   }
 
-  get = (url: string, options: Options) => {
+  get = (url: string, options: HTTPTransportOptions) => {
     return this.request(this.getUrl(url), {...options, method: METHODS.GET}, options?.timeout);
   };
 
-  post = (url: string, options: Options) => {
+  post = (url: string, options: HTTPTransportOptions) => {
     return this.request(this.getUrl(url), {...options, method: METHODS.POST}, options?.timeout);
   };
 
-  put = (url: string, options: Options) => {
+  put = (url: string, options: HTTPTransportOptions) => {
     return this.request(this.getUrl(url), {...options, method: METHODS.PUT}, options?.timeout);
   };
 
-  delete = (url: string, options: Options) => {
+  delete = (url: string, options: HTTPTransportOptions) => {
     return this.request(this.getUrl(url), {...options, method: METHODS.PUT}, options?.timeout);
   };
 
-  request = (url: string, options: Options, timeout = 5000) => {
+  request = (url: string, options: HTTPTransportOptions, timeout = 5000) => {
     const {method, headers, data} = options;
     let params = '';
 
