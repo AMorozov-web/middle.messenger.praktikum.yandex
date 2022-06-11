@@ -1,5 +1,6 @@
-import {EventBus, setValue} from '../../utils';
-import {STORE_EVENTS} from '../../constants';
+import {EventBus} from '../core';
+import {setValue} from '../utils';
+import {STORE_EVENTS} from '../constants';
 
 class Store extends EventBus {
   private state: Indexed = {};

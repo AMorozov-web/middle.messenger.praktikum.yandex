@@ -1,5 +1,6 @@
 import {v4 as getId} from 'uuid';
-import {cloneObject, EventBus, Templator} from '../../utils';
+import {EventBus} from '..';
+import {cloneObject, Templator} from '../../utils';
 
 export type Children = Record<string, Block | Block[]>;
 
