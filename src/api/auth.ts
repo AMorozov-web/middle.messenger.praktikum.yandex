@@ -34,51 +34,29 @@ export class AuthApi extends Api {
   }
 
   logout() {
-    return authTransport
-      .post(AUTH_ENDPOINTS.LOGOUT, {
-        data: {},
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then(() => {
-        store.set('isUserAuthorized', false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    return authTransport.post(AUTH_ENDPOINTS.LOGOUT, {
+      data: {},
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   }
 
   signUp(data: SignUpData) {
-    return authTransport
-      .post(AUTH_ENDPOINTS.LOGOUT, {
-        data,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((response) => {
-        store.set('userId', response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    return authTransport.post(AUTH_ENDPOINTS.LOGOUT, {
+      data,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   }
 
   getUser() {
-    return authTransport
-      .post(AUTH_ENDPOINTS.GET_USER, {
-        data: {},
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((response) => {
-        const userData = JSON.parse(response as string);
-        store.set('userData', userData);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    return authTransport.post(AUTH_ENDPOINTS.GET_USER, {
+      data: {},
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   }
 }
