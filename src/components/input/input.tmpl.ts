@@ -3,6 +3,7 @@ export const template = `
     <p class={{label.className}} >{{label.text}}</p>
     <input
       class={{inputClassName}}
+      data-test-id={{dataTestId}}
       id={{id}}
       name={{name}}
       type={{type}}
