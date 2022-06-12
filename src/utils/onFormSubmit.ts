@@ -2,24 +2,20 @@
  * Обработчик отправки формы, на событие onSubmit собирает данные, и выполняет функцию, если она была передана
  *
  * @param evt - событие отправки формы
- * @param callback - функцию, которая выполнится после сбора данных
  */
 
-export const onFormSubmit = (evt: Event, callback?: () => void) => {
+export const onFormSubmit = <T extends Record<string, string>>(evt: Event) => {
   evt.preventDefault();
   const {elements} = evt.target as HTMLFormElement;
 
-  const data = [...elements].reduce((result, item) => {
+  return [...elements].reduce<T>((result, item) => {
+    const buffer = {};
     if (item instanceof HTMLInputElement || item instanceof HTMLTextAreaElement) {
       item.checkValidity();
-      result[item.name] = item.value;
+
+      const {name, value} = item;
+      buffer[name] = value;
     }
-    return result;
-  }, {} as Record<string, string>);
-
-  console.log(data);
-
-  if (callback) {
-    callback();
-  }
+    return {...result, ...buffer};
+  }, {} as T);
 };
