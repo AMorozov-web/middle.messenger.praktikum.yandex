@@ -1,16 +1,22 @@
 import {template} from './sign-up.tmpl';
-import {onFormSubmit} from '../../utils';
 import {Block} from '../../core';
+import {SignUpData} from '../../api';
+import {SignUpController} from './sing-up-controller';
 import {Button, Form, Input, LinkWithRouter} from '../../components';
+import {onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, INPUT_TYPE, PATTERN, TAG_NAME} from '../../constants';
 
-const redirectToSignIn = () => {
-  const link = document.createElement(TAG_NAME.A);
-  link.href = '/index.html';
-  setTimeout(() => {
-    link.click();
-    link.remove();
-  }, 500);
+const onSubmit = (evt: Event) => {
+  const data = onFormSubmit<SignUpData>(evt);
+  SignUpController.signUp(data);
+};
+
+const onFocus = (evt: Event) => {
+  const target = evt.target as HTMLInputElement;
+
+  if (!target.checkValidity()) {
+    target.reportValidity();
+  }
 };
 
 const emailInput = new Input({
@@ -142,16 +148,10 @@ export class SignUpPage extends Block {
         ],
         events: {
           submit: {
-            callback: (evt) => onFormSubmit(evt, redirectToSignIn),
+            callback: onSubmit,
           },
           focus: {
-            callback: (evt) => {
-              const target = evt.target as HTMLInputElement;
-
-              if (!target.checkValidity()) {
-                target.reportValidity();
-              }
-            },
+            callback: onFocus,
             capture: true,
           },
         },
