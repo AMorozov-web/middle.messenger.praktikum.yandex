@@ -27,7 +27,7 @@ export class EventBus {
 
   emit(eventName: string, ...args: any[]) {
     if (!this.listeners[eventName]) {
-      throw new Error(`${eventName} not exist`);
+      return;
     }
 
     this.listeners[eventName].forEach((event) => event(...args));
