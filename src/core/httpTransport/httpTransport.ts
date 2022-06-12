@@ -5,7 +5,7 @@ type HTTPTransportOptions = {
   data: object;
   headers: object;
   method: keyof typeof METHODS;
-  timeout: number;
+  timeout?: number;
 };
 
 /**
@@ -23,20 +23,20 @@ export class HTTPTransport {
     return `${this.baseUrl}${url}`;
   }
 
-  get = (url: string, options: HTTPTransportOptions) => {
+  get = (url: string, options: Omit<HTTPTransportOptions, 'method'>) => {
     return this.request(this.getUrl(url), {...options, method: METHODS.GET}, options?.timeout);
   };
 
-  post = (url: string, options: HTTPTransportOptions) => {
+  post = (url: string, options: Omit<HTTPTransportOptions, 'method'>) => {
     return this.request(this.getUrl(url), {...options, method: METHODS.POST}, options?.timeout);
   };
 
-  put = (url: string, options: HTTPTransportOptions) => {
+  put = (url: string, options: Omit<HTTPTransportOptions, 'method'>) => {
     return this.request(this.getUrl(url), {...options, method: METHODS.PUT}, options?.timeout);
   };
 
-  delete = (url: string, options: HTTPTransportOptions) => {
-    return this.request(this.getUrl(url), {...options, method: METHODS.PUT}, options?.timeout);
+  delete = (url: string, options: Omit<HTTPTransportOptions, 'method'>) => {
+    return this.request(this.getUrl(url), {...options, method: METHODS.DELETE}, options?.timeout);
   };
 
   request = (url: string, options: HTTPTransportOptions, timeout = 5000) => {
