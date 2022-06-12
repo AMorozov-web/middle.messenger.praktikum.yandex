@@ -29,7 +29,7 @@ export class Router {
 
   public use<T extends Block, P extends CommonProps>(
     path: string,
-    component: new (props?: any) => T,
+    component: new (props?: P) => T,
     componentProps?: P,
   ) {
     const route = new Route(path, component, {...componentProps, root: this._root});
