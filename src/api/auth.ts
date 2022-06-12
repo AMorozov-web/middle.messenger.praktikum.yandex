@@ -1,6 +1,7 @@
 import {Api, HTTPTransport} from '../core';
 import {store} from '../store';
 import {BASE_URL} from '../constants';
+import {AUTH_ENDPOINTS} from './endpoints';
 
 export type SignInData = {login: string; password: string};
 
@@ -18,7 +19,7 @@ const authTransport = new HTTPTransport(BASE_URL);
 export class AuthApi extends Api {
   login(data: SignInData) {
     return authTransport
-      .post('/auth/signin', {
+      .post(AUTH_ENDPOINTS.LOGIN, {
         data,
         headers: {
           'Content-Type': 'application/json',
@@ -34,7 +35,7 @@ export class AuthApi extends Api {
 
   logout() {
     return authTransport
-      .post('/auth/logout', {
+      .post(AUTH_ENDPOINTS.LOGOUT, {
         data: {},
         headers: {
           'Content-Type': 'application/json',
@@ -50,7 +51,7 @@ export class AuthApi extends Api {
 
   signUp(data: SignUpData) {
     return authTransport
-      .post('/auth/signup', {
+      .post(AUTH_ENDPOINTS.LOGOUT, {
         data,
         headers: {
           'Content-Type': 'application/json',
@@ -58,6 +59,23 @@ export class AuthApi extends Api {
       })
       .then((response) => {
         store.set('userId', response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  getUser() {
+    return authTransport
+      .post(AUTH_ENDPOINTS.GET_USER, {
+        data: {},
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => {
+        const userData = JSON.parse(response as string);
+        store.set('userData', userData);
       })
       .catch((error) => {
         console.log(error);
