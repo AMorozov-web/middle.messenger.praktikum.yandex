@@ -1,6 +1,6 @@
 import {v4 as getId} from 'uuid';
 import {EventBus} from '..';
-import {cloneObject, Templator} from '../../utils';
+import {Templator} from '../../utils';
 
 export type Children = Record<string, Block | Block[]>;
 
@@ -23,9 +23,9 @@ export abstract class Block<T extends CommonProps = CommonProps> {
 
   props: CommonProps;
 
-  private _element: HTMLElement | null;
+  private _element: Nullable<HTMLElement>;
 
-  private readonly _id: string | null;
+  private readonly _id: Nullable<string>;
 
   private readonly _meta: BlockMeta;
 
@@ -60,7 +60,7 @@ export abstract class Block<T extends CommonProps = CommonProps> {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  public setProps = (nextProps: object) => {
+  public setProps = (nextProps: T) => {
     if (!nextProps) {
       return;
     }
@@ -213,7 +213,8 @@ export abstract class Block<T extends CommonProps = CommonProps> {
 
     return new Proxy(props, {
       set(target, prop: string, value) {
-        const _target = cloneObject(props);
+        const _target = {...props};
+
         if (prop in target) {
           target[prop] = value;
           eventBus().emit(Block.EVENTS.FLOW_CDU, _target, props);

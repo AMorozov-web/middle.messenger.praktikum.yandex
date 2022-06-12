@@ -14,7 +14,7 @@ declare global {
     capture?: boolean;
   };
 
-  type CommonProps = Record<string, unknown> & {
+  type CommonProps = Indexed & {
     events?: Record<string, EventProps>;
   };
 
