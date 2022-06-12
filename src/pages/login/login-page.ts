@@ -1,16 +1,22 @@
-import {template} from './login.tmpl';
+import {template} from './login-page.tmpl';
 import {Block} from '../../core';
+import {SignInData} from '../../api';
 import {Button, Form, Input, LinkWithRouter} from '../../components';
+import {LoginController} from './login-controller';
 import {onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, TAG_NAME} from '../../constants';
 
-const redirectToMain = () => {
-  const link = document.createElement(TAG_NAME.A);
-  link.href = '/main.html';
-  setTimeout(() => {
-    link.click();
-    link.remove();
-  }, 500);
+const onSubmit = (evt: Event) => {
+  const data = onFormSubmit<SignInData>(evt);
+  LoginController.login(data);
+};
+
+const onFocus = (evt: Event) => {
+  const target = evt.target as HTMLInputElement;
+
+  if (!target.checkValidity()) {
+    target.reportValidity();
+  }
 };
 
 const loginInput = new Input({
@@ -60,16 +66,10 @@ export class LoginPage extends Block {
         children: [loginInput, passwordInput, submitButton],
         events: {
           submit: {
-            callback: (evt) => onFormSubmit(evt, redirectToMain),
+            callback: onSubmit,
           },
           focus: {
-            callback: (evt) => {
-              const target = evt.target as HTMLInputElement;
-
-              if (!target.checkValidity()) {
-                target.reportValidity();
-              }
-            },
+            callback: onFocus,
             capture: true,
           },
         },
