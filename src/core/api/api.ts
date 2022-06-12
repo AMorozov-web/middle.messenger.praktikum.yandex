@@ -1,4 +1,8 @@
-export abstract class API {
+/**
+ * Simple CRUD interface
+ */
+
+export abstract class Api {
   create() {
     throw new Error('Not implemented');
   }
