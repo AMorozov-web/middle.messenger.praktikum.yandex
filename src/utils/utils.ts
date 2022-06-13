@@ -125,7 +125,7 @@ export const isEqual = (left: Indexed, right: Indexed): boolean => {
  * @param right - объект
  */
 
-export const mergeObjects = (left: Indexed, right: Indexed): Indexed => {
+export const mergeObjects = <T extends Indexed>(left: T, right: T): T => {
   if (!right) {
     return left;
   }
@@ -155,7 +155,7 @@ export const mergeObjects = (left: Indexed, right: Indexed): Indexed => {
  * @param value - значение свойства
  */
 
-export const setValue = (object: Indexed, path: string, value: unknown): Indexed => {
+export const setValue = <T extends Indexed>(object: T, path: string, value: unknown): T => {
   if (!isObject(object)) {
     return object;
   }
@@ -166,9 +166,9 @@ export const setValue = (object: Indexed, path: string, value: unknown): Indexed
     return {
       [curr]: prev,
     };
-  }, value as Indexed);
+  }, value as T);
 
-  return mergeObjects(object, objectToSet);
+  return mergeObjects<T>(object, objectToSet as T);
 };
 
 /**

@@ -22,7 +22,7 @@ declare global {
     [key in string]: T;
   };
 
-  type UserData = {
+  type User = {
     id: number;
     first_name: string;
     second_name: string;
@@ -31,5 +31,6 @@ declare global {
     email: string;
     phone: string;
     avatar: string;
+    isAuthorized: boolean;
   };
 }

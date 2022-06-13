@@ -2,8 +2,17 @@ import {EventBus} from '../core';
 import {setValue} from '../utils';
 import {STORE_EVENTS} from '../constants';
 
-class Store extends EventBus {
-  private state: Indexed = {};
+type InitialState = {
+  user: Nullable<User>;
+};
+
+class Store<T extends Indexed> extends EventBus {
+  private state: T;
+
+  constructor(initialState: T) {
+    super();
+    this.state = initialState;
+  }
 
   public getState() {
     return this.state;
@@ -15,4 +24,8 @@ class Store extends EventBus {
   }
 }
 
-export const store = new Store();
+const initialState: InitialState = {
+  user: null,
+};
+
+export const store = new Store(initialState);

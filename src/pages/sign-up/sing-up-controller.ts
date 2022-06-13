@@ -10,9 +10,9 @@ export class SignUpController {
       .signUp(data)
       .then(() => authApi.getUser())
       .then((response) => {
-        const userData = JSON.parse(response as string);
+        const {user} = store.getState();
 
-        store.set('user', {...userData, isAuthorized: true});
+        store.set('user', {...user, ...response});
 
         router.go('/');
       })

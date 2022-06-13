@@ -2,7 +2,7 @@ import {HTTPTransport} from '../core';
 import {BASE_URL} from '../constants';
 import {USER_ENDPOINTS} from './endpoints';
 
-export type ChangeProfileData = Omit<UserData, 'id'>;
+export type ChangeProfileData = Omit<User, 'id' | 'avatar' | 'isAuthorized'>;
 
 export type ChangePasswordData = {
   oldPassword: string;
@@ -16,7 +16,7 @@ class UserApi {
     this.transport = new HTTPTransport(BASE_URL);
   }
 
-  changeProfile(data: ChangeProfileData): Promise<UserData> {
+  changeProfile(data: ChangeProfileData): Promise<User> {
     return this.transport.put(USER_ENDPOINTS.PROFILE, {
       data,
       headers: {
