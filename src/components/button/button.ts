@@ -4,9 +4,9 @@ import {TAG_NAME} from '../../constants';
 
 type Props = {
   className?: string;
-  type: ButtonType;
-  text: string;
-};
+  type?: ButtonType;
+  text?: string;
+} & CommonProps;
 
 export class Button extends Block<Props> {
   constructor(props: Props) {
