@@ -4,14 +4,7 @@ import {AUTH_ENDPOINTS} from './endpoints';
 
 export type SignInData = {login: string; password: string};
 
-export type SignUpData = {
-  first_name: string;
-  second_name: string;
-  login: string;
-  email: string;
-  password: string;
-  phone: string;
-};
+export type SignUpData = Omit<UserData, 'id' | 'avatar'>;
 
 class AuthApi {
   private transport: HTTPTransport;
@@ -20,7 +13,7 @@ class AuthApi {
     this.transport = new HTTPTransport(BASE_URL);
   }
 
-  login(data: SignInData) {
+  login(data: SignInData): Promise<void> {
     return this.transport.post(AUTH_ENDPOINTS.LOGIN, {
       data,
       headers: {
@@ -29,11 +22,11 @@ class AuthApi {
     });
   }
 
-  logout() {
+  logout(): Promise<void> {
     return this.transport.post(AUTH_ENDPOINTS.LOGOUT);
   }
 
-  signUp(data: SignUpData) {
+  signUp(data: SignUpData): Promise<Pick<UserData, 'id'>> {
     return this.transport.post(AUTH_ENDPOINTS.SIGN_UP, {
       data,
       headers: {
@@ -42,7 +35,7 @@ class AuthApi {
     });
   }
 
-  getUser() {
+  getUser(): Promise<UserData> {
     return this.transport.get(AUTH_ENDPOINTS.GET_USER, {
       headers: {
         'Content-Type': 'application/json',

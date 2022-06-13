@@ -2,16 +2,9 @@ import {HTTPTransport} from '../core';
 import {BASE_URL} from '../constants';
 import {USER_ENDPOINTS} from './endpoints';
 
-type ChangeProfileData = {
-  first_name: string;
-  second_name: string;
-  display_name: string;
-  login: string;
-  email: string;
-  phone: string;
-};
+export type ChangeProfileData = Omit<UserData, 'id'>;
 
-type ChangePasswordData = {
+export type ChangePasswordData = {
   oldPassword: string;
   newPassword: string;
 };
@@ -23,8 +16,8 @@ class UserApi {
     this.transport = new HTTPTransport(BASE_URL);
   }
 
-  changeProfile(data: ChangeProfileData) {
-    return this.transport.post(USER_ENDPOINTS.PROFILE, {
+  changeProfile(data: ChangeProfileData): Promise<UserData> {
+    return this.transport.put(USER_ENDPOINTS.PROFILE, {
       data,
       headers: {
         'Content-Type': 'application/json',
@@ -32,8 +25,8 @@ class UserApi {
     });
   }
 
-  changePassword(data: ChangePasswordData) {
-    return this.transport.get(USER_ENDPOINTS.PASSWORD, {
+  changePassword(data: ChangePasswordData): Promise<void> {
+    return this.transport.put(USER_ENDPOINTS.PASSWORD, {
       data,
       headers: {
         'Content-Type': 'application/json',
@@ -42,7 +35,7 @@ class UserApi {
   }
 
   // changeAvatar() {
-  //   return this.transport.post(USER_ENDPOINTS.AVATAR);
+  //   return this.transport.put(USER_ENDPOINTS.AVATAR);
   // }
 }
 
