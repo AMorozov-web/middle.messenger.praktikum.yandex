@@ -160,9 +160,9 @@ export const setValue = <T extends Indexed>(object: T, path: string, value: unkn
     return object;
   }
 
-  const splited = path.split('.');
+  const splitedPath = path.split('.');
 
-  const objectToSet = splited.reduceRight<Indexed>((prev, curr) => {
+  const objectToSet = splitedPath.reduceRight<Indexed>((prev, curr) => {
     return {
       [curr]: prev,
     };

@@ -6,6 +6,8 @@ export type SignInData = {login: string; password: string};
 
 export type SignUpData = Omit<User, 'id' | 'avatar' | 'isAuthorized'>;
 
+export type UserId = Pick<User, 'id'>;
+
 class AuthApi {
   private transport: HTTPTransport;
 
@@ -26,7 +28,7 @@ class AuthApi {
     return this.transport.post(AUTH_ENDPOINTS.LOGOUT);
   }
 
-  signUp(data: SignUpData): Promise<Pick<User, 'id'>> {
+  signUp(data: SignUpData): Promise<UserId> {
     return this.transport.post(AUTH_ENDPOINTS.SIGN_UP, {
       data,
       headers: {
