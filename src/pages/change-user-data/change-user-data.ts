@@ -1,16 +1,14 @@
 import {template} from './change-user-data.tmpl';
 import {Block} from '../../core';
 import {Button, Form, Input, LinkWithRouter} from '../../components';
-import {onFormSubmit} from '../../utils';
+import {ChangeProfileData} from '../../api';
+import {ChangeUserDataController} from '.';
+import {onFocus, onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, INPUT_TYPE, PATTERN, TAG_NAME} from '../../constants';
 
-const redirectToProfile = () => {
-  const link = document.createElement(TAG_NAME.A);
-  link.href = '/profile.html';
-  setTimeout(() => {
-    link.click();
-    link.remove();
-  }, 500);
+const onSubmit = (evt: Event) => {
+  const data = onFormSubmit<ChangeProfileData>(evt);
+  ChangeUserDataController.changeUserData(data);
 };
 
 const emailInput = new Input({
@@ -122,16 +120,10 @@ export class ChangeUserDataPage extends Block {
         ],
         events: {
           submit: {
-            callback: (evt) => onFormSubmit(evt, redirectToProfile),
+            callback: onSubmit,
           },
           focus: {
-            callback: (evt) => {
-              const target = evt.target as HTMLInputElement;
-
-              if (!target.checkValidity()) {
-                target.reportValidity();
-              }
-            },
+            callback: onFocus,
             capture: true,
           },
         },

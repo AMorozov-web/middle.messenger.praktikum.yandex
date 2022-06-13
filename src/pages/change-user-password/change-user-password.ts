@@ -1,16 +1,14 @@
 import {template} from './change-user-password.tmpl';
 import {Block} from '../../core';
 import {Button, Form, Input, LinkWithRouter} from '../../components';
-import {onFormSubmit} from '../../utils';
+import {ChangePasswordData} from '../../api';
+import {ChangeUserPasswordController} from './change-user-password-controller';
+import {onFocus, onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, INPUT_TYPE, PATTERN, TAG_NAME} from '../../constants';
 
-const redirectToProfile = () => {
-  const link = document.createElement(TAG_NAME.A);
-  link.href = '/profile.html';
-  setTimeout(() => {
-    link.click();
-    link.remove();
-  }, 500);
+const onSubmit = (evt: Event) => {
+  const data = onFormSubmit<ChangePasswordData>(evt);
+  ChangeUserPasswordController.changeUserPassword(data);
 };
 
 const oldPasswordInput = new Input({
@@ -80,16 +78,10 @@ export class ChangeUserPasswordPage extends Block {
         children: [oldPasswordInput, newPasswordInput, repeatNewPasswordInput, saveButton],
         events: {
           submit: {
-            callback: (evt) => onFormSubmit(evt, redirectToProfile),
+            callback: onSubmit,
           },
           focus: {
-            callback: (evt) => {
-              const target = evt.target as HTMLInputElement;
-
-              if (!target.checkValidity()) {
-                target.reportValidity();
-              }
-            },
+            callback: onFocus,
             capture: true,
           },
         },
