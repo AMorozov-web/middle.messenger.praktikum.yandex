@@ -1,5 +1,4 @@
 import {Api, HTTPTransport} from '../core';
-import {store} from '../store';
 import {BASE_URL} from '../constants';
 import {AUTH_ENDPOINTS} from './endpoints';
 
@@ -18,19 +17,12 @@ const authTransport = new HTTPTransport(BASE_URL);
 
 export class AuthApi extends Api {
   login(data: SignInData) {
-    return authTransport
-      .post(AUTH_ENDPOINTS.LOGIN, {
-        data,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then(() => {
-        store.set('isUserAuthorized', true);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    return authTransport.post(AUTH_ENDPOINTS.LOGIN, {
+      data,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   }
 
   logout() {
