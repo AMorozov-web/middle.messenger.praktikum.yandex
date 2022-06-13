@@ -18,9 +18,11 @@ export const connect = <P extends CommonProps>(
       const newProps = getProps<P>(props, mapStateToProps?.<P>(store.getState()));
       super(newProps);
 
-      // this.setProps({...mapStateToProps?.(store.getState())});
+      this.setProps(newProps);
+
       store.on(STORE_EVENTS.UPDATED, () => {
-        this.setProps({...mapStateToProps?.(store.getState())});
+        const mappedProps = mapStateToProps?.<P>(store.getState());
+        this.setProps(mappedProps ?? ({} as P));
       });
     }
   };
