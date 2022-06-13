@@ -1,4 +1,4 @@
-import {Api, HTTPTransport} from '../core';
+import {HTTPTransport} from '../core';
 import {BASE_URL} from '../constants';
 import {AUTH_ENDPOINTS} from './endpoints';
 
@@ -13,11 +13,15 @@ export type SignUpData = {
   phone: string;
 };
 
-const authTransport = new HTTPTransport(BASE_URL);
+class AuthApi {
+  private transport: HTTPTransport;
 
-export class AuthApi extends Api {
+  constructor() {
+    this.transport = new HTTPTransport(BASE_URL);
+  }
+
   login(data: SignInData) {
-    return authTransport.post(AUTH_ENDPOINTS.LOGIN, {
+    return this.transport.post(AUTH_ENDPOINTS.LOGIN, {
       data,
       headers: {
         'Content-Type': 'application/json',
@@ -26,16 +30,11 @@ export class AuthApi extends Api {
   }
 
   logout() {
-    return authTransport.post(AUTH_ENDPOINTS.LOGOUT, {
-      data: {},
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    return this.transport.post(AUTH_ENDPOINTS.LOGOUT);
   }
 
   signUp(data: SignUpData) {
-    return authTransport.post(AUTH_ENDPOINTS.LOGOUT, {
+    return this.transport.post(AUTH_ENDPOINTS.SIGN_UP, {
       data,
       headers: {
         'Content-Type': 'application/json',
@@ -44,11 +43,12 @@ export class AuthApi extends Api {
   }
 
   getUser() {
-    return authTransport.post(AUTH_ENDPOINTS.GET_USER, {
-      data: {},
+    return this.transport.get(AUTH_ENDPOINTS.GET_USER, {
       headers: {
         'Content-Type': 'application/json',
       },
     });
   }
 }
+
+export const authApi = new AuthApi();
