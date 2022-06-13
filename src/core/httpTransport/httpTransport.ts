@@ -23,23 +23,27 @@ export class HTTPTransport {
     return `${this.baseUrl}${url}`;
   }
 
-  get = (url: string, options?: Omit<HTTPTransportOptions, 'method'>) => {
-    return this.request(this.getUrl(url), {...options, method: METHODS.GET}, options?.timeout);
+  get = <T = unknown>(url: string, options?: Omit<HTTPTransportOptions, 'method'>) => {
+    return this.request<T>(this.getUrl(url), {...options, method: METHODS.GET}, options?.timeout);
   };
 
-  post = (url: string, options?: Omit<HTTPTransportOptions, 'method'>) => {
-    return this.request(this.getUrl(url), {...options, method: METHODS.POST}, options?.timeout);
+  post = <T = unknown>(url: string, options?: Omit<HTTPTransportOptions, 'method'>) => {
+    return this.request<T>(this.getUrl(url), {...options, method: METHODS.POST}, options?.timeout);
   };
 
-  put = (url: string, options?: Omit<HTTPTransportOptions, 'method'>) => {
-    return this.request(this.getUrl(url), {...options, method: METHODS.PUT}, options?.timeout);
+  put = <T = unknown>(url: string, options?: Omit<HTTPTransportOptions, 'method'>) => {
+    return this.request<T>(this.getUrl(url), {...options, method: METHODS.PUT}, options?.timeout);
   };
 
-  delete = (url: string, options?: Omit<HTTPTransportOptions, 'method'>) => {
-    return this.request(this.getUrl(url), {...options, method: METHODS.DELETE}, options?.timeout);
+  delete = <T = unknown>(url: string, options?: Omit<HTTPTransportOptions, 'method'>) => {
+    return this.request<T>(
+      this.getUrl(url),
+      {...options, method: METHODS.DELETE},
+      options?.timeout,
+    );
   };
 
-  request = (url: string, options: HTTPTransportOptions, timeout = 5000) => {
+  request = <T>(url: string, options: HTTPTransportOptions, timeout = 5000) => {
     const {method, headers, data} = options;
     let params = '';
 
@@ -47,7 +51,7 @@ export class HTTPTransport {
       params = queryStringify(data);
     }
 
-    return new Promise((resolve, reject) => {
+    return new Promise<T>((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open(method, url + params);
 
