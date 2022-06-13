@@ -11,7 +11,7 @@ const getProps = <T extends CommonProps>(props: T, mappedProps?: T): T => {
 
 export const connect = <P extends CommonProps>(
   Component: new (props: P) => Block<P>,
-  mapStateToProps?: <T extends Indexed>(state: Indexed) => T,
+  mapStateToProps?: <T extends Indexed>(state: RootState) => T,
 ) => {
   return class extends Component {
     constructor(props: P) {

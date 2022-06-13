@@ -1,4 +1,5 @@
 import {BUTTON_TYPE, INPUT_TYPE, TAG_NAME} from '../constants';
+import {store} from '../store';
 
 export {};
 
@@ -33,4 +34,6 @@ declare global {
     avatar: string;
     isAuthorized: boolean;
   };
+
+  type RootState = ReturnType<typeof store.getState>;
 }
