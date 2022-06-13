@@ -34,6 +34,4 @@ declare global {
     avatar: string;
     isAuthorized: boolean;
   };
-
-  type RootState = ReturnType<typeof store.getState>;
 }

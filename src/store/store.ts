@@ -2,7 +2,7 @@ import {EventBus} from '../core';
 import {setValue} from '../utils';
 import {STORE_EVENTS} from '../constants';
 
-type InitialState = {
+export type RootState = {
   user: Nullable<User>;
 };
 
@@ -24,7 +24,7 @@ class Store<T extends Indexed> extends EventBus {
   }
 }
 
-const initialState: InitialState = {
+const initialState: RootState = {
   user: null,
 };
 
