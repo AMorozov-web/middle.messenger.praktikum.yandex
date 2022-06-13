@@ -185,3 +185,16 @@ export const queryStringify = (data: object) =>
     }
     return result.concat(`&${k}=${v.toString()}`);
   }, '');
+
+/**
+ * Обработчик события onfocus для input
+ *
+ */
+
+export const onFocus = (evt: Event) => {
+  const target = evt.target as HTMLInputElement;
+
+  if (!target.checkValidity()) {
+    target.reportValidity();
+  }
+};

@@ -3,20 +3,12 @@ import {Block} from '../../core';
 import {SignInData} from '../../api';
 import {Button, Form, Input, LinkWithRouter} from '../../components';
 import {LoginController} from './login-controller';
-import {onFormSubmit} from '../../utils';
+import {onFocus, onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, TAG_NAME} from '../../constants';
 
 const onSubmit = (evt: Event) => {
   const data = onFormSubmit<SignInData>(evt);
   LoginController.login(data);
-};
-
-const onFocus = (evt: Event) => {
-  const target = evt.target as HTMLInputElement;
-
-  if (!target.checkValidity()) {
-    target.reportValidity();
-  }
 };
 
 const loginInput = new Input({
