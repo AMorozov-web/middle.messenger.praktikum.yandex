@@ -4,7 +4,7 @@ import {SignInData} from '../../api';
 import {Button, Form, Input, LinkWithRouter} from '../../components';
 import {LoginController} from './login-controller';
 import {onFocus, onFormSubmit} from '../../utils';
-import {BUTTON_TYPE, TAG_NAME} from '../../constants';
+import {BUTTON_TYPE, INPUT_TYPE, TAG_NAME} from '../../constants';
 
 const onSubmit = (evt: Event) => {
   const data = onFormSubmit<SignInData>(evt);
@@ -28,6 +28,7 @@ const loginInput = new Input({
 const passwordInput = new Input({
   className: 'login-page__password',
   id: 'password',
+  type: INPUT_TYPE.PASSWORD,
   name: 'password',
   label: {
     text: 'Пароль',

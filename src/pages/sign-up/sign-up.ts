@@ -50,8 +50,8 @@ const loginInput = new Input({
 
 const firstNameInput = new Input({
   className: 'sign-up__firstname',
-  id: 'first-name',
-  name: 'first-name',
+  id: 'first_name',
+  name: 'first_name',
   pattern: PATTERN.NAME,
   label: {
     text: 'Имя',
@@ -63,8 +63,8 @@ const firstNameInput = new Input({
 
 const lastNameInput = new Input({
   className: 'sign-up__lastname',
-  id: 'last-name',
-  name: 'last-name',
+  id: 'second_name',
+  name: 'second_name',
   pattern: PATTERN.NAME,
   label: {
     text: 'Фамилия',
