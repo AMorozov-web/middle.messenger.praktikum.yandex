@@ -2,7 +2,7 @@ import {v4 as getId} from 'uuid';
 import {EventBus} from '..';
 import {Templator} from '../../utils';
 
-export type Children = Record<string, Block | Block[]>;
+export type Children<T extends CommonProps> = Record<string, Block<T> | Block<T>[]>;
 
 type BlockMeta = {
   tagName: string;
@@ -17,7 +17,7 @@ export abstract class Block<T extends CommonProps = CommonProps> {
     FLOW_RENDER: 'flow:render',
   };
 
-  children: Children;
+  children: Children<T>;
 
   eventBus: () => EventBus;
 
@@ -154,7 +154,7 @@ export abstract class Block<T extends CommonProps = CommonProps> {
         }
         return result;
       },
-      {children: {} as Children, props: {} as CommonProps},
+      {children: {} as Children<T>, props: {} as CommonProps},
     );
   }
 
