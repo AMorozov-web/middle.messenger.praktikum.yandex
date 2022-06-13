@@ -1,6 +1,6 @@
 import {v4 as getId} from 'uuid';
 import {EventBus} from '..';
-import {Templator} from '../../utils';
+import {isEqual, Templator} from '../../utils';
 
 export type Children<T extends CommonProps> = Record<string, Block<T> | Block<T>[]>;
 
@@ -100,11 +100,9 @@ export abstract class Block<T extends CommonProps = CommonProps> {
     }
   }
 
-  public componentDidUpdate(oldProps: CommonProps, newProps: CommonProps) {
-    // В дальнейшем необходимо сравнивать пропсы для оптимизации ререндеров
-    // If написан для купирования ошибки value is never read
+  public componentDidUpdate(oldProps: T, newProps: T) {
     if (oldProps && newProps) {
-      return true;
+      return isEqual<T>(oldProps, newProps);
     }
     return true;
   }
@@ -184,7 +182,7 @@ export abstract class Block<T extends CommonProps = CommonProps> {
     }
   }
 
-  private _componentDidUpdate(oldProps: CommonProps, newProps: CommonProps) {
+  private _componentDidUpdate(oldProps: T, newProps: T) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (response) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);

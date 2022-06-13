@@ -74,7 +74,7 @@ export const cloneObject = <T>(object: T): T => {
  * @param right - второй объект
  */
 
-export const isEqual = (left: Indexed, right: Indexed): boolean => {
+export const isEqual = <T extends Indexed>(left: T, right: T): boolean => {
   const leftKeys = Object.keys(left);
   const rightKeys = Object.keys(right);
 
