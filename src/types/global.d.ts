@@ -1,5 +1,4 @@
 import {BUTTON_TYPE, INPUT_TYPE, TAG_NAME} from '../constants';
-import {store} from '../store';
 
 export {};
 

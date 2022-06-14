@@ -8,6 +8,8 @@ export type SignUpData = Omit<User, 'id' | 'avatar' | 'isAuthorized'>;
 
 export type UserId = Pick<User, 'id'>;
 
+export type UserData = Omit<User, 'isAuthorized'>;
+
 class AuthApi {
   private transport: HTTPTransport;
 
@@ -37,7 +39,7 @@ class AuthApi {
     });
   }
 
-  getUser(): Promise<User> {
+  getUser(): Promise<UserData> {
     return this.transport.get(AUTH_ENDPOINTS.GET_USER, {
       headers: {
         'Content-Type': 'application/json',
