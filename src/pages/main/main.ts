@@ -11,6 +11,7 @@ import {
   Message,
   UserInfo,
 } from '../../components';
+import {MainController} from '.';
 import {onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, TAG_NAME} from '../../constants';
 
@@ -57,6 +58,8 @@ const submitButton = new Button({
 
 export class MainPage extends Block {
   constructor() {
+    MainController.checkAuth();
+
     super(TAG_NAME.DIV, {
       addChatLink: new LinkWithRouter({
         href: '',
