@@ -40,3 +40,5 @@ export const STORE_EVENTS = {
 } as const;
 
 export const BASE_URL = 'https://ya-praktikum.tech/api/v2' as const;
+
+export const EMPTY_VALUE_PLACEHOLDER = '-';

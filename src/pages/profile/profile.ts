@@ -1,12 +1,14 @@
 import {template} from './profile.tmpl';
 import {Block} from '../../core';
-import {Avatar, LinkWithRouter} from '../../components';
+import {UserAvatar, LinkWithRouter, ConnectedUserData} from '../../components';
 import {TAG_NAME} from '../../constants';
 
-const avatar = new Avatar({
+const avatar = new UserAvatar({
   className: 'profile-page__avatar-img',
   wrapperClassName: 'profile-page__avatar-wrapper',
 });
+
+const userData = new ConnectedUserData({});
 
 const toBackLink = new LinkWithRouter({
   className: 'profile-page__back',
@@ -33,12 +35,7 @@ export class ProfilePage extends Block {
   constructor() {
     super(TAG_NAME.DIV, {
       avatar,
-      email: 'pochta@yandex.ru',
-      login: 'ivanivanov',
-      firstName: 'Иван',
-      lastName: 'Иванов',
-      nickName: 'Иван',
-      phone: '+7 (909) 967 30 30',
+      userData,
       toBackLink,
       changeDataLink,
       changePasswordLink,
