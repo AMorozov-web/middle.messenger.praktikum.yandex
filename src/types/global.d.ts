@@ -26,11 +26,11 @@ declare global {
     id: number;
     first_name: string;
     second_name: string;
-    display_name: string;
+    display_name?: string;
     login: string;
     email: string;
     phone: string;
-    avatar: string;
+    avatar?: string;
     isAuthorized: boolean;
   };
 }
