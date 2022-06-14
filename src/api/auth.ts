@@ -39,7 +39,7 @@ class AuthApi {
     });
   }
 
-  getUser(): Promise<UserData> {
+  getUser(): Promise<string> {
     return this.transport.get(AUTH_ENDPOINTS.GET_USER, {
       headers: {
         'Content-Type': 'application/json',
