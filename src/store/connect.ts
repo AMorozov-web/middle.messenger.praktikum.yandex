@@ -18,8 +18,6 @@ export const connect = <P extends CommonProps>(
       const newProps = getProps<P>(props, mapStateToProps(store.getState()));
       super(newProps);
 
-      // this.setProps(newProps); // возможно нужно убрать
-
       store.on(STORE_EVENTS.UPDATED, () => {
         const mappedProps = mapStateToProps(store.getState());
 
