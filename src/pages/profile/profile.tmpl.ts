@@ -8,7 +8,7 @@ export const template = `
     <div class="profile-page__content">
       <div class="profile-page__avatar">
         {{avatar}}
-        <button class="profile-page__edit-avatar"></button>
+        {{editAvatarInput}}
       </div>
       {{userData}}
       <ul class="profile-page__user-controls">

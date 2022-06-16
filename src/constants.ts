@@ -3,6 +3,7 @@ export const INPUT_TYPE = {
   PASSWORD: 'password',
   TEL: 'tel',
   TEXT: 'text',
+  FILE: 'file',
 } as const;
 
 export const BUTTON_TYPE = {
