@@ -12,11 +12,12 @@ type Props = {
   inputClassName?: string;
   label?: {
     className?: string;
-    text?: string;
+    content?: string;
   };
   name?: string;
   value?: string;
   type?: InputType;
+  accept?: string;
   validation?: {
     minLength?: number;
     maxLength?: number;

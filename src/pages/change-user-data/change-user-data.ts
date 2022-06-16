@@ -28,7 +28,7 @@ const emailInput = new UserEmailInput({
   type: INPUT_TYPE.EMAIL,
   pattern: PATTERN.EMAIL,
   label: {
-    text: 'Почта',
+    content: 'Почта',
   },
   validation: {
     required: true,
@@ -42,7 +42,7 @@ const loginInput = new UserLoginInput({
   pattern: PATTERN.LOGIN,
   type: INPUT_TYPE.TEXT,
   label: {
-    text: 'Логин',
+    content: 'Логин',
   },
   validation: {
     maxLength: 20,
@@ -58,7 +58,7 @@ const firstNameInput = new UserFirstNameInput({
   pattern: PATTERN.NAME,
   type: INPUT_TYPE.TEXT,
   label: {
-    text: 'Имя',
+    content: 'Имя',
   },
   validation: {
     required: true,
@@ -72,7 +72,7 @@ const lastNameInput = new UserSecondNameInput({
   pattern: PATTERN.NAME,
   type: INPUT_TYPE.TEXT,
   label: {
-    text: 'Фамилия',
+    content: 'Фамилия',
   },
   validation: {
     required: true,
@@ -86,7 +86,7 @@ const nickNameInput = new UserNickNameInput({
   pattern: PATTERN.NAME,
   type: INPUT_TYPE.TEXT,
   label: {
-    text: 'Имя в чате',
+    content: 'Имя в чате',
   },
   validation: {
     required: true,
@@ -100,7 +100,7 @@ const phoneInput = new UserPhoneInput({
   pattern: PATTERN.PHONE,
   type: INPUT_TYPE.TEL,
   label: {
-    text: 'Телефон',
+    content: 'Телефон',
   },
   validation: {
     required: true,
