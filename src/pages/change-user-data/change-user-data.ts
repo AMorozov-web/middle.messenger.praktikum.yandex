@@ -1,6 +1,16 @@
 import {template} from './change-user-data.tmpl';
 import {Block} from '../../core';
-import {Button, Form, Input, LinkWithRouter} from '../../components';
+import {
+  Button,
+  Form,
+  LinkWithRouter,
+  UserEmailInput,
+  UserFirstNameInput,
+  UserLoginInput,
+  UserNickNameInput,
+  UserPhoneInput,
+  UserSecondNameInput,
+} from '../../components';
 import {ChangeProfileData} from '../../api';
 import {ChangeUserDataController} from '.';
 import {onFocus, onFormSubmit} from '../../utils';
@@ -11,7 +21,7 @@ const onSubmit = (evt: Event) => {
   ChangeUserDataController.changeUserData(data);
 };
 
-const emailInput = new Input({
+const emailInput = new UserEmailInput({
   className: 'change-user-data__field',
   id: 'email',
   name: 'email',
@@ -25,11 +35,12 @@ const emailInput = new Input({
   },
 });
 
-const loginInput = new Input({
+const loginInput = new UserLoginInput({
   className: 'change-user-data__field',
   id: 'login',
   name: 'login',
   pattern: PATTERN.LOGIN,
+  type: INPUT_TYPE.TEXT,
   label: {
     text: 'Логин',
   },
@@ -40,11 +51,12 @@ const loginInput = new Input({
   },
 });
 
-const firstNameInput = new Input({
+const firstNameInput = new UserFirstNameInput({
   className: 'change-user-data__field',
-  id: 'first-name',
-  name: 'first-name',
+  id: 'first_name',
+  name: 'first_name',
   pattern: PATTERN.NAME,
+  type: INPUT_TYPE.TEXT,
   label: {
     text: 'Имя',
   },
@@ -53,11 +65,12 @@ const firstNameInput = new Input({
   },
 });
 
-const lastNameInput = new Input({
+const lastNameInput = new UserSecondNameInput({
   className: 'change-user-data__field',
-  id: 'last-name',
-  name: 'last-name',
+  id: 'second_name',
+  name: 'second_name',
   pattern: PATTERN.NAME,
+  type: INPUT_TYPE.TEXT,
   label: {
     text: 'Фамилия',
   },
@@ -66,11 +79,12 @@ const lastNameInput = new Input({
   },
 });
 
-const nickNameInput = new Input({
+const nickNameInput = new UserNickNameInput({
   className: 'change-user-data__field',
-  id: 'nickname',
-  name: 'nickname',
+  id: 'display_name',
+  name: 'display_name',
   pattern: PATTERN.NAME,
+  type: INPUT_TYPE.TEXT,
   label: {
     text: 'Имя в чате',
   },
@@ -79,7 +93,7 @@ const nickNameInput = new Input({
   },
 });
 
-const phoneInput = new Input({
+const phoneInput = new UserPhoneInput({
   className: 'change-user-data__field',
   id: 'phone',
   name: 'phone',
@@ -105,7 +119,10 @@ export class ChangeUserDataPage extends Block {
       link: new LinkWithRouter({
         className: 'change-user-data-page__back',
         href: '/profile',
-        children: ' ',
+        children: `<svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="currentColor" d="M13 6.8H2V5.2h11z"/>
+                    <path d="M6 11 2 6l4-5" stroke="currentColor" stroke-width="1.6"/>
+                  </svg>`,
       }),
       form: new Form({
         className: 'change-user-data-page__form',
