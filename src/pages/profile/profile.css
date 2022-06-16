@@ -53,9 +53,13 @@
   align-items: center;
   width: 130px;
   height: 130px;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .profile-page__avatar-img {
+  width: 130px;
+  height: 130px;
   color: var(--white);
 }
 
@@ -63,11 +67,24 @@
   position: absolute;
   bottom: 0;
   right: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 27px;
   height: 27px;
+  padding: 0;
   background-color: var(--dusty-gray);
   border: none;
   border-radius: 50%;
+  cursor: pointer;
+}
+
+.profile-page__edit-avatar-label {
+  height: 14px;
+}
+
+.profile-page__edit-avatar-label > svg {
+  color: var(--white);
 }
 
 .profile-page__user-name {
