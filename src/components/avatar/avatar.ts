@@ -27,7 +27,7 @@ export class Avatar extends Block<Props> {
 export const UserAvatar = connect(Avatar, (state) => {
   if (state.user?.avatar) {
     return {
-      src: `${BASE_URL}${state.user.avatar}`,
+      src: `${BASE_URL}/resources${state.user.avatar}`,
     };
   }
   return {};
