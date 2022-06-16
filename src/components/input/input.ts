@@ -1,5 +1,6 @@
 import {template} from './input.tmpl';
 import {Block} from '../../core';
+import {connect} from '../../store';
 import {INPUT_TYPE, TAG_NAME} from '../../constants';
 
 type Props = {
@@ -14,6 +15,7 @@ type Props = {
     text?: string;
   };
   name?: string;
+  value?: string;
   type?: InputType;
   validation?: {
     minLength?: number;
