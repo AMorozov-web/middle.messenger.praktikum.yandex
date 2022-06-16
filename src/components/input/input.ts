@@ -44,3 +44,27 @@ export class Input extends Block<Props> {
     return this.compile(template, this.props);
   }
 }
+
+export const UserEmailInput = connect(Input, (state) => ({
+  value: state?.user?.email ?? '',
+}));
+
+export const UserLoginInput = connect(Input, (state) => ({
+  value: state?.user?.login ?? '',
+}));
+
+export const UserFirstNameInput = connect(Input, (state) => ({
+  value: state?.user?.first_name ?? '',
+}));
+
+export const UserSecondNameInput = connect(Input, (state) => ({
+  value: state?.user?.second_name ?? '',
+}));
+
+export const UserNickNameInput = connect(Input, (state) => ({
+  value: state?.user?.display_name ?? '',
+}));
+
+export const UserPhoneInput = connect(Input, (state) => ({
+  value: state?.user?.phone ?? '',
+}));
