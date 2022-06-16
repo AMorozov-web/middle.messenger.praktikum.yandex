@@ -16,7 +16,7 @@ class UserApi {
     this.transport = new HTTPTransport(BASE_URL);
   }
 
-  changeProfile(data: ChangeProfileData): Promise<User> {
+  changeProfile(data: ChangeProfileData): Promise<string> {
     return this.transport.put(USER_ENDPOINTS.PROFILE, {
       data,
       headers: {
@@ -34,9 +34,14 @@ class UserApi {
     });
   }
 
-  // changeAvatar() {
-  //   return this.transport.put(USER_ENDPOINTS.AVATAR);
-  // }
+  changeAvatar(formData: FormData): Promise<string> {
+    return this.transport.put(USER_ENDPOINTS.AVATAR, {
+      data: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  }
 }
 
 export const userApi = new UserApi();

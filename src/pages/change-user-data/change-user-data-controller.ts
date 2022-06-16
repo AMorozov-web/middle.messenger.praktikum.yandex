@@ -20,4 +20,17 @@ export class ChangeUserDataController {
         console.log(error);
       });
   }
+
+  public static changeAvatar(formData: FormData) {
+    userApi
+      .changeAvatar(formData)
+      .then((response) => {
+        const {user} = store.getState();
+
+        store.set('user', {...user, ...JSON.parse(response)});
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 }

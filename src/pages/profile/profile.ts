@@ -1,10 +1,24 @@
 import {template} from './profile.tmpl';
 import {Block} from '../../core';
-import {UserAvatar, LinkWithRouter, ConnectedUserData, Button} from '../../components';
+import {UserAvatar, LinkWithRouter, ConnectedUserData, Button, Input} from '../../components';
 import {ProfileController} from './profile-controller';
-import {BUTTON_TYPE, TAG_NAME} from '../../constants';
+import {BUTTON_TYPE, INPUT_TYPE, TAG_NAME} from '../../constants';
+import {ChangeUserDataController} from '../change-user-data';
 
 const onClick = () => ProfileController.logout();
+
+const onAvatarChange = (evt: Event) => {
+  const file = (evt.target as HTMLInputElement).files?.[0];
+
+  if (file) {
+    const formData = new FormData();
+    const blob = new Blob([file], {type: file.type});
+    formData.append('avatar', blob, file.name);
+
+    ChangeUserDataController.changeAvatar(formData);
+    evt.preventDefault();
+  }
+};
 
 const avatar = new UserAvatar({
   className: 'profile-page__avatar-img',
