@@ -12,7 +12,7 @@ export class MainController {
       authApi
         .getUser()
         .then((response) => {
-          store.set('user', {...response, isAuthorized: true});
+          store.set('user', {...JSON.parse(response), isAuthorized: true});
         })
         .catch((error) => {
           console.log(error);

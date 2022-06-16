@@ -12,7 +12,7 @@ export class ChangeUserDataController {
       .then((response) => {
         const {user} = store.getState();
 
-        store.set('user', {...user, ...response});
+        store.set('user', {...user, ...JSON.parse(response)});
 
         router.go('/profile');
       })
