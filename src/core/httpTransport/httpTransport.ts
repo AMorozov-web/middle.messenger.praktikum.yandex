@@ -47,6 +47,8 @@ export class HTTPTransport {
     const {method, headers, data} = options;
     let params = '';
 
+    const isFormData = headers?.['Content-Type'] === 'multipart/form-data';
+
     if (method === METHODS.GET && data) {
       params = queryStringify(data);
     }
@@ -72,12 +74,16 @@ export class HTTPTransport {
 
       if (headers) {
         Object.entries(headers).forEach(([k, v]) => {
-          xhr.setRequestHeader(k, v);
+          if (!isFormData) {
+            xhr.setRequestHeader(k, v);
+          }
         });
       }
 
       if (method === METHODS.GET || !data) {
         xhr.send();
+      } else if (isFormData) {
+        xhr.send(data as XMLHttpRequestBodyInit);
       } else {
         xhr.send(JSON.stringify(data));
       }
