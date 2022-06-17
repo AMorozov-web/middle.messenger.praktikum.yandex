@@ -52,7 +52,7 @@ const newMessageInput = new Input({
 
 const submitButton = new Button({
   className: 'main-page__submit-button',
-  text: ' ',
+  content: ' ',
   type: BUTTON_TYPE.SUBMIT,
 });
 
@@ -102,7 +102,7 @@ export class MainPage extends Block {
         }),
         button: new Button({
           className: 'main-page__user-button',
-          text: '',
+          content: '',
           type: BUTTON_TYPE.BUTTON,
         }),
         userName: 'Пользователь',

@@ -61,7 +61,7 @@ const repeatNewPasswordInput = new Input({
 
 const saveButton = new Button({
   className: 'change-user-password__save',
-  text: 'Сохранить',
+  content: 'Сохранить',
   type: BUTTON_TYPE.SUBMIT,
 });
 

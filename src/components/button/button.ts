@@ -5,7 +5,7 @@ import {TAG_NAME} from '../../constants';
 type Props = {
   className?: string;
   type?: ButtonType;
-  text?: string;
+  content?: string;
 } & CommonProps;
 
 export class Button extends Block<Props> {

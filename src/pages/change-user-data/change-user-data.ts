@@ -109,7 +109,7 @@ const phoneInput = new UserPhoneInput({
 
 const saveButton = new Button({
   className: 'change-user-data__save',
-  text: 'Сохранить',
+  content: 'Сохранить',
   type: BUTTON_TYPE.SUBMIT,
 });
 

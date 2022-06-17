@@ -114,7 +114,7 @@ const repeatPasswordInput = new Input({
 
 const submitButton = new Button({
   className: 'sign-up__submit',
-  text: 'Зарегистрироваться',
+  content: 'Зарегистрироваться',
   type: BUTTON_TYPE.SUBMIT,
 });
 

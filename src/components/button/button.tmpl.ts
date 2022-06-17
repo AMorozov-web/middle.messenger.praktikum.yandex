@@ -3,6 +3,6 @@ export const template = `
     class={{className}}
     type={{type}}
   >
-    {{text}}
+    {{content}}
   </button>
 `;

@@ -42,7 +42,7 @@ const passwordInput = new Input({
 
 const submitButton = new Button({
   className: 'login-page__submit',
-  text: 'Авторизоваться',
+  content: 'Авторизоваться',
   type: BUTTON_TYPE.SUBMIT,
 });
 

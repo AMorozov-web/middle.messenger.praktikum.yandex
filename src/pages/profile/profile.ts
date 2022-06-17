@@ -68,7 +68,7 @@ const changePasswordLink = new LinkWithRouter({
 
 const exitLink = new Button({
   type: BUTTON_TYPE.BUTTON,
-  text: 'Выйти',
+  content: 'Выйти',
   events: {
     click: {
       callback: onClick,
