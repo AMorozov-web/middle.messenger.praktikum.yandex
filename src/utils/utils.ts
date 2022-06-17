@@ -198,3 +198,15 @@ export const onFocus = (evt: Event) => {
     target.reportValidity();
   }
 };
+
+/**
+ * Функция удаляет свойство из объекта по ключу
+ */
+
+export const omit = <T extends Indexed, K extends keyof T>(object: T, key: K): Omit<T, K> => {
+  const copy = {...object};
+
+  delete copy[key];
+
+  return copy;
+};

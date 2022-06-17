@@ -1,24 +1,24 @@
 import {template} from './change-user-password.tmpl';
 import {Block} from '../../core';
 import {Button, Form, Input, LinkWithRouter} from '../../components';
-import {ChangePasswordData} from '../../api';
 import {ChangeUserPasswordController} from './change-user-password-controller';
-import {onFocus, onFormSubmit} from '../../utils';
+import {omit, onFocus, onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, INPUT_TYPE, PATTERN, TAG_NAME} from '../../constants';
 
 const onSubmit = (evt: Event) => {
-  const data = onFormSubmit<ChangePasswordData>(evt);
-  ChangeUserPasswordController.changeUserPassword(data);
+  const data = onFormSubmit<{oldPassword: string; newPassword: string; repeatNewPassword: string}>(
+    evt,
+  );
+  ChangeUserPasswordController.changeUserPassword(omit(data, 'repeatNewPassword'));
 };
 
 const oldPasswordInput = new Input({
   className: 'change-user-password__field',
-  id: 'password',
-  name: 'password',
+  id: 'oldPassword',
+  name: 'oldPassword',
   type: INPUT_TYPE.PASSWORD,
-  pattern: PATTERN.PASSWORD,
   label: {
-    text: 'Пароль',
+    content: 'Пароль',
   },
   validation: {
     maxLength: 40,
@@ -29,12 +29,12 @@ const oldPasswordInput = new Input({
 
 const newPasswordInput = new Input({
   className: 'change-user-password__field',
-  id: 'password',
-  name: 'password',
+  id: 'newPassword',
+  name: 'newPassword',
   type: INPUT_TYPE.PASSWORD,
   pattern: PATTERN.PASSWORD,
   label: {
-    text: 'Пароль',
+    content: 'Пароль',
   },
   validation: {
     maxLength: 40,
@@ -45,12 +45,12 @@ const newPasswordInput = new Input({
 
 const repeatNewPasswordInput = new Input({
   className: 'change-user-password__field',
-  id: 'repeat-password',
-  name: 'repeat-password',
+  id: 'repeatNewPassword',
+  name: 'repeatNewPassword',
   type: INPUT_TYPE.PASSWORD,
   pattern: PATTERN.PASSWORD,
   label: {
-    text: 'Пароль (ещё раз)',
+    content: 'Пароль (ещё раз)',
   },
   validation: {
     maxLength: 40,
@@ -71,7 +71,10 @@ export class ChangeUserPasswordPage extends Block {
       link: new LinkWithRouter({
         className: 'change-user-password-page__back',
         href: '/profile',
-        children: ' ',
+        children: `<svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="currentColor" d="M13 6.8H2V5.2h11z"/>
+                    <path d="M6 11 2 6l4-5" stroke="currentColor" stroke-width="1.6"/>
+                  </svg>`,
       }),
       form: new Form({
         className: 'change-user-password-page__form',
