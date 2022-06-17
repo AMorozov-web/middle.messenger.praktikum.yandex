@@ -4,6 +4,8 @@ import {STORE_EVENTS} from '../constants';
 
 export type RootState = {
   user: Nullable<User>;
+  currentChat: Nullable<number>;
+  chats: Chat[];
 };
 
 class Store<T extends Indexed> extends EventBus {
@@ -26,6 +28,8 @@ class Store<T extends Indexed> extends EventBus {
 
 const initialState: RootState = {
   user: null,
+  currentChat: null,
+  chats: [],
 };
 
 export const store = new Store(initialState);

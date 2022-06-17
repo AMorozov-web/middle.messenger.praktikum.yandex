@@ -33,4 +33,16 @@ declare global {
     avatar?: string;
     isAuthorized: boolean;
   };
+
+  type Chat = {
+    id: number;
+    title: string;
+    avatar: string;
+    unread_count: number;
+    last_message: {
+      user: Omit<User, 'isAuthorized' | 'display_name' | 'id'>;
+      time: string;
+      content: string;
+    };
+  };
 }
