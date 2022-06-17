@@ -16,7 +16,7 @@ const loginInput = new Input({
   id: 'login',
   name: 'login',
   label: {
-    text: 'Логин',
+    content: 'Логин',
   },
   validation: {
     maxLength: 20,
@@ -31,7 +31,7 @@ const passwordInput = new Input({
   type: INPUT_TYPE.PASSWORD,
   name: 'password',
   label: {
-    text: 'Пароль',
+    content: 'Пароль',
   },
   validation: {
     maxLength: 40,

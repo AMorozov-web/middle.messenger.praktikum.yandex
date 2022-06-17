@@ -43,7 +43,7 @@ const newMessageInput = new Input({
   id: 'new-message',
   name: 'new-message',
   label: {
-    text: 'Сообщение',
+    content: 'Сообщение',
   },
   validation: {
     required: true,

@@ -3,20 +3,12 @@ import {Block} from '../../core';
 import {SignUpData} from '../../api';
 import {SignUpController} from './sing-up-controller';
 import {Button, Form, Input, LinkWithRouter} from '../../components';
-import {onFormSubmit} from '../../utils';
+import {onFocus, onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, INPUT_TYPE, PATTERN, TAG_NAME} from '../../constants';
 
 const onSubmit = (evt: Event) => {
   const data = onFormSubmit<SignUpData>(evt);
   SignUpController.signUp(data);
-};
-
-const onFocus = (evt: Event) => {
-  const target = evt.target as HTMLInputElement;
-
-  if (!target.checkValidity()) {
-    target.reportValidity();
-  }
 };
 
 const emailInput = new Input({
@@ -26,7 +18,7 @@ const emailInput = new Input({
   type: INPUT_TYPE.EMAIL,
   pattern: PATTERN.EMAIL,
   label: {
-    text: 'Почта',
+    content: 'Почта',
   },
   validation: {
     required: true,
@@ -39,7 +31,7 @@ const loginInput = new Input({
   name: 'login',
   pattern: PATTERN.LOGIN,
   label: {
-    text: 'Логин',
+    content: 'Логин',
   },
   validation: {
     maxLength: 20,
@@ -54,7 +46,7 @@ const firstNameInput = new Input({
   name: 'first_name',
   pattern: PATTERN.NAME,
   label: {
-    text: 'Имя',
+    content: 'Имя',
   },
   validation: {
     required: true,
@@ -67,7 +59,7 @@ const lastNameInput = new Input({
   name: 'second_name',
   pattern: PATTERN.NAME,
   label: {
-    text: 'Фамилия',
+    content: 'Фамилия',
   },
   validation: {
     required: true,
@@ -81,7 +73,7 @@ const phoneInput = new Input({
   pattern: PATTERN.PHONE,
   type: INPUT_TYPE.TEL,
   label: {
-    text: 'Телефон',
+    content: 'Телефон',
   },
   validation: {
     required: true,
@@ -95,7 +87,7 @@ const passwordInput = new Input({
   type: INPUT_TYPE.PASSWORD,
   pattern: PATTERN.PASSWORD,
   label: {
-    text: 'Пароль',
+    content: 'Пароль',
   },
   validation: {
     maxLength: 40,
@@ -111,7 +103,7 @@ const repeatPasswordInput = new Input({
   type: INPUT_TYPE.PASSWORD,
   pattern: PATTERN.PASSWORD,
   label: {
-    text: 'Пароль (ещё раз)',
+    content: 'Пароль (ещё раз)',
   },
   validation: {
     maxLength: 40,
