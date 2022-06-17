@@ -40,6 +40,12 @@ export const STORE_EVENTS = {
   UPDATED: 'updated',
 } as const;
 
+export const WS_EVENTS = {
+  MESSAGE: 'MESSAGE',
+} as const;
+
 export const BASE_URL = 'https://ya-praktikum.tech/api/v2' as const;
+
+export const WS_BASE_URL = 'wss://ya-praktikum.tech/ws/chats' as const;
 
 export const EMPTY_VALUE_PLACEHOLDER = '-';
