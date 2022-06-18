@@ -204,6 +204,7 @@ export abstract class Block<T extends CommonProps = CommonProps> {
 
     this._element = newElement;
     this._addEvents();
+    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
   private _makePropsProxy(props: CommonProps) {
