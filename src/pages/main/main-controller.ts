@@ -1,24 +1,20 @@
-import {authApi} from '../../api';
-import {Router} from '../../core';
+import {chatsApi} from '../../api';
 import {store} from '../../store';
-import {getAvatarUrl} from '../../utils';
-
-const router = Router.getInstance('#root');
 
 export class MainController {
-  public static checkAuth() {
-    const {user} = store.getState();
-
-    if (!user?.id) {
-      authApi
-        .getUser()
-        .then((response) => {
-          store.set('user', {...response, avatar: getAvatarUrl(response.avatar)});
+  public static createChat(title: string, onSuccess?: () => void): Promise<void> {
+    return new Promise((resolve) => {
+      chatsApi
+        .createChat({title})
+        .then(() => {
+          chatsApi.getChats().then((response) => {
+            store.set('chats', response);
+            resolve(onSuccess?.());
+          });
         })
         .catch((error) => {
           console.log(error);
-          router.go('/login');
         });
-    }
+    });
   }
 }

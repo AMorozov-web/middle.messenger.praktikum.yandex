@@ -35,15 +35,18 @@ declare global {
 
   type UserData = Omit<User, 'id' | 'avatar'>;
 
+  type LastMessage = {
+    user: Omit<User, 'display_name' | 'id'>;
+    time: string;
+    content: string;
+  };
+
   type Chat = {
     id: number;
     title: string;
-    avatar: string;
+    avatar: Nullable<string>;
     unread_count: number;
-    last_message: {
-      user: Omit<User, 'display_name' | 'id'>;
-      time: string;
-      content: string;
-    };
+    created_by: number;
+    last_message: Nullable<LastMessage>;
   };
 }

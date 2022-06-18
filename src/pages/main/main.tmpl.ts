@@ -4,7 +4,7 @@ export const template = `
     <h1 class="visually-hidden">Чаты</h1>
     <aside class="main-page__inner-wrapper">
       <div class="main-page__buttons">
-        {{addChatLink}}
+        {{addChatButton}}
         {{profileLink}}
       </div>
 <!--      Будет реализовано позже -->
@@ -26,8 +26,9 @@ export const template = `
 <!--        <button class="main-page__add-file" type="button">-->
 <!--          <span class="main-page__icon"></span>-->
 <!--        </button>-->
-      {{form}}
+      {{sendMessageForm}}
     </div>
   </section>
+  {{addChatModal}}
 </main>
 `;

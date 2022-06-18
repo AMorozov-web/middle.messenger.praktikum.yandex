@@ -1,6 +1,7 @@
 import {template} from './main.tmpl';
 import {Block} from '../../core';
 import {
+  AddChatModal,
   Avatar,
   Button,
   ChatItem,
@@ -11,7 +12,7 @@ import {
   Message,
   UserInfo,
 } from '../../components';
-import {MainController} from '.';
+import {MainController} from './main-controller';
 import {onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, TAG_NAME} from '../../constants';
 
@@ -58,16 +59,26 @@ const submitButton = new Button({
 
 export class MainPage extends Block {
   constructor() {
-    MainController.checkAuth();
-
     super(TAG_NAME.DIV, {
-      addChatLink: new LinkWithRouter({
-        href: '',
-        children: 'Добавить чат',
+      addChatButton: new Button({
+        content: `<svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 0v8M0 4h8" stroke="currentColor" stroke-linejoin="round"/>
+                  </svg>
+                  <span>Добавить чат</span>`,
+        className: 'main-page__add-chat',
+        events: {
+          click: {
+            callback: () => (this.props.addChatModal as AddChatModal).show(),
+          },
+        },
       }),
       profileLink: new LinkWithRouter({
+        className: 'main-page__profile-link',
         href: '/profile',
-        children: 'Профиль',
+        children: `<span>Профиль</span>
+                  <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m1 9 4-4-4-4" stroke="currentColor"/>
+                  </svg>`,
       }),
       chatsList: new List({
         className: 'main-page__chats-list',
@@ -77,7 +88,7 @@ export class MainPage extends Block {
         className: 'main-page__messages',
         items: messageData,
       }),
-      form: new Form({
+      sendMessageForm: new Form({
         className: 'main-page__send-message',
         children: [newMessageInput, submitButton],
         events: {
@@ -107,7 +118,15 @@ export class MainPage extends Block {
         }),
         userName: 'Пользователь',
       }),
+      addChatModal: new AddChatModal({
+        className: 'main-page__add-chat-modal',
+        onSubmit: (title) => MainController.createChat(title),
+      }),
     });
+  }
+
+  componentDidMount(): void {
+    (this.props.addChatModal as AddChatModal).hide();
   }
 
   render() {
