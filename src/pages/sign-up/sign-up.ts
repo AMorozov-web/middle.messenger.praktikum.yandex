@@ -1,13 +1,12 @@
 import {template} from './sign-up.tmpl';
 import {Block} from '../../core';
-import {SignUpData} from '../../api';
 import {SignUpController} from './sing-up-controller';
 import {Button, Form, Input, LinkWithRouter} from '../../components';
 import {onFocus, onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, INPUT_TYPE, PATTERN, TAG_NAME} from '../../constants';
 
 const onSubmit = (evt: Event) => {
-  const data = onFormSubmit<SignUpData>(evt);
+  const data = onFormSubmit<UserData>(evt);
   SignUpController.signUp(data);
 };
 

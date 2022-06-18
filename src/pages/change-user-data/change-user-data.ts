@@ -11,13 +11,12 @@ import {
   UserPhoneInput,
   UserSecondNameInput,
 } from '../../components';
-import {ChangeProfileData} from '../../api';
 import {ChangeUserDataController} from '.';
 import {onFocus, onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, INPUT_TYPE, PATTERN, TAG_NAME} from '../../constants';
 
 const onSubmit = (evt: Event) => {
-  const data = onFormSubmit<ChangeProfileData>(evt);
+  const data = onFormSubmit<UserData>(evt);
   ChangeUserDataController.changeUserData(data);
 };
 

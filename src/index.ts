@@ -10,6 +10,7 @@ import {
 } from './pages';
 import {authApi} from './api';
 import {store} from './store';
+import {getAvatarUrl} from './utils';
 
 const router = Router.getInstance('#root');
 
@@ -23,10 +24,10 @@ router
   .use('/change-profile', ChangeUserDataPage)
   .start();
 
-authApi
+authApi // возможно стоит это делать в контроллере
   .getUser()
   .then((response) => {
-    store.set('user', {...JSON.parse(response), isAuthorized: true});
+    store.set('user', {...response, avatar: getAvatarUrl(response.avatar)});
   })
   .catch((error) => {
     console.log(error);

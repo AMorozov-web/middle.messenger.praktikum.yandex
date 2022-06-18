@@ -1,18 +1,18 @@
 import {Router} from '../../core';
-import {authApi, ChangeProfileData, userApi} from '../../api';
+import {userApi} from '../../api';
 import {store} from '../../store';
+import {getAvatarUrl} from '../../utils';
 
 const router = Router.getInstance('#root');
 
 export class ChangeUserDataController {
-  public static changeUserData(data: ChangeProfileData) {
+  public static changeUserData(data: UserData) {
     userApi
       .changeProfile(data)
-      .then(() => authApi.getUser())
       .then((response) => {
         const {user} = store.getState();
 
-        store.set('user', {...user, ...JSON.parse(response)});
+        store.set('user', {...user, ...response});
 
         router.go('/profile');
       })
@@ -27,7 +27,7 @@ export class ChangeUserDataController {
       .then((response) => {
         const {user} = store.getState();
 
-        store.set('user', {...user, ...JSON.parse(response)});
+        store.set('user', {...user, ...response, avatar: getAvatarUrl(response.avatar)});
       })
       .catch((error) => {
         console.log(error);

@@ -1,6 +1,7 @@
 import {authApi} from '../../api';
 import {Router} from '../../core';
 import {store} from '../../store';
+import {getAvatarUrl} from '../../utils';
 
 const router = Router.getInstance('#root');
 
@@ -12,7 +13,7 @@ export class MainController {
       authApi
         .getUser()
         .then((response) => {
-          store.set('user', {...JSON.parse(response), isAuthorized: true});
+          store.set('user', {...response, avatar: getAvatarUrl(response.avatar)});
         })
         .catch((error) => {
           console.log(error);

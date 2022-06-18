@@ -2,7 +2,6 @@ import {template} from './avatar.tmpl';
 import {Block} from '../../core';
 import {connect} from '../../store';
 import defaultImage from '../../../static/icons/image.svg';
-import {BASE_URL} from '../../constants';
 
 type Props = {
   className?: string;
@@ -27,7 +26,7 @@ export class Avatar extends Block<Props> {
 export const UserAvatar = connect(Avatar, (state) => {
   if (state.user?.avatar) {
     return {
-      src: `${BASE_URL}/resources${state.user.avatar}`,
+      src: state.user.avatar,
     };
   }
   return {};

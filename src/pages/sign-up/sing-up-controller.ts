@@ -1,18 +1,17 @@
 import {Router} from '../../core';
-import {authApi, SignUpData} from '../../api';
+import {authApi} from '../../api';
 import {store} from '../../store';
+import {getAvatarUrl} from '../../utils';
 
 const router = Router.getInstance('#root');
 
 export class SignUpController {
-  public static signUp(data: SignUpData) {
+  public static signUp(data: UserData) {
     authApi
       .signUp(data)
       .then(() => authApi.getUser())
       .then((response) => {
-        const {user} = store.getState();
-
-        store.set('user', {...user, ...JSON.parse(response)});
+        store.set('user', {...response, avatar: getAvatarUrl(response.avatar)});
 
         router.go('/');
       })
