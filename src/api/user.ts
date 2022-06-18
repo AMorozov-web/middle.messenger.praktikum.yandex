@@ -1,8 +1,6 @@
 import {HTTPTransport} from '../core';
-import {BASE_URL} from '../constants';
 import {USER_ENDPOINTS} from './endpoints';
-
-export type ChangeProfileData = Omit<User, 'id' | 'avatar' | 'isAuthorized'>;
+import {BASE_URL} from '../constants';
 
 export type ChangePasswordData = {
   oldPassword: string;
@@ -16,13 +14,15 @@ class UserApi {
     this.transport = new HTTPTransport(BASE_URL);
   }
 
-  changeProfile(data: ChangeProfileData): Promise<string> {
-    return this.transport.put(USER_ENDPOINTS.PROFILE, {
-      data,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+  changeProfile(data: UserData): Promise<User> {
+    return this.transport
+      .put<string>(USER_ENDPOINTS.PROFILE, {
+        data,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => JSON.parse(response));
   }
 
   changePassword(data: ChangePasswordData): Promise<void> {
@@ -34,13 +34,15 @@ class UserApi {
     });
   }
 
-  changeAvatar(formData: FormData): Promise<string> {
-    return this.transport.put(USER_ENDPOINTS.AVATAR, {
-      data: formData,
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+  changeAvatar(formData: FormData): Promise<User> {
+    return this.transport
+      .put<string>(USER_ENDPOINTS.AVATAR, {
+        data: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((response) => JSON.parse(response));
   }
 }
 

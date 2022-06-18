@@ -31,8 +31,9 @@ declare global {
     email: string;
     phone: string;
     avatar?: string;
-    isAuthorized: boolean;
   };
+
+  type UserData = Omit<User, 'id' | 'avatar'>;
 
   type Chat = {
     id: number;
@@ -40,7 +41,7 @@ declare global {
     avatar: string;
     unread_count: number;
     last_message: {
-      user: Omit<User, 'isAuthorized' | 'display_name' | 'id'>;
+      user: Omit<User, 'display_name' | 'id'>;
       time: string;
       content: string;
     };
