@@ -1,3 +1,5 @@
+import {BASE_URL} from '../constants';
+
 /**
  * Функция достает значение из объекта по указанному пути вида 'a.b.c'
  * В случае, если значение не найдено, возвращает значение по умолчанию, если оно передано третьим аргументом
@@ -210,3 +212,10 @@ export const omit = <T extends Indexed, K extends keyof T>(object: T, key: K): O
 
   return copy;
 };
+
+/**
+ * Собирает полный путь до загруженного avatar
+ */
+
+export const getAvatarUrl = (avatarUrl?: Nullable<string>): string | undefined =>
+  avatarUrl ? `${BASE_URL}/resources/${avatarUrl}` : undefined;
