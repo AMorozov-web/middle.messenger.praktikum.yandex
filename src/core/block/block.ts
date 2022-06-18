@@ -67,7 +67,11 @@ export abstract class Block<T extends CommonProps = CommonProps> {
 
     this._removeEvents();
 
-    this.props = {...this.props, ...nextProps};
+    const {props, children} = this._getChildren(nextProps);
+
+    this.props = {...this.props, ...props};
+    this.children = {...this.children, ...children};
+
     this.eventBus().emit(Block.EVENTS.FLOW_CDU);
   };
 
