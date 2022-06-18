@@ -28,6 +28,10 @@ authApi // возможно стоит это делать в контролле
   .getUser()
   .then((response) => {
     store.set('user', {...response, avatar: getAvatarUrl(response.avatar)});
+
+    if (location.pathname !== '/') {
+      router.go('/');
+    }
   })
   .then(() => {
     chatsApi.getChats().then((response) => {
@@ -43,5 +47,3 @@ authApi // возможно стоит это делать в контролле
       router.go('/login');
     }
   });
-
-console.log(store.getState());

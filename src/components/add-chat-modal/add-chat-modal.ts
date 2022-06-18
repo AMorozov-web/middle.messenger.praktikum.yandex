@@ -9,7 +9,7 @@ type Props = {
   className?: string;
   events?: Record<string, EventProps>;
   toggleHideClassName?: string;
-  onSubmit?: (title: string) => Promise<void>; // TODO Maybe return Promise?
+  onSubmit?: (title: string) => Promise<void>;
 };
 
 const input = new Input({
