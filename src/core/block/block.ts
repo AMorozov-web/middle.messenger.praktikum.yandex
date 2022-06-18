@@ -75,8 +75,8 @@ export abstract class Block<T extends CommonProps = CommonProps> {
     return new DocumentFragment();
   }
 
-  public getContent() {
-    return this._element;
+  public getContent<E extends HTMLElement>(): Nullable<E> {
+    return this._element as Nullable<E>;
   }
 
   public show() {
