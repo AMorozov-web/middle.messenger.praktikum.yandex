@@ -15,7 +15,7 @@ export class Avatar extends Block<Props> {
       src: defaultImage,
     };
 
-    super('div', {...defaultProps, ...props});
+    super('div', {...defaultProps, ...props, src: props.src ?? defaultImage});
   }
 
   render() {
