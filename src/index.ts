@@ -8,7 +8,7 @@ import {
   ChangeUserPasswordPage,
   ChangeUserDataPage,
 } from './pages';
-import {authApi, chatsApi} from './api';
+import {authApi} from './api';
 import {store} from './store';
 import {getAvatarUrl} from './utils';
 
@@ -32,11 +32,6 @@ authApi // возможно стоит это делать в контролле
     if (location.pathname !== '/') {
       router.go('/');
     }
-  })
-  .then(() => {
-    chatsApi.getChats().then((response) => {
-      store.set('chats', response);
-    });
   })
   .catch((error) => {
     console.log(error);

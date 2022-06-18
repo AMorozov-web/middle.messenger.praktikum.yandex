@@ -17,4 +17,15 @@ export class MainController {
         });
     });
   }
+
+  public static getChats(data?: {offset?: number; limit?: number; title?: string}) {
+    chatsApi
+      .getChats(data)
+      .then((response) => {
+        store.set('chats', response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 }
