@@ -8,7 +8,7 @@ import {
   ChangeUserPasswordPage,
   ChangeUserDataPage,
 } from './pages';
-import {authApi} from './api';
+import {authApi, chatsApi} from './api';
 import {store} from './store';
 import {getAvatarUrl} from './utils';
 
@@ -29,7 +29,19 @@ authApi // возможно стоит это делать в контролле
   .then((response) => {
     store.set('user', {...response, avatar: getAvatarUrl(response.avatar)});
   })
+  .then(() => {
+    chatsApi.getChats().then((response) => {
+      store.set('chats', response);
+    });
+  })
   .catch((error) => {
     console.log(error);
-    router.go('/login');
+
+    const {user} = store.getState();
+
+    if (!user?.id) {
+      router.go('/login');
+    }
   });
+
+console.log(store.getState());
