@@ -4,16 +4,23 @@ import {Block} from '../../core';
 import {TAG_NAME} from '../../constants';
 
 type Props = {
-  avatar: Avatar;
-  lastMessage: string;
-  userName: string;
-  time: string;
-  newMessagesCount: string;
+  id?: number;
+  avatar?: Avatar;
+  lastMessage?: string;
+  className?: string;
+  title?: string;
+  time?: string;
+  unreadCount?: string;
+  events?: Record<string, EventProps>;
 };
 
 export class ChatItem extends Block<Props> {
   constructor(props: Props) {
-    super(TAG_NAME.LI, props);
+    const defaultProps = {
+      className: '',
+    };
+
+    super(TAG_NAME.LI, {...defaultProps, ...props});
   }
 
   render() {
