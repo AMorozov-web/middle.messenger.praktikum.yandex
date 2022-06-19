@@ -4,7 +4,7 @@ import {STORE_EVENTS} from '../constants';
 
 export type RootState = {
   user: Nullable<User>;
-  currentChat: Nullable<number>;
+  currentChat: Nullable<Chat>;
   chats: Chat[];
 };
 

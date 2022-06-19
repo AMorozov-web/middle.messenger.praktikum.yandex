@@ -28,4 +28,8 @@ export class MainController {
         console.log(error);
       });
   }
+
+  public static selectedChat(chat: Chat) {
+    store.set('currentChat', chat);
+  }
 }

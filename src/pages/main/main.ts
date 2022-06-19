@@ -1,5 +1,6 @@
 import {template} from './main.tmpl';
 import {Block} from '../../core';
+import {connect, store} from '../../store';
 import {
   AddChatModal,
   Avatar,
@@ -13,24 +14,43 @@ import {
   UserInfo,
 } from '../../components';
 import {MainController} from './main-controller';
-import {onFormSubmit} from '../../utils';
+import {getAvatarUrl, onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, TAG_NAME} from '../../constants';
 
-const chatsListData = new Array(3).fill('').map(
-  () =>
-    new ChatItem({
+const getChatsItems = (chats: Chat[], currentChat?: Nullable<Chat>) =>
+  chats.map((chat) => {
+    const {avatar, last_message: lastMessage, title, unread_count: unreadCount} = chat;
+    const className = currentChat?.id === chat.id ? 'main-page__chats-item---selected' : '';
+
+    return new ChatItem({
       avatar: new Avatar({
         wrapperClassName: 'main-page__chat-avatar',
+        src: getAvatarUrl(avatar),
       }),
-      lastMessage: 'Последнее сообщение...',
-      newMessagesCount: '1',
-      userName: 'Пользователь',
-      time: '12:00',
-    }),
-);
+      className,
+      unreadCount: unreadCount ? String(unreadCount) : undefined,
+      title: title ?? '',
+      lastMessage: lastMessage?.content ?? '',
+      time: lastMessage?.time ? '12:00' : undefined,
+      events: {
+        click: {
+          callback: () => {
+            MainController.selectedChat(chat);
+          },
+        },
+      },
+    });
+  });
+
+const ChatsList = connect(List, (state) => {
+  if (state.chats.length) {
+    return {items: getChatsItems(state.chats, state.currentChat)};
+  }
+  return {items: []};
+});
 
 const messageData = new Array(4).fill('').map((_, i) => {
-  const className = i % 2 !== 0 ? 'main-page__message--self' : undefined;
+  const className = i % 2 !== 0 ? 'main-page__message--self' : '';
 
   return new Message({
     className,
@@ -82,9 +102,9 @@ export class MainPage extends Block {
                     <path d="m1 9 4-4-4-4" stroke="currentColor"/>
                   </svg>`,
       }),
-      chatsList: new List({
+      chatsList: new ChatsList({
         className: 'main-page__chats-list',
-        items: chatsListData,
+        items: getChatsItems(store.getState().chats),
       }),
       messagesList: new List({
         className: 'main-page__messages',

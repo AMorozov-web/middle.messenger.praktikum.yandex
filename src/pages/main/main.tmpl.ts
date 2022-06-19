@@ -12,6 +12,7 @@ export const template = `
 <!--        <p class="input__label">Поиск</p>-->
 <!--        <input type="text" name="search" id="search" class="input" />-->
 <!--      </label>-->
+    <hr class="main-page__hr" />
       {{chatsList}}
     </aside>
     <div class="main-page__content">

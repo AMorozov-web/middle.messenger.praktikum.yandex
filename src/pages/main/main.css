@@ -22,6 +22,14 @@
 .main-page__buttons {
   display: flex;
   justify-content: space-between;
+  height: 36px;
+}
+
+.main-page__hr {
+  width: 100%;
+  margin: 0;
+  border-top: 1px solid var(--mercury);
+  border-bottom: none;
 }
 
 .main-page__add-chat {
@@ -45,17 +53,33 @@
 }
 
 .main-page__chats-list {
-  margin: 0;
-  padding: 0;
+  margin: -12px 0 0;
+  padding: 2px 0 0;
   list-style: none;
 }
 
 .main-page__chats-item {
+  padding: 2px 0;
+  border-bottom: 1px solid var(--mercury);
+}
+
+.main-page__chats-item-container {
   display: grid;
   grid-template-columns: 47px 1fr 33px;
   grid-template-rows: 13px min-content;
   gap: 4px 10px;
-  padding: 12px 0;
+  padding: 10px;
+  margin: 0 -10px;
+  cursor: pointer;
+}
+
+.main-page__chats-item-container:hover,
+.main-page__chats-item---selected > .main-page__chats-item-container:hover {
+  background-color: var(--mercury);
+}
+
+.main-page__chats-item---selected > .main-page__chats-item-container {
+  background-color: var(--hawkeys-blue);
 }
 
 .main-page__chat-avatar {
@@ -121,7 +145,7 @@
   gap: 10px;
   width: max-content;
   min-width: 720px;
-  padding-bottom: 10px;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--gallery);
 }
 
