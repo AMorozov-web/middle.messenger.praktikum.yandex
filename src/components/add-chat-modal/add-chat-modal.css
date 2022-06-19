@@ -45,8 +45,26 @@
   width: 100%;
 }
 
+.add-chat-modal__input > p {
+  color: var(--dusty-gray);
+  font-size: 10px;
+  font-weight: 500;
+}
+
 .add-chat-modal__input > input {
   width: 100%;
+  height: 28px;
+  color: var(--black);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 28px;
+  border: none;
+  border-bottom: 1px solid var(--dusty-gray);
+}
+
+.add-chat-modal__input > input:focus {
+  outline: none;
+  border-bottom: 1px solid var(--royal-blue);
 }
 
 .add-chat-modal__button {
