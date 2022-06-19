@@ -6,6 +6,7 @@ import {INPUT_TYPE, TAG_NAME} from '../../constants';
 type Props = {
   className?: string;
   events?: Record<string, EventProps>;
+  placeholder?: string;
   dataTestId?: string;
   pattern?: string;
   id?: string;

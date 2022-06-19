@@ -63,6 +63,7 @@ const newMessageInput = new Input({
   className: 'main-page__new-message',
   id: 'new-message',
   name: 'new-message',
+  placeholder: 'Сообщение',
   label: {
     content: 'Сообщение',
   },

@@ -12,6 +12,7 @@ export const template = `
       minLength="{{validation.minLength}}"
       maxLength="{{validation.maxLength}}"
       accept="{{accept}}"
+      placeholder="{{placeholder}}"
       required="{{validation.required}}" />
   </label>
 `;
