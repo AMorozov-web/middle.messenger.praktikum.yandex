@@ -6,6 +6,7 @@ export * from './form';
 export * from './link';
 export * from './list';
 export * from './message';
-export * from './user-info';
+export * from './chat-info';
 export * from './user-data';
 export * from './add-chat-modal';
+export * from './chat';
