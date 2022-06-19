@@ -6,7 +6,8 @@ type Props = {
   className?: string;
   type?: ButtonType;
   content?: string;
-} & CommonProps;
+  events?: Record<string, EventProps>;
+};
 
 export class Button extends Block<Props> {
   constructor(props: Props) {
