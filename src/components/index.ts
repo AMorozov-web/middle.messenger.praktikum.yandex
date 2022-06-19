@@ -10,3 +10,4 @@ export * from './chat-info';
 export * from './user-data';
 export * from './add-chat-modal';
 export * from './chat';
+export * from './chat-actions';
