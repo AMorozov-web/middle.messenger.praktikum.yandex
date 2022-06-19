@@ -250,15 +250,40 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  height: 100%;
+}
+
+.main-page__new-message > p {
+  display: none;
 }
 
 .main-page__new-message > .input {
   flex-grow: 1;
+  height: 32px;
+  padding: 0 20px;
+  color: var(--black);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: "Inter", sans-serif;
+  line-height: 32px;
+  background-color: var(--gallery);
+  border: none;
+  border-radius: 30px;
 }
 
-.main-page__add-file,
+.main-page__new-message > .input::placeholder {
+  color: var(--dusty-gray);
+}
+
 .main-page__submit-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 32px;
   height: 32px;
+  color: var(--white);
+  background-color: var(--royal-blue);
+  border-radius: 50%;
+  border: none;
   cursor: pointer;
 }
