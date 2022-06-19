@@ -21,7 +21,7 @@ export abstract class Block<T extends CommonProps = CommonProps> {
 
   eventBus: () => EventBus;
 
-  props: CommonProps;
+  props: T;
 
   private _element: Nullable<HTMLElement>;
 
@@ -46,7 +46,7 @@ export abstract class Block<T extends CommonProps = CommonProps> {
 
     this.eventBus = () => eventBus;
 
-    this.props = this._makePropsProxy({...allProps, _id: this._id});
+    this.props = this._makePropsProxy({...allProps, _id: this._id}) as T;
 
     eventBus.emit(Block.EVENTS.INIT);
   }
@@ -153,7 +153,7 @@ export abstract class Block<T extends CommonProps = CommonProps> {
         if (value instanceof Block) {
           result.children[key] = value;
         } else if (Array.isArray(value) && value.every((item) => item instanceof Block)) {
-          result.children[key] = value as Block[];
+          result.children[key] = value as Block<T>[];
         } else {
           result.props[key] = value;
         }
@@ -214,10 +214,10 @@ export abstract class Block<T extends CommonProps = CommonProps> {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
-  private _makePropsProxy(props: CommonProps) {
+  private _makePropsProxy(props: T) {
     const eventBus = this.eventBus.bind(this);
 
-    return new Proxy(props, {
+    return new Proxy<CommonProps>(props, {
       set(target, prop: string, value) {
         const _target = {...props};
 
