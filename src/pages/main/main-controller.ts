@@ -29,7 +29,22 @@ export class MainController {
       });
   }
 
-  public static selectedChat(chat: ChatShortInfo) {
+  public static selectChat(chat: ChatShortInfo) {
     store.set('currentChat', chat);
+  }
+
+  public static deleteChat(id: number) {
+    chatsApi
+      .deleteChat(id)
+      .then(() => {
+        chatsApi.getChats().then((response) => {
+          store.set('currentChat', null);
+          store.set('chats', response);
+          console.log(store.getState());
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }

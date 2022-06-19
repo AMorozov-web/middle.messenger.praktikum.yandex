@@ -61,6 +61,15 @@ class ChatsApi {
       .post<string>(`/chats/token/${id}`)
       .then((response) => JSON.parse(response).token);
   }
+
+  deleteChat(id: number): Promise<void> {
+    return this.httpTransport.delete('/chats', {
+      data: {chatId: id},
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  }
 }
 
 export const chatsApi = new ChatsApi();
