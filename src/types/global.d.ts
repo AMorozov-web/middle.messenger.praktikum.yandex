@@ -41,7 +41,7 @@ declare global {
     content: string;
   };
 
-  type Chat = {
+  type ChatShortInfo = {
     id: number;
     title: string;
     avatar: Nullable<string>;

@@ -8,7 +8,7 @@ class ChatsApi {
     this.httpTransport = new HTTPTransport(BASE_URL);
   }
 
-  getChats(data?: {offset?: number; limit?: number; title?: string}): Promise<Chat[]> {
+  getChats(data?: {offset?: number; limit?: number; title?: string}): Promise<ChatShortInfo[]> {
     return this.httpTransport
       .get<string>('/chats', {
         data,

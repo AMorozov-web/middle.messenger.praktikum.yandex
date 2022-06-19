@@ -29,7 +29,7 @@ export class MainController {
       });
   }
 
-  public static selectedChat(chat: Chat) {
+  public static selectedChat(chat: ChatShortInfo) {
     store.set('currentChat', chat);
   }
 }

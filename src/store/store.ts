@@ -4,8 +4,8 @@ import {STORE_EVENTS} from '../constants';
 
 export type RootState = {
   user: Nullable<User>;
-  currentChat: Nullable<Chat>;
-  chats: Chat[];
+  currentChat: Nullable<ChatShortInfo>;
+  chats: ChatShortInfo[];
 };
 
 class Store<T extends Indexed> extends EventBus {
