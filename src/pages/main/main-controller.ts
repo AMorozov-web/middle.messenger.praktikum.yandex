@@ -40,7 +40,6 @@ export class MainController {
         chatsApi.getChats().then((response) => {
           store.set('currentChat', null);
           store.set('chats', response);
-          console.log(store.getState());
         });
       })
       .catch((error) => {

@@ -3,6 +3,7 @@ import {Block} from '../../core';
 import {connect} from '../../store';
 import {
   AddChatModal,
+  AddUserModal,
   Avatar,
   Button,
   ChatItem,
@@ -69,7 +70,7 @@ export class MainPage extends Block {
         className: 'main-page__add-chat',
         events: {
           click: {
-            callback: () => (this.props.addChatModal as AddChatModal).show(),
+            callback: () => (this.props.addChatModal as Block).show(),
           },
         },
       }),
@@ -86,7 +87,7 @@ export class MainPage extends Block {
         items: [],
       }),
       chat: new ConnectedChat({
-        onAddUser: () => console.log('add'),
+        onAddUser: () => (this.props.addUserModal as Block).show(),
         onDeleteChat: (id) => {
           if (id) {
             MainController.deleteChat(id);
@@ -94,14 +95,17 @@ export class MainPage extends Block {
         },
       }),
       addChatModal: new AddChatModal({
-        className: 'main-page__add-chat-modal',
         onSubmit: (title) => MainController.createChat(title),
+      }),
+      addUserModal: new AddUserModal({
+        onSearch: (title) => console.log('search', title),
       }),
     });
   }
 
   componentDidMount(): void {
-    (this.props.addChatModal as AddChatModal).hide();
+    (this.props.addChatModal as Block).hide();
+    (this.props.addUserModal as Block).hide();
   }
 
   render() {

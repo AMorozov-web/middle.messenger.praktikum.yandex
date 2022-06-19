@@ -18,5 +18,6 @@ export const template = `
     {{chat}}
   </section>
   {{addChatModal}}
+  {{addUserModal}}
 </main>
 `;
