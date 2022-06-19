@@ -67,10 +67,13 @@ export abstract class Block<T extends CommonProps = CommonProps> {
 
     this._removeEvents();
 
-    const {props, children} = this._getChildren(nextProps);
+    this.props = {...this.props, ...nextProps};
 
-    this.props = {...this.props, ...props};
-    this.children = {...this.children, ...children};
+    const {children} = this._getChildren(nextProps);
+
+    if (Object.keys(children).length) {
+      this.children = {...this.children, ...children};
+    }
 
     this.eventBus().emit(Block.EVENTS.FLOW_CDU);
   };
@@ -106,7 +109,7 @@ export abstract class Block<T extends CommonProps = CommonProps> {
 
   public componentDidUpdate(oldProps: T, newProps: T) {
     if (oldProps && newProps) {
-      return isEqual<T>(oldProps, newProps);
+      return !isEqual<T>(oldProps, newProps);
     }
     return true;
   }
