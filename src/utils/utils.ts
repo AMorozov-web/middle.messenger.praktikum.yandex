@@ -219,3 +219,15 @@ export const omit = <T extends Indexed, K extends keyof T>(object: T, key: K): O
 
 export const getAvatarUrl = (avatarUrl?: Nullable<string>): string | undefined =>
   avatarUrl ? `${BASE_URL}/resources/${avatarUrl}` : undefined;
+
+/**
+ * Достает из даты в формате ISOString часы и минуты, и возвращает в виде строки вида 12:00
+ */
+
+export const getTimeFromDate = (isoString: string): string => {
+  const date = new Date(isoString);
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+
+  return `${hours}:${minutes}`;
+};

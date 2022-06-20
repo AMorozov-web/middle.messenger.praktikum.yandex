@@ -12,7 +12,7 @@ import {
   List,
 } from '../../components';
 import {MainController} from './main-controller';
-import {getAvatarUrl} from '../../utils';
+import {getAvatarUrl, getTimeFromDate} from '../../utils';
 import {TAG_NAME} from '../../constants';
 
 const getChatsItems = (chats: ChatShortInfo[], currentChat?: Nullable<ChatShortInfo>) =>
@@ -29,7 +29,7 @@ const getChatsItems = (chats: ChatShortInfo[], currentChat?: Nullable<ChatShortI
       unreadCount: unreadCount ? String(unreadCount) : undefined,
       title: title ?? '',
       lastMessage: lastMessage?.content ?? '',
-      time: lastMessage?.time ? '12:00' : undefined,
+      time: lastMessage?.time ? getTimeFromDate(lastMessage.time) : undefined,
       events: {
         click: {
           callback: () => {
@@ -98,7 +98,7 @@ export class MainPage extends Block {
         onSubmit: (title) => MainController.createChat(title),
       }),
       addUserModal: new AddUserModal({
-        onSearch: (title) => console.log('search', title),
+        onSearch: (login) => console.log('search', login),
       }),
     });
   }
