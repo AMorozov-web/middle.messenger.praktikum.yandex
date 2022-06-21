@@ -4,7 +4,7 @@ import {TAG_NAME} from '../../constants';
 
 type Props = {
   className?: string;
-  items: unknown[];
+  items?: unknown[];
 };
 
 export class List extends Block<Props> {

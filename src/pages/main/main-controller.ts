@@ -1,4 +1,4 @@
-import {chatsApi} from '../../api';
+import {chatsApi, userApi} from '../../api';
 import {store} from '../../store';
 
 export class MainController {
@@ -41,6 +41,31 @@ export class MainController {
           store.set('currentChat', null);
           store.set('chats', response);
         });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  public static searchByLogin(login: string) {
+    userApi
+      .searchByLogin(login)
+      .then((response) => {
+        if (store.getState().searchResult.length) {
+          store.set('searchResult', []);
+        }
+        store.set('searchResult', response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  public static addUserToChat(userId: number, chatId: number, onSuccess?: () => void) {
+    chatsApi
+      .addUserToChat(userId, chatId)
+      .then(() => {
+        onSuccess?.();
       })
       .catch((error) => {
         console.log(error);

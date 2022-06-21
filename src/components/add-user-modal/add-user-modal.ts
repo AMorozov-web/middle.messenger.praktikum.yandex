@@ -1,6 +1,7 @@
 import {template} from './add-user-modal.tmpl';
 import {Block} from '../../core';
-import {Button, Form, Input} from '..';
+import {connect} from '../../store';
+import {Button, Form, Input, List, UserItem} from '..';
 import {onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, INPUT_TYPE} from '../../constants';
 
@@ -9,7 +10,9 @@ type Props = {
   className?: string;
   events?: Record<string, EventProps>;
   toggleHideClassName?: string;
+  searchResults?: List;
   onSearch?: (login: string) => void;
+  onAddUser?: (userId: number, chatId: number) => void;
 };
 
 const input = new Input({
@@ -36,6 +39,29 @@ const button = new Button({
 
 export class AddUserModal extends Block<Props> {
   constructor(props: Props) {
+    const SearchResults = connect(List, (state, listProps) => {
+      const currentChatId = state.currentChat?.id;
+
+      const items = state.searchResult.map((item) => {
+        return new UserItem({
+          button: new Button({
+            type: BUTTON_TYPE.BUTTON,
+            content: 'Добавить',
+            className: 'add-user-modal__user-item-button',
+            events: {
+              click: {
+                callback: () => props.onAddUser?.(item.id, currentChatId ?? 0),
+              },
+            },
+          }),
+          userLogin: item.login,
+          userName: `${item.first_name} ${item.second_name}`,
+          className: 'add-user-modal__user-item',
+        });
+      });
+      return {...listProps, items};
+    });
+
     const form = new Form({
       className: 'add-user-modal__form',
       children: [input, button],
@@ -53,6 +79,7 @@ export class AddUserModal extends Block<Props> {
     super('div', {
       ...props,
       form,
+      searchResults: new SearchResults({className: 'add-user-modal__results-list'}),
       events: {
         click: {
           callback: (evt: Event) => {

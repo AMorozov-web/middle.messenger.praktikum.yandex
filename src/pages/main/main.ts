@@ -1,6 +1,6 @@
 import {template} from './main.tmpl';
 import {Block} from '../../core';
-import {connect} from '../../store';
+import {connect, store} from '../../store';
 import {
   AddChatModal,
   AddUserModal,
@@ -98,7 +98,14 @@ export class MainPage extends Block {
         onSubmit: (title) => MainController.createChat(title),
       }),
       addUserModal: new AddUserModal({
-        onSearch: (login) => console.log('search', login),
+        onSearch: (login) => {
+          MainController.searchByLogin(login);
+        },
+        onAddUser: (userId, chatId) =>
+          MainController.addUserToChat(userId, chatId, () => {
+            (this.props.addUserModal as Block).hide();
+            store.set('searchResult', []);
+          }),
       }),
     });
   }

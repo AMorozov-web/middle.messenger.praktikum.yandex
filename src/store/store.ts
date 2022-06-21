@@ -6,6 +6,7 @@ export type RootState = {
   user: Nullable<User>;
   currentChat: Nullable<ChatShortInfo>;
   chats: ChatShortInfo[];
+  searchResult: User[];
 };
 
 class Store<T extends Indexed> extends EventBus {
@@ -30,6 +31,7 @@ const initialState: RootState = {
   user: null,
   currentChat: null,
   chats: [],
+  searchResult: [],
 };
 
 export const store = new Store(initialState);
