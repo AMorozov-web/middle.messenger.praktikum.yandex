@@ -59,7 +59,7 @@ const ChatsList = connect(List, (state) => {
 
 export class MainPage extends Block {
   constructor() {
-    MainController.getChats();
+    MainController.init();
 
     super(TAG_NAME.DIV, {
       addChatButton: new Button({
