@@ -44,6 +44,27 @@ class UserApi {
       })
       .then((response) => JSON.parse(response));
   }
+
+  getById(id: number): Promise<User> {
+    return this.transport
+      .get<string>(`/user/${id}`, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((response) => JSON.parse(response));
+  }
+
+  searchByLogin(login: string): Promise<User[]> {
+    return this.transport
+      .post<string>(USER_ENDPOINTS.SEARCH, {
+        data: {login},
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => JSON.parse(response));
+  }
 }
 
 export const userApi = new UserApi();

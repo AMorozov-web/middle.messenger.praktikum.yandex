@@ -9,4 +9,5 @@ export const USER_ENDPOINTS = {
   PROFILE: '/user/profile',
   AVATAR: '/user/profile/avatar',
   PASSWORD: '/user/password',
+  SEARCH: '/user/search',
 } as const;
