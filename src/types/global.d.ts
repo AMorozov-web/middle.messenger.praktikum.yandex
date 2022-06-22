@@ -49,4 +49,25 @@ declare global {
     created_by: number;
     last_message: Nullable<LastMessage>;
   };
+
+  type ChatMessage = {
+    id: number;
+    is_read: boolean;
+    chat_id: number;
+    time: string;
+    type: string;
+    user_id: string | number;
+    content: string;
+    file?: Nullable<ChatFile>;
+  };
+
+  type ChatFile = {
+    id: number;
+    user_id: number;
+    path: string;
+    filename: string;
+    content_type: string;
+    content_size: number;
+    upload_date: string;
+  };
 }

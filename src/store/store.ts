@@ -7,6 +7,7 @@ export type RootState = {
   currentChat: Nullable<ChatShortInfo>;
   chats: ChatShortInfo[];
   searchResult: User[];
+  messages: ChatMessage[];
 };
 
 class Store<T extends Indexed> extends EventBus {
@@ -32,6 +33,7 @@ const initialState: RootState = {
   currentChat: null,
   chats: [],
   searchResult: [],
+  messages: [],
 };
 
 export const store = new Store(initialState);

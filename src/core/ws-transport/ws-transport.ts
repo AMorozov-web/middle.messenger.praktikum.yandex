@@ -24,16 +24,20 @@ export type ChatMessage = {
   file?: Nullable<ChatFile>;
 };
 
-export const isArrayMessageData = (data: unknown): data is ChatMessage[] =>
-  Array.isArray(data) && data.every((item) => item.type === 'message' || item.type === 'file');
+export const isArrayMessage = (data: unknown): data is ChatMessage[] =>
+  Boolean(data) &&
+  Array.isArray(data) &&
+  data.every((item) => item.type === 'message' || item.type === 'file');
 
-export const isMessageData = (data: unknown): data is ChatMessage =>
-  isObject(data) && (data.type === 'message' || data.type === 'file');
+export const isSingleMessage = (data: unknown): data is ChatMessage =>
+  Boolean(data) && isObject(data) && (data.type === 'message' || data.type === 'file');
 
 export class WsTransport extends EventBus {
   private socket: WebSocket;
 
   timer: number | null;
+
+  private static TIMEOUT = 20000;
 
   constructor(params: {userId: number; chatId: number; token: string}) {
     const {userId, chatId, token} = params;
@@ -44,20 +48,27 @@ export class WsTransport extends EventBus {
     this.socket = new WebSocket(`${WS_BASE_URL}/${userId}/${chatId}/${token}`);
 
     this.socket.addEventListener('open', () => {
-      console.log('Connection open');
+      const iteration = () => {
+        this.ping();
+        this.timer = setTimeout(iteration, WsTransport.TIMEOUT);
+      };
+
+      this.timer = setTimeout(iteration, WsTransport.TIMEOUT);
+
       this.get();
     });
 
     this.socket.addEventListener('message', (event) => {
       const data = JSON.parse(event.data);
 
-      if (isArrayMessageData(data)) {
-        store.set('chat.messages', data);
+      if (isArrayMessage(data)) {
+        store.set('messages', data);
       }
 
-      if (isMessageData(data)) {
+      if (isSingleMessage(data)) {
         this.get();
       }
+
       this.emit(WS_EVENTS.MESSAGE);
     });
 
@@ -65,8 +76,12 @@ export class WsTransport extends EventBus {
       console.log('Error', event);
     });
 
-    this.socket.addEventListener('close', (event) => {
-      console.log('Connection closed', event.reason);
+    this.socket.addEventListener('close', () => {
+      if (this.timer) {
+        clearTimeout(this.timer);
+
+        this.timer = null;
+      }
     });
   }
 
@@ -89,8 +104,6 @@ export class WsTransport extends EventBus {
   }
 
   ping() {
-    this.timer = setTimeout(() => this.ping(), 2000);
-
     this.socket.send(
       JSON.stringify({
         type: 'ping',
