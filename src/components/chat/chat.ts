@@ -44,6 +44,7 @@ export class Chat extends Block<Props> {
   constructor(props: Props) {
     super(TAG_NAME.DIV, {
       ...props,
+      currentChat: null,
       emptyMessage: props.emptyMessage ?? DEFAULT_EMPTY_MESSAGE,
       sendMessageForm: new Form({
         className: 'main-page__send-message',
@@ -64,7 +65,10 @@ export class Chat extends Block<Props> {
           },
         },
       }),
-      chatInfo: new ChatInfo({}),
+      chatInfo: new ChatInfo({
+        chatName: '',
+        chatAvatar: '',
+      }),
       chatActions: new ChatActions({
         className: 'main-page__chat-actions',
         icon: `<svg width="3" height="16" viewBox="0 0 3 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -100,6 +104,9 @@ export class Chat extends Block<Props> {
   }
 }
 
-export const ConnectedChat = connect(Chat, (state, props) => {
-  return {...props, currentChat: state.currentChat};
+export const ConnectedChat = connect(Chat, (state) => {
+  if (state.currentChat) {
+    return {currentChat: state.currentChat};
+  }
+  return {};
 });

@@ -48,7 +48,7 @@ export class AddChatModal extends Block<Props> {
     });
 
     super('div', {
-      ...props,
+      toggleHideClassName: '',
       form,
       events: {
         click: {
@@ -70,7 +70,7 @@ export class AddChatModal extends Block<Props> {
   }
 
   hide() {
-    this.setProps({...this.props, toggleHideClassName: 'visually-hidden'});
+    this.setProps({toggleHideClassName: 'visually-hidden'});
   }
 
   render() {

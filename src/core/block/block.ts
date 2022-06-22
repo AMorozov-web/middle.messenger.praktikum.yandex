@@ -61,21 +61,20 @@ export abstract class Block<T extends CommonProps = CommonProps> {
   }
 
   public setProps = (nextProps: T) => {
-    if (!nextProps) {
+    if (!Object.keys(nextProps).length) {
       return;
     }
 
     this._removeEvents();
 
-    this.props = {...this.props, ...nextProps};
+    Object.assign(this.props, nextProps);
 
     const {children} = this._getChildren(nextProps);
 
-    if (Object.keys(children).length) {
+    if (!isEqual(this.children, {...this.children, ...children})) {
       this.children = {...this.children, ...children};
+      this.eventBus().emit(Block.EVENTS.FLOW_CDU);
     }
-
-    this.eventBus().emit(Block.EVENTS.FLOW_CDU);
   };
 
   public render(): DocumentFragment {
@@ -181,9 +180,9 @@ export abstract class Block<T extends CommonProps = CommonProps> {
     if (this.children) {
       Object.values(this.children).forEach((child) => {
         if (Array.isArray(child)) {
-          child.forEach((item) => item.dispatchComponentDidMount());
+          child.forEach((item) => item.componentDidMount());
         } else {
-          child.dispatchComponentDidMount();
+          child.componentDidMount();
         }
       });
     }

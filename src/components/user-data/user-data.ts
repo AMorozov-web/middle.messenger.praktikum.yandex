@@ -14,7 +14,16 @@ type Props = {
 
 export class UserData extends Block<Props> {
   constructor(props: Props) {
-    super(TAG_NAME.DIV, props);
+    const defaultProps = {
+      email: '',
+      login: '',
+      firstName: '',
+      lastName: '',
+      nickName: '',
+      phone: '',
+    };
+
+    super(TAG_NAME.DIV, {...defaultProps, ...props});
   }
 
   render() {

@@ -39,7 +39,7 @@ const button = new Button({
 
 export class AddUserModal extends Block<Props> {
   constructor(props: Props) {
-    const SearchResults = connect(List, (state, listProps) => {
+    const SearchResults = connect(List, (state) => {
       const currentChatId = state.currentChat?.id;
 
       const items = state.searchResult.map((item) => {
@@ -59,7 +59,7 @@ export class AddUserModal extends Block<Props> {
           className: 'add-user-modal__user-item',
         });
       });
-      return {...listProps, items};
+      return {items};
     });
 
     const form = new Form({
@@ -79,6 +79,7 @@ export class AddUserModal extends Block<Props> {
     super('div', {
       ...props,
       form,
+      toggleHideClassName: '',
       searchResults: new SearchResults({className: 'add-user-modal__results-list'}),
       events: {
         click: {

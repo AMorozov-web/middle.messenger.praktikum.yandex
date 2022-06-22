@@ -84,7 +84,6 @@ export class MainPage extends Block {
       }),
       chatsList: new ChatsList({
         className: 'main-page__chats-list',
-        items: [],
       }),
       chat: new ConnectedChat({
         onAddUser: () => (this.props.addUserModal as Block).show(),

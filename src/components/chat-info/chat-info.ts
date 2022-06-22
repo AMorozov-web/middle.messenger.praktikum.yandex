@@ -10,6 +10,7 @@ type Props = {
   button?: Button;
   currentChat?: ChatShortInfo;
   chatName?: string;
+  chatAvatar?: string;
 };
 
 export class ChatInfo extends Block<Props> {
@@ -19,7 +20,7 @@ export class ChatInfo extends Block<Props> {
       chatName: props.currentChat?.title ?? '',
       avatar: new Avatar({
         wrapperClassName: 'main-page__chat-avatar',
-        src: props.currentChat?.avatar ? getAvatarUrl(props.currentChat.avatar) : undefined,
+        src: props.chatAvatar ? getAvatarUrl(props.chatAvatar) : undefined,
       }),
     });
   }

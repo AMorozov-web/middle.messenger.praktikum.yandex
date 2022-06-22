@@ -15,17 +15,25 @@ const addUserButton = new Button({
   className: 'chat-action__add-user-button',
   content: 'Добавить пользователя',
   type: BUTTON_TYPE.BUTTON,
+  events: {},
 });
 
 const deleteChatButton = new Button({
   className: 'chat-actions__delete-button',
   content: 'Удалить чат',
   type: BUTTON_TYPE.BUTTON,
+  events: {},
 });
 
 export class ChatActions extends Block<Props> {
   constructor(props: Props) {
-    super(TAG_NAME.BUTTON, {...props, addUserButton, deleteChatButton});
+    super(TAG_NAME.BUTTON, {
+      ...props,
+      addUserButton,
+      deleteChatButton,
+      onAddUser: undefined,
+      onDeleteChat: undefined,
+    });
   }
 
   componentDidMount() {
