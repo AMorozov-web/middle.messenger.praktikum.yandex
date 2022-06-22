@@ -55,7 +55,7 @@ export class Chat extends Block<Props> {
             callback: (evt) => {
               const {message} = onFormSubmit(evt);
               MainController.sendMessage(message);
-              this.getContent<HTMLFormElement>()?.querySelector('form')?.reset();
+              this.getContent()?.querySelector('form')?.reset();
             },
           },
           focus: {

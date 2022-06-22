@@ -41,6 +41,7 @@ export class AddChatModal extends Block<Props> {
             const data = onFormSubmit<{title: string}>(evt);
             props.onSubmit?.(data.title).then(() => {
               this.hide();
+              this.getContent()?.querySelector('form')?.reset();
             });
           },
         },
@@ -58,6 +59,7 @@ export class AddChatModal extends Block<Props> {
 
             if (target && target.contains(modal) && target !== modal) {
               this.hide();
+              this.getContent()?.querySelector('form')?.reset();
             }
           },
         },
