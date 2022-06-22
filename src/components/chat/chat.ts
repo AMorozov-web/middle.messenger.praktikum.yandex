@@ -4,6 +4,7 @@ import {Button, ChatActions, ChatInfo, Form, Input} from '..';
 import {connect} from '../../store';
 import {getAvatarUrl, onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, TAG_NAME} from '../../constants';
+import {MainController} from '../../pages';
 
 type Props = {
   chatInfo?: ChatInfo;
@@ -20,8 +21,8 @@ const DEFAULT_EMPTY_MESSAGE = 'Выберите чат чтобы отправи
 
 const newMessageInput = new Input({
   className: 'main-page__new-message',
-  id: 'new-message',
-  name: 'new-message',
+  id: 'message',
+  name: 'message',
   placeholder: 'Сообщение',
   label: {
     content: 'Сообщение',
@@ -51,7 +52,11 @@ export class Chat extends Block<Props> {
         children: [newMessageInput, submitButton],
         events: {
           submit: {
-            callback: (evt) => onFormSubmit(evt),
+            callback: (evt) => {
+              const {message} = onFormSubmit(evt);
+              MainController.sendMessage(message);
+              this.getContent<HTMLFormElement>()?.querySelector('form')?.reset();
+            },
           },
           focus: {
             callback: (evt) => {
@@ -76,6 +81,26 @@ export class Chat extends Block<Props> {
                 <circle cx="1.5" cy="8" r="1.5" fill="currentColor"/>
                 <circle cx="1.5" cy="14" r="1.5" fill="currentColor"/>
               </svg>`,
+        addUserButton: new Button({
+          className: 'chat-action__add-user-button',
+          content: 'Добавить пользователя',
+          type: BUTTON_TYPE.BUTTON,
+          events: {
+            click: {
+              callback: () => this.props.onAddUser?.(),
+            },
+          },
+        }),
+        deleteChatButton: new Button({
+          className: 'chat-actions__delete-button',
+          content: 'Удалить чат',
+          type: BUTTON_TYPE.BUTTON,
+          events: {
+            click: {
+              callback: () => this.props.onDeleteChat?.(this.props.currentChat?.id),
+            },
+          },
+        }),
       }),
     });
   }
