@@ -48,6 +48,8 @@ const submitButton = new Button({
 
 export class LoginPage extends Block {
   constructor() {
+    LoginController.checkAuth();
+
     super(TAG_NAME.DIV, {
       link: new LinkWithRouter({
         className: 'login-page__signup',

@@ -6,6 +6,14 @@ import {getAvatarUrl} from '../../utils';
 const router = Router.getInstance('#root');
 
 export class LoginController {
+  public static checkAuth() {
+    const {user} = store.getState();
+
+    if (user?.id) {
+      router.go('/');
+    }
+  }
+
   public static login(data: SignInData) {
     authApi
       .login(data)
