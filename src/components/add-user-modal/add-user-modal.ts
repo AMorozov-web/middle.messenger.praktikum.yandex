@@ -1,6 +1,6 @@
 import {template} from './add-user-modal.tmpl';
 import {Block} from '../../core';
-import {connect} from '../../store';
+import {connect, store} from '../../store';
 import {Button, Form, Input, List, UserItem} from '..';
 import {onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, INPUT_TYPE} from '../../constants';
@@ -89,6 +89,7 @@ export class AddUserModal extends Block<Props> {
 
             if (target && target.contains(modal) && target !== modal) {
               this.hide();
+              store.set('searchResult', []);
             }
           },
         },
