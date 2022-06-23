@@ -49,3 +49,18 @@ export const BASE_URL = 'https://ya-praktikum.tech/api/v2' as const;
 export const WS_BASE_URL = 'wss://ya-praktikum.tech/ws/chats' as const;
 
 export const EMPTY_VALUE_PLACEHOLDER = '-';
+
+export const MONTHS_MAP = {
+  1: 'января',
+  2: 'февраля',
+  3: 'марта',
+  4: 'апреля',
+  5: 'мая',
+  6: 'июня',
+  7: 'июля',
+  8: 'августа',
+  9: 'сентября',
+  10: 'октября',
+  11: 'ноября',
+  12: 'декабря',
+} as const;

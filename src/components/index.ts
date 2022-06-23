@@ -13,3 +13,4 @@ export * from './add-chat-modal';
 export * from './add-user-modal';
 export * from './chat';
 export * from './chat-actions';
+export * from './chat-day-item';
