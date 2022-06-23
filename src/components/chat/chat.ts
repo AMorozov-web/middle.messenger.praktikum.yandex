@@ -1,8 +1,8 @@
 import {emptyTemplate, template} from './chat.tmpl';
 import {Block} from '../../core';
-import {Button, ChatActions, ChatInfo, Form, Input} from '..';
+import {Button, ChatActions, ChatDayItem, ChatInfo, Form, Input, List, Message} from '..';
 import {connect} from '../../store';
-import {getAvatarUrl, onFormSubmit} from '../../utils';
+import {getAvatarUrl, getDayFromDate, getTimeFromDate, onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, TAG_NAME} from '../../constants';
 import {MainController} from '../../pages';
 
@@ -15,9 +15,36 @@ type Props = {
   currentChat?: Nullable<ChatShortInfo>;
   onAddUser?: () => void;
   onDeleteChat?: (id?: number) => void;
+  daysList?: List;
 };
 
 const DEFAULT_EMPTY_MESSAGE = 'Выберите чат чтобы отправить сообщение';
+
+const getChatContent = (messages: ChatMessage[], currentUserId: number | undefined) => {
+  const daysMap = messages.reduce((result, current) => {
+    const currentDay = getDayFromDate(current.time);
+    const currentTime = getTimeFromDate(current.time);
+    const className = current.user_id === currentUserId ? 'main-page__message--self' : '';
+
+    const message = new Message({className, time: currentTime, text: current.content});
+
+    if (currentDay in result) {
+      result[currentDay].push(message);
+    } else {
+      result[currentDay] = [message];
+    }
+
+    return result;
+  }, {} as Record<string, Message[]>);
+
+  return Object.keys(daysMap).map((key) => {
+    return new ChatDayItem({
+      className: 'main-page__day',
+      dayTitle: key,
+      messages: daysMap[key].reverse(),
+    });
+  });
+};
 
 const newMessageInput = new Input({
   className: 'main-page__new-message',
@@ -39,6 +66,14 @@ const submitButton = new Button({
               <path d="m7 1 4 5-4 5" stroke="currentColor" stroke-width="1.6"/>
             </svg>`,
   type: BUTTON_TYPE.SUBMIT,
+});
+
+const SelectedChat = connect(List, (state) => {
+  const currentUserId = state.user?.id;
+
+  const items = getChatContent(state.messages, currentUserId);
+
+  return {items};
 });
 
 export class Chat extends Block<Props> {
@@ -102,6 +137,7 @@ export class Chat extends Block<Props> {
           },
         }),
       }),
+      daysList: new SelectedChat({className: 'main-page__selected-chat'}),
     });
   }
 

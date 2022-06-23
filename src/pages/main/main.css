@@ -263,22 +263,30 @@
 }
 
 .main-page__selected-chat {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   flex-grow: 1;
   max-width: 720px;
   margin: 0;
-  padding: 0;
+  padding: 16px 0;
   list-style: none;
 }
 
-.main-page__day {
-  padding-top: 30px;
-}
-
-.main-page__day-title {
+.main-page__day > .day__title {
   margin-bottom: 30px;
   text-align: center;
   font-weight: 500;
   color: var(--dusty-gray);
+}
+
+.main-page__day > .day__messages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .main-page__messages {

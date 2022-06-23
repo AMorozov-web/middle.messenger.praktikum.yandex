@@ -4,8 +4,8 @@ import {TAG_NAME} from '../../constants';
 
 type Props = {
   className?: string;
-  text: string;
-  time: string;
+  text?: string;
+  time?: string;
 };
 
 export class Message extends Block<Props> {

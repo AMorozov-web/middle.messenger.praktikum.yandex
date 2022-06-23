@@ -47,16 +47,6 @@ const ChatsList = connect(List, (state) => {
   return {items: []};
 });
 
-// const messageData = new Array(4).fill('').map((_, i) => {
-//   const className = i % 2 !== 0 ? 'main-page__message--self' : '';
-//
-//   return new Message({
-//     className,
-//     text: 'Круто!',
-//     time: '12:00',
-//   });
-// });
-
 export class MainPage extends Block {
   constructor() {
     MainController.init();

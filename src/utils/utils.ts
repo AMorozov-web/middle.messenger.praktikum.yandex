@@ -1,4 +1,4 @@
-import {BASE_URL} from '../constants';
+import {BASE_URL, MONTHS_MAP} from '../constants';
 
 /**
  * Функция достает значение из объекта по указанному пути вида 'a.b.c'
@@ -230,4 +230,12 @@ export const getTimeFromDate = (isoString: string): string => {
   const minutes = date.getMinutes();
 
   return `${hours}:${minutes}`;
+};
+
+export const getDayFromDate = (isoString: string): string => {
+  const date = new Date(isoString);
+  const day = date.getDay();
+  const month = date.getMonth();
+
+  return `${day} ${MONTHS_MAP[month]}`;
 };

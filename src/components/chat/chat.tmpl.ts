@@ -4,12 +4,7 @@ export const template = `
         {{chatInfo}}
         {{chatActions}}
       </div>
-      <ul class="main-page__selected-chat">
-        <li class="main-page__day">
-          <p class="main-page__day-title">19 мая</p>
-          {{messagesList}}
-        </li>
-      </ul>
+      {{daysList}}
       {{sendMessageForm}}
     </div>
 `;
