@@ -1,5 +1,5 @@
 import {Router} from '../../core';
-import {authApi, SignInData} from '../../api';
+import {authApi, chatsApi, SignInData} from '../../api';
 import {store} from '../../store';
 import {getAvatarUrl} from '../../utils';
 
@@ -20,6 +20,9 @@ export class LoginController {
       .then(() => authApi.getUser())
       .then((response) => {
         store.set('user', {...response, avatar: getAvatarUrl(response.avatar)});
+        chatsApi.getChats().then((chats) => {
+          store.set('chats', chats);
+        });
 
         router.go('/');
       })

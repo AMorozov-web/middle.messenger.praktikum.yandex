@@ -12,7 +12,7 @@ import {
   List,
 } from '../../components';
 import {MainController} from './main-controller';
-import {getAvatarUrl, getTimeFromDate} from '../../utils';
+import {getAvatarUrl, getTimeFromDate, isEqual} from '../../utils';
 import {TAG_NAME} from '../../constants';
 
 const getChatsItems = (chats: ChatShortInfo[], currentChat?: Nullable<ChatShortInfo>) =>
@@ -49,8 +49,6 @@ const ChatsList = connect(List, (state) => {
 
 export class MainPage extends Block {
   constructor() {
-    MainController.init();
-
     super(TAG_NAME.DIV, {
       addChatButton: new Button({
         content: `<svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -102,6 +100,17 @@ export class MainPage extends Block {
   componentDidMount(): void {
     (this.props.addChatModal as Block).hide();
     (this.props.addUserModal as Block).hide();
+  }
+
+  componentDidUpdate<T extends CommonProps>(oldProps: T, newProps: T) {
+    if (!store.getState().chats.length) {
+      MainController.getChats();
+    }
+
+    if (oldProps && newProps) {
+      return !isEqual<T>(oldProps, newProps);
+    }
+    return true;
   }
 
   render() {

@@ -9,8 +9,8 @@ export class ProfileController {
     authApi
       .logout()
       .then(() => {
-        router.go('/login');
         store.set('user', null);
+        router.go('/login');
       })
       .catch((error) => {
         console.log(error);

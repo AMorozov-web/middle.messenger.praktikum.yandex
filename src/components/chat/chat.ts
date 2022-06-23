@@ -21,7 +21,9 @@ type Props = {
 const DEFAULT_EMPTY_MESSAGE = 'Выберите чат чтобы отправить сообщение';
 
 const getChatContent = (messages: ChatMessage[], currentUserId: number | undefined) => {
-  const daysMap = messages.reduce((result, current) => {
+  const reversed = [...messages].reverse();
+
+  const daysMap = reversed.reduce((result, current) => {
     const currentDay = getDayFromDate(current.time);
     const currentTime = getTimeFromDate(current.time);
     const className = current.user_id === currentUserId ? 'main-page__message--self' : '';
@@ -41,7 +43,7 @@ const getChatContent = (messages: ChatMessage[], currentUserId: number | undefin
     return new ChatDayItem({
       className: 'main-page__day',
       dayTitle: key,
-      messages: daysMap[key].reverse(),
+      messages: daysMap[key],
     });
   });
 };

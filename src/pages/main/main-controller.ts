@@ -6,10 +6,6 @@ import {WS_EVENTS} from '../../constants';
 export class MainController {
   static wsTransport: WsTransport | null;
 
-  public static init() {
-    this.getChats();
-  }
-
   public static createChat(title: string, onSuccess?: () => void): Promise<void> {
     return new Promise((resolve) => {
       chatsApi
