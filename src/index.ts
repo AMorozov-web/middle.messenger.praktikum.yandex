@@ -42,3 +42,5 @@ authApi // возможно стоит это делать в контролле
       router.go('/login');
     }
   });
+
+console.log(store.getState());

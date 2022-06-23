@@ -1,4 +1,4 @@
 export * from './utils';
-export * from './templator';
+export * from './Templator';
 export * from './onFormSubmit';
 export * from './renderDOM';

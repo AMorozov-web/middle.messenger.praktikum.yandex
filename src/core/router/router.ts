@@ -10,7 +10,7 @@ export class Router {
 
   private history: History;
 
-  private routes: Route[];
+  routes: Route[];
 
   private constructor(root: string) {
     this.routes = [];

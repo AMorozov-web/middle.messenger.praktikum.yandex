@@ -1,4 +1,4 @@
-import {get} from './utils';
+import {get} from '../utils';
 
 export class Templator {
   PROPS_REGEXP = /{{(.*?)}}/gi;
