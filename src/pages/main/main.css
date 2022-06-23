@@ -1,7 +1,3 @@
-.main {
-  position: relative;
-}
-
 .main-page {
   display: grid;
   grid-template-columns: 310px 1fr;
@@ -66,20 +62,20 @@
 .main-page__chats-item-container {
   display: grid;
   grid-template-columns: 47px 1fr 33px;
-  grid-template-rows: 13px min-content;
+  grid-template-rows: 13px 1fr;
   gap: 4px 10px;
   padding: 10px;
   margin: 0 -10px;
   cursor: pointer;
 }
 
+.main-page__chats-item---selected > .main-page__chats-item-container {
+  background-color: var(--hawkeys-blue);
+}
+
 .main-page__chats-item-container:hover,
 .main-page__chats-item---selected > .main-page__chats-item-container:hover {
   background-color: var(--mercury);
-}
-
-.main-page__chats-item---selected > .main-page__chats-item-container {
-  background-color: var(--hawkeys-blue);
 }
 
 .main-page__chat-avatar {
@@ -102,6 +98,8 @@
 .main-page__chat-name {
   grid-column: 2 / 3;
   grid-row: 1 / 2;
+  display: flex;
+  justify-self: flex-start;
   font-size: 13px;
   font-weight: 600;
 }
@@ -168,28 +166,6 @@
   flex-grow: 1;
 }
 
-.main-page__chat-avatar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background-color: var(--gallery);
-}
-
-.main-page__chat-avatar > img {
-  width: 14px;
-  height: 14px;
-}
-
-.main-page__chat-name {
-  display: flex;
-  justify-self: flex-start;
-  font-size: 13px;
-  font-weight: 600;
-}
-
 .main-page__chat-button:hover {
   background-color: var(--gallery);
 }
@@ -228,7 +204,7 @@
   display: flex;
 }
 
-.main-page__chat-actions > .chat-actions__container > .chat-actions__tooltip {
+.main-page__chat-actions.chat-actions__tooltip {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -239,7 +215,8 @@
   overflow: hidden;
 }
 
-.main-page__chat-actions > .chat-actions__container > .chat-actions__tooltip > button {
+.main-page__chat-actions.chat-action__add-user-button,
+.main-page__chat-actions.chat-actions__delete-button {
   width: 100%;
   height: 100%;
   padding: 12px 19px;
@@ -250,15 +227,16 @@
   cursor: pointer;
 }
 
-.main-page__chat-actions > .chat-actions__container > .chat-actions__tooltip > button:hover {
+.main-page__chat-actions.chat-action__add-user-button:hover,
+.main-page__chat-actions.chat-actions__delete-button:hover {
   background-color: var(--gallery);
 }
 
-.main-page__chat-actions > .chat-actions__container > .chat-actions__tooltip > button:first-child {
+.main-page__chat-actions.chat-action__add-user-button {
   padding-top: 19px;
 }
 
-.main-page__chat-actions > .chat-actions__container > .chat-actions__tooltip > button:last-child {
+.main-page__chat-actions.chat-actions__delete-button {
   padding-bottom: 19px;
 }
 
