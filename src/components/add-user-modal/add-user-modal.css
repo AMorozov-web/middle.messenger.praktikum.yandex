@@ -48,13 +48,7 @@
   flex-grow: 1;
 }
 
-.add-user-modal__input > p {
-  color: var(--dusty-gray);
-  font-size: 10px;
-  font-weight: 500;
-}
-
-.add-user-modal__input > input {
+.add-user-modal__input > .input {
   height: 28px;
   color: var(--black);
   font-size: 13px;
@@ -63,6 +57,13 @@
   border: none;
   border-bottom: 1px solid var(--dusty-gray);
 }
+
+.add-user-modal__input > p {
+  color: var(--dusty-gray);
+  font-size: 10px;
+  font-weight: 500;
+}
+
 
 .add-user-modal__input > input:focus {
   outline: none;

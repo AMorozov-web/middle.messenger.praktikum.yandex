@@ -204,7 +204,7 @@
   display: flex;
 }
 
-.main-page__chat-actions.chat-actions__tooltip {
+.main-page__chat-actions .chat-actions__tooltip {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -215,8 +215,8 @@
   overflow: hidden;
 }
 
-.main-page__chat-actions.chat-action__add-user-button,
-.main-page__chat-actions.chat-actions__delete-button {
+.main-page__chat-actions .chat-action__add-user-button,
+.main-page__chat-actions .chat-actions__delete-button {
   width: 100%;
   height: 100%;
   padding: 12px 19px;
@@ -227,18 +227,19 @@
   cursor: pointer;
 }
 
-.main-page__chat-actions.chat-action__add-user-button:hover,
-.main-page__chat-actions.chat-actions__delete-button:hover {
-  background-color: var(--gallery);
-}
-
-.main-page__chat-actions.chat-action__add-user-button {
+.main-page__chat-actions .chat-action__add-user-button {
   padding-top: 19px;
 }
 
-.main-page__chat-actions.chat-actions__delete-button {
+.main-page__chat-actions .chat-actions__delete-button {
   padding-bottom: 19px;
 }
+
+.main-page__chat-actions .chat-action__add-user-button:hover,
+.main-page__chat-actions .chat-actions__delete-button:hover {
+  background-color: var(--gallery);
+}
+
 
 .main-page__selected-chat {
   display: flex;
