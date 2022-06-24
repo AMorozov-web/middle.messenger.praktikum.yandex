@@ -234,8 +234,7 @@ export const getTimeFromDate = (isoString: string): string => {
 
 export const getDayFromDate = (isoString: string): string => {
   const date = new Date(isoString);
-  const day = date.getDay();
+  const day = date.getDate();
   const month = date.getMonth();
-  console.log(day, month);
   return `${day} ${MONTHS_MAP[month]}`;
 };
