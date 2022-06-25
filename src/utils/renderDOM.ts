@@ -1,4 +1,4 @@
-import {Block} from '../components';
+import {Block} from '../core';
 
 /**
  * Помещает собранный компонент в выбранный элемент

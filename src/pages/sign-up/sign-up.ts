@@ -1,15 +1,13 @@
 import {template} from './sign-up.tmpl';
-import {onFormSubmit, renderDOM} from '../../utils';
-import {Block, Button, Form, Input, Link} from '../../components';
+import {Block} from '../../core';
+import {SignUpController} from './sing-up-controller';
+import {Button, Form, Input, LinkWithRouter} from '../../components';
+import {onFocus, onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, INPUT_TYPE, PATTERN, TAG_NAME} from '../../constants';
 
-const redirectToSignIn = () => {
-  const link = document.createElement(TAG_NAME.A);
-  link.href = '/index.html';
-  setTimeout(() => {
-    link.click();
-    link.remove();
-  }, 500);
+const onSubmit = (evt: Event) => {
+  const data = onFormSubmit<UserData>(evt);
+  SignUpController.signUp(data);
 };
 
 const emailInput = new Input({
@@ -19,7 +17,7 @@ const emailInput = new Input({
   type: INPUT_TYPE.EMAIL,
   pattern: PATTERN.EMAIL,
   label: {
-    text: 'Почта',
+    content: 'Почта',
   },
   validation: {
     required: true,
@@ -32,7 +30,7 @@ const loginInput = new Input({
   name: 'login',
   pattern: PATTERN.LOGIN,
   label: {
-    text: 'Логин',
+    content: 'Логин',
   },
   validation: {
     maxLength: 20,
@@ -43,11 +41,11 @@ const loginInput = new Input({
 
 const firstNameInput = new Input({
   className: 'sign-up__firstname',
-  id: 'first-name',
-  name: 'first-name',
+  id: 'first_name',
+  name: 'first_name',
   pattern: PATTERN.NAME,
   label: {
-    text: 'Имя',
+    content: 'Имя',
   },
   validation: {
     required: true,
@@ -56,11 +54,11 @@ const firstNameInput = new Input({
 
 const lastNameInput = new Input({
   className: 'sign-up__lastname',
-  id: 'last-name',
-  name: 'last-name',
+  id: 'second_name',
+  name: 'second_name',
   pattern: PATTERN.NAME,
   label: {
-    text: 'Фамилия',
+    content: 'Фамилия',
   },
   validation: {
     required: true,
@@ -74,7 +72,7 @@ const phoneInput = new Input({
   pattern: PATTERN.PHONE,
   type: INPUT_TYPE.TEL,
   label: {
-    text: 'Телефон',
+    content: 'Телефон',
   },
   validation: {
     required: true,
@@ -88,7 +86,7 @@ const passwordInput = new Input({
   type: INPUT_TYPE.PASSWORD,
   pattern: PATTERN.PASSWORD,
   label: {
-    text: 'Пароль',
+    content: 'Пароль',
   },
   validation: {
     maxLength: 40,
@@ -104,7 +102,7 @@ const repeatPasswordInput = new Input({
   type: INPUT_TYPE.PASSWORD,
   pattern: PATTERN.PASSWORD,
   label: {
-    text: 'Пароль (ещё раз)',
+    content: 'Пароль (ещё раз)',
   },
   validation: {
     maxLength: 40,
@@ -115,17 +113,17 @@ const repeatPasswordInput = new Input({
 
 const submitButton = new Button({
   className: 'sign-up__submit',
-  text: 'Зарегистрироваться',
+  content: 'Зарегистрироваться',
   type: BUTTON_TYPE.SUBMIT,
 });
 
-class SignUpPage extends Block {
+export class SignUpPage extends Block {
   constructor() {
     super(TAG_NAME.DIV, {
-      link: new Link({
+      link: new LinkWithRouter({
         className: 'sign-up__sign-in',
-        href: './index.html',
-        text: 'Войти',
+        href: '/login',
+        children: 'Войти',
       }),
       form: new Form({
         className: 'sign-up__form',
@@ -141,16 +139,10 @@ class SignUpPage extends Block {
         ],
         events: {
           submit: {
-            callback: (evt) => onFormSubmit(evt, redirectToSignIn),
+            callback: onSubmit,
           },
           focus: {
-            callback: (evt) => {
-              const target = evt.target as HTMLInputElement;
-
-              if (!target.checkValidity()) {
-                target.reportValidity();
-              }
-            },
+            callback: onFocus,
             capture: true,
           },
         },
@@ -162,9 +154,3 @@ class SignUpPage extends Block {
     return this.compile(template, this.props);
   }
 }
-
-const page = new SignUpPage();
-
-const root = document.getElementById('root');
-
-renderDOM(root, page);

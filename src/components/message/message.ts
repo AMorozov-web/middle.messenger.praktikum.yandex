@@ -1,11 +1,11 @@
 import {template} from './message.tmpl';
-import {Block} from '../block';
+import {Block} from '../../core';
 import {TAG_NAME} from '../../constants';
 
 type Props = {
   className?: string;
-  text: string;
-  time: string;
+  text?: string;
+  time?: string;
 };
 
 export class Message extends Block<Props> {

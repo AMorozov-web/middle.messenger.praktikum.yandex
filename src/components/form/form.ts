@@ -1,5 +1,5 @@
 import {template} from './form.tmpl';
-import {Block} from '../block';
+import {Block} from '../../core';
 import {TAG_NAME} from '../../constants';
 
 type Props = {

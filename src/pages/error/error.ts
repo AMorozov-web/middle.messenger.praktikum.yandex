@@ -1,19 +1,19 @@
 import {template} from './error.tmpl';
-import {Block, Link} from '../../components';
-import {renderDOM} from '../../utils';
+import {Block} from '../../core';
+import {LinkWithRouter} from '../../components';
 import {TAG_NAME} from '../../constants';
 
-class ErrorPage extends Block {
+export class ErrorPage extends Block {
   constructor() {
     super(TAG_NAME.DIV, {
       error: {
         code: '404',
         description: 'Не туда попали',
       },
-      children: new Link({
+      children: new LinkWithRouter({
         className: 'error-page__back',
-        href: './main.html',
-        text: 'Назад',
+        href: -1,
+        children: 'Назад',
       }),
     });
   }
@@ -22,9 +22,3 @@ class ErrorPage extends Block {
     return this.compile(template, this.props);
   }
 }
-
-const page = new ErrorPage();
-
-const root = document.getElementById('root');
-
-renderDOM(root, page);

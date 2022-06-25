@@ -1,11 +1,12 @@
 import {template} from './button.tmpl';
-import {Block} from '../block';
+import {Block} from '../../core';
 import {TAG_NAME} from '../../constants';
 
 type Props = {
   className?: string;
-  type: ButtonType;
-  text: string;
+  type?: ButtonType;
+  content?: string;
+  events?: Record<string, EventProps>;
 };
 
 export class Button extends Block<Props> {

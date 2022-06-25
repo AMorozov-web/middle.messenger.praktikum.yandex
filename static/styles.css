@@ -1,5 +1,7 @@
 @import url("/src/styles/global.css");
-@import url("/src/pages/login/login.css");
+@import url("/src/components/add-chat-modal/add-chat-modal.css");
+@import url("/src/components/add-user-modal/add-user-modal.css");
+@import url("/src/pages/login/login-page.css");
 @import url("/src/pages/sign-up/sign-up.css");
 @import url("/src/pages/main/main.css");
 @import url("/src/pages/profile/profile.css");

@@ -19,6 +19,7 @@
     "@typescript-eslint"
   ],
   "rules": {
+    "@typescript-eslint/ban-types": "warn",
     "@typescript-eslint/no-empty-function": [
       "error",
       {
@@ -46,6 +47,7 @@
         "props": false
       }
     ],
+    "no-plusplus": "off",
     "no-restricted-globals": "off",
     "no-restricted-syntax": [
       2,

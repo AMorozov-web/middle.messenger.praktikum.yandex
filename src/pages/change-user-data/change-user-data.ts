@@ -1,38 +1,47 @@
 import {template} from './change-user-data.tmpl';
-import {Block, Button, Form, Input, Link} from '../../components';
-import {onFormSubmit, renderDOM} from '../../utils';
+import {Block} from '../../core';
+import {
+  Button,
+  Form,
+  LinkWithRouter,
+  UserEmailInput,
+  UserFirstNameInput,
+  UserLoginInput,
+  UserNickNameInput,
+  UserPhoneInput,
+  UserSecondNameInput,
+} from '../../components';
+import {ChangeUserDataController} from '.';
+import {onFocus, onFormSubmit} from '../../utils';
 import {BUTTON_TYPE, INPUT_TYPE, PATTERN, TAG_NAME} from '../../constants';
 
-const redirectToProfile = () => {
-  const link = document.createElement(TAG_NAME.A);
-  link.href = '/profile.html';
-  setTimeout(() => {
-    link.click();
-    link.remove();
-  }, 500);
+const onSubmit = (evt: Event) => {
+  const data = onFormSubmit<UserData>(evt);
+  ChangeUserDataController.changeUserData(data);
 };
 
-const emailInput = new Input({
+const emailInput = new UserEmailInput({
   className: 'change-user-data__field',
   id: 'email',
   name: 'email',
   type: INPUT_TYPE.EMAIL,
   pattern: PATTERN.EMAIL,
   label: {
-    text: 'Почта',
+    content: 'Почта',
   },
   validation: {
     required: true,
   },
 });
 
-const loginInput = new Input({
+const loginInput = new UserLoginInput({
   className: 'change-user-data__field',
   id: 'login',
   name: 'login',
   pattern: PATTERN.LOGIN,
+  type: INPUT_TYPE.TEXT,
   label: {
-    text: 'Логин',
+    content: 'Логин',
   },
   validation: {
     maxLength: 20,
@@ -41,53 +50,56 @@ const loginInput = new Input({
   },
 });
 
-const firstNameInput = new Input({
+const firstNameInput = new UserFirstNameInput({
   className: 'change-user-data__field',
-  id: 'first-name',
-  name: 'first-name',
+  id: 'first_name',
+  name: 'first_name',
   pattern: PATTERN.NAME,
+  type: INPUT_TYPE.TEXT,
   label: {
-    text: 'Имя',
+    content: 'Имя',
   },
   validation: {
     required: true,
   },
 });
 
-const lastNameInput = new Input({
+const lastNameInput = new UserSecondNameInput({
   className: 'change-user-data__field',
-  id: 'last-name',
-  name: 'last-name',
+  id: 'second_name',
+  name: 'second_name',
   pattern: PATTERN.NAME,
+  type: INPUT_TYPE.TEXT,
   label: {
-    text: 'Фамилия',
+    content: 'Фамилия',
   },
   validation: {
     required: true,
   },
 });
 
-const nickNameInput = new Input({
+const nickNameInput = new UserNickNameInput({
   className: 'change-user-data__field',
-  id: 'nickname',
-  name: 'nickname',
+  id: 'display_name',
+  name: 'display_name',
   pattern: PATTERN.NAME,
+  type: INPUT_TYPE.TEXT,
   label: {
-    text: 'Имя в чате',
+    content: 'Имя в чате',
   },
   validation: {
     required: true,
   },
 });
 
-const phoneInput = new Input({
+const phoneInput = new UserPhoneInput({
   className: 'change-user-data__field',
   id: 'phone',
   name: 'phone',
   pattern: PATTERN.PHONE,
   type: INPUT_TYPE.TEL,
   label: {
-    text: 'Телефон',
+    content: 'Телефон',
   },
   validation: {
     required: true,
@@ -96,17 +108,20 @@ const phoneInput = new Input({
 
 const saveButton = new Button({
   className: 'change-user-data__save',
-  text: 'Сохранить',
+  content: 'Сохранить',
   type: BUTTON_TYPE.SUBMIT,
 });
 
-class ChangeUserDataPage extends Block {
+export class ChangeUserDataPage extends Block {
   constructor() {
     super(TAG_NAME.DIV, {
-      link: new Link({
+      link: new LinkWithRouter({
         className: 'change-user-data-page__back',
-        href: './profile.html',
-        text: ' ',
+        href: '/profile',
+        children: `<svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="currentColor" d="M13 6.8H2V5.2h11z"/>
+                    <path d="M6 11 2 6l4-5" stroke="currentColor" stroke-width="1.6"/>
+                  </svg>`,
       }),
       form: new Form({
         className: 'change-user-data-page__form',
@@ -121,16 +136,10 @@ class ChangeUserDataPage extends Block {
         ],
         events: {
           submit: {
-            callback: (evt) => onFormSubmit(evt, redirectToProfile),
+            callback: onSubmit,
           },
           focus: {
-            callback: (evt) => {
-              const target = evt.target as HTMLInputElement;
-
-              if (!target.checkValidity()) {
-                target.reportValidity();
-              }
-            },
+            callback: onFocus,
             capture: true,
           },
         },
@@ -142,9 +151,3 @@ class ChangeUserDataPage extends Block {
     return this.compile(template, this.props);
   }
 }
-
-const page = new ChangeUserDataPage();
-
-const root = document.getElementById('root');
-
-renderDOM(root, page);

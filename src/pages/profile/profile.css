@@ -17,10 +17,17 @@
 }
 
 .profile-page__back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 28px;
   height: 28px;
   border-radius: 50%;
   background-color: var(--royal-blue);
+}
+
+.profile-page__back > svg {
+  color: var(--white);
 }
 
 .profile-page__content {
@@ -46,9 +53,13 @@
   align-items: center;
   width: 130px;
   height: 130px;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .profile-page__avatar-img {
+  width: 130px;
+  height: 130px;
   color: var(--white);
 }
 
@@ -56,11 +67,24 @@
   position: absolute;
   bottom: 0;
   right: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 27px;
   height: 27px;
+  padding: 0;
   background-color: var(--dusty-gray);
   border: none;
   border-radius: 50%;
+  cursor: pointer;
+}
+
+.profile-page__edit-avatar-label {
+  height: 14px;
+}
+
+.profile-page__edit-avatar-label > svg {
+  color: var(--white);
 }
 
 .profile-page__user-name {
@@ -107,7 +131,11 @@
   text-decoration: none;
 }
 
-.profile-page__user-controls-item--exit > a {
+.profile-page__user-controls-item--exit > button {
+  padding: 0;
   color: var(--red);
-  text-decoration: none;
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+  cursor: pointer;
 }
