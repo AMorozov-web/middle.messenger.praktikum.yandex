@@ -35,7 +35,7 @@ export const isSingleMessage = (data: unknown): data is ChatMessage =>
 export class WsTransport extends EventBus {
   private socket: WebSocket;
 
-  timer: number | null;
+  timer: Nullable<NodeJS.Timeout>;
 
   private static TIMEOUT = 20000;
 

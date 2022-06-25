@@ -12,6 +12,8 @@ import {authApi, chatsApi} from './api';
 import {store} from './store';
 import {getAvatarUrl} from './utils';
 
+import './styles/styles.css';
+
 const router = Router.getInstance('#root');
 
 router
@@ -37,5 +39,3 @@ authApi // возможно стоит это делать в контролле
 
     router.go('/login');
   });
-
-console.log(store.getState());
